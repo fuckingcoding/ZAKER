@@ -5,7 +5,7 @@ import android.content.Context;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.integration.okhttp.OkHttpUrlLoader;
+
 import com.bumptech.glide.load.model.GlideUrl;
 
 import java.io.InputStream;
@@ -38,8 +38,8 @@ public class MyApplication extends Application{
     public void onCreate() {
         super.onCreate();
 
-        Glide.get(this).register(GlideUrl.class
-                , InputStream.class, new OkHttpUrlLoader.Factory(OkHttpClientHelper.getOkHttpSingletonInstance()));
+//        Glide.get(this).register(GlideUrl.class
+//                , InputStream.class, new OkHttpUrlLoader.Factory(OkHttpClientHelper.getOkHttpSingletonInstance()));
 
     }
 }

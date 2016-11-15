@@ -12,7 +12,7 @@ import mdzz.com.first_of_mdzz.ui.main.MainActivity;
 
 public class UIManager {
 
-    //打开界面  路由界面
+    //跳转界面工具类
     public static void startMain(Context context,
                                  int code,
                                  String name){
