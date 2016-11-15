@@ -2,9 +2,11 @@ package mdzz.com.first_of_mdzz.utils;
 
 import android.os.Environment;
 
-import com.yztc.appframe.App;
+
 
 import java.io.File;
+
+import mdzz.com.first_of_mdzz.base.MyApplication;
 
 /**
  * Created by wanggang on 2016/11/14.
@@ -19,9 +21,9 @@ public class FileManger {
     public  static File getRootCacheFile(){
         if(Environment.getExternalStorageState()
                 .equals(Environment.MEDIA_MOUNTED)){
-            return App.app.getExternalCacheDir();
+            return MyApplication.app.getExternalCacheDir();
         }else {
-            return App.app.getCacheDir();
+            return MyApplication.app.getCacheDir();
         }
     }
 

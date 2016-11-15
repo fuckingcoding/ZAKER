@@ -8,7 +8,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 
-import com.yztc.httpsdemo.App;
+import mdzz.com.first_of_mdzz.base.MyApplication;
+
 
 /**
  * Created by wanggang on 2016/11/2.
@@ -26,7 +27,7 @@ public class NetUtils {
     public static boolean isConnected() {
 
         ConnectivityManager connectivity = (ConnectivityManager)
-                App.getInstance()
+                MyApplication.getInstance()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
 
         if (null != connectivity) {
@@ -45,7 +46,7 @@ public class NetUtils {
      */
     public static boolean isWifi() {
         ConnectivityManager cm = (ConnectivityManager)
-                App.getInstance()
+                MyApplication.getInstance()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         if (cm == null)
             return false;
