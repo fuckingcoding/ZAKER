@@ -58,11 +58,13 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"/>
             <ImageView
+                android:src="@mipmap/ic_launcher"
                 android:id="@+id/iv2_Funfrag"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"/>
             <ImageView
+                android:src="@mipmap/ic_launcher"
                 android:id="@+id/iv3_Funfrag"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
