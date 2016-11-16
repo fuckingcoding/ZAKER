@@ -19,11 +19,12 @@ import mdzz.com.first_of_mdzz.adapter.MyViewPagerAdapter;
 import mdzz.com.first_of_mdzz.ui.main.MainActivity;
 
 public class GuideActivity extends AppCompatActivity {
-   private ViewPager mviewpager;
+    private ViewPager mviewpager;
     private LinearLayout mlinear;
     private MyViewPagerAdapter madapter;
     private List<View> list;
     private int [] viewdatas= new int[] {R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -13,7 +13,7 @@ public class MyApplication extends Application{
 
     public static MyApplication app;
 
-    private MyApplication() {
+    public MyApplication() {
 
     }
 
