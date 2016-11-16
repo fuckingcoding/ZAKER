@@ -1,4 +1,4 @@
-package mdzz.com.first_of_mdzz;
+package mdzz.com.first_of_mdzz.widget;
 
 import android.content.Context;
 import android.support.v4.view.MotionEventCompat;

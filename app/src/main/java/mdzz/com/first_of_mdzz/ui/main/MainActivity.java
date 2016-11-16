@@ -20,7 +20,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import mdzz.com.first_of_mdzz.NoScrollViewPager;
+import mdzz.com.first_of_mdzz.widget.NoScrollViewPager;
 import mdzz.com.first_of_mdzz.R;
 import mdzz.com.first_of_mdzz.adapter.Mainadapter;
 import mdzz.com.first_of_mdzz.ui.fragment.FunFragment;

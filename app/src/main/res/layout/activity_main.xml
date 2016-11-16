@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mdzz.com.first_of_mdzz.PagerEnabledSlidingPaneLayout
+<mdzz.com.first_of_mdzz.widget.PagerEnabledSlidingPaneLayout
 
     android:id="@+id/slidingpanelayout_main"
     android:layout_width="match_parent"
@@ -134,12 +134,12 @@
         android:orientation="vertical">
 
 
-        <mdzz.com.first_of_mdzz.NoScrollViewPager
+        <mdzz.com.first_of_mdzz.widget.NoScrollViewPager
             android:id="@+id/viewPager_main"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" >
-        </mdzz.com.first_of_mdzz.NoScrollViewPager>
+        </mdzz.com.first_of_mdzz.widget.NoScrollViewPager>
 
         <View
             android:layout_width="match_parent"
@@ -209,4 +209,4 @@
 
     </LinearLayout>
 
-</mdzz.com.first_of_mdzz.PagerEnabledSlidingPaneLayout>
+</mdzz.com.first_of_mdzz.widget.PagerEnabledSlidingPaneLayout>
