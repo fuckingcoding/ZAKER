@@ -15,12 +15,13 @@ import java.util.List;
 
 import mdzz.com.first_of_mdzz.R;
 import mdzz.com.first_of_mdzz.adapter.Mainadapter;
+import mdzz.com.first_of_mdzz.base.BaseFragment;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewsFragment extends Fragment {
+public class NewsFragment extends BaseFragment {
 
     //数据源
     public static final String [] TABS={"热点","订阅","直播"};
@@ -62,7 +63,7 @@ public class NewsFragment extends Fragment {
         HotFragment hotFragment=new HotFragment();
         SubscriberFragment subscriberFragment=new SubscriberFragment();
         LiveFragment liveFragment=new LiveFragment();
-
+        newsfragmentList.clear();
         newsfragmentList.add(hotFragment);
         newsfragmentList.add(subscriberFragment);
         newsfragmentList.add(liveFragment);

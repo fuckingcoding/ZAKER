@@ -8,12 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import mdzz.com.first_of_mdzz.R;
+import mdzz.com.first_of_mdzz.base.BaseFragment;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SubscriberFragment extends Fragment {
+public class SubscriberFragment extends BaseFragment {
 
 
     public SubscriberFragment() {
