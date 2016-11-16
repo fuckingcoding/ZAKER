@@ -2,6 +2,7 @@ package mdzz.com.first_of_mdzz.ui.fragment;
 
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -16,9 +17,11 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +42,10 @@ public class FunFragment extends BaseFragment {
     private RecyclerView recyclerView ;
     private List<View> list_imageview;
     private MyVpInfiniteAdapter adapter;
-    private RecyclerView.LayoutManager manager  ;
+    private RecyclerView.LayoutManager manager;
+    private LinearLayout mlinear_ad;
+    private  MyRunnable runnable;
+    private Handler handler = new Handler();
 
 
     @Override
@@ -76,7 +82,7 @@ public class FunFragment extends BaseFragment {
         imageView3 = (ImageView) view.findViewById(R.id.iv3_Funfrag);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_Funfrag);
         viewPager = (ViewPager) view.findViewById(R.id.viewpager_Funfragment);
-
+        mlinear_ad = (LinearLayout) view.findViewById(R.id.linear_ad);
         for(int i =0;i<4;i++){
             ImageView iv = new ImageView(getActivity());
             iv.setTag(i);
@@ -94,6 +100,7 @@ public class FunFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initDot();
          initAdapter();
         initAdViewPager();
         initRecyclerView();
@@ -103,16 +110,72 @@ public class FunFragment extends BaseFragment {
         adapter = new MyVpInfiniteAdapter(list_imageview);
 
     }
+    private void initDot() {
+        for (int i = 0; i < list_imageview.size(); i++) {
+
+            ImageView iv = new ImageView(getActivity());
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(30, 30);
+            params.rightMargin = 10;
+            iv.setLayoutParams(params);
+            iv.setImageResource(R.drawable.dot_selector);
+            if (i == 0) {
+                iv.setSelected(true);
+            }
+
+            mlinear_ad.addView(iv);
+
+        }
+    }
 
     private void initAdViewPager() {
-        //viewPager.setAdapter(adapter);
+        viewPager.setAdapter(adapter);
+        //匹配圆点和滚动页
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+            @Override
+            public void onPageSelected( int position) {
+                for(int i =0;i<list_imageview.size();i++){
+                    if(i==(position%list_imageview.size())){
+                        Log.e("TAG", "onPageSelected() returned: " + position%6);
+                       mlinear_ad.getChildAt(i%list_imageview.size()).setSelected(true);
+                    }else {
+                        mlinear_ad.getChildAt(i%list_imageview.size()).setSelected(false);
+                    }
+                }
+//                if(adinfo!=null){
+//                    mtv_ad.setText(adinfo.getData().get(position%3).getName());
+//                }
+            }
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+
+        viewPager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                int action = motionEvent.getAction();
+                switch (action){
+                    case MotionEvent.ACTION_DOWN:
+                        handler.removeCallbacks(runnable);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        handler.postDelayed(runnable,4000);
+                        break;
+                }
+
+                return false;
+            }
+        });
 
     }
 
     private void initRecyclerView() {
         manager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         recyclerView .setLayoutManager(manager);
-      //  recyclerView.setAdapter();
+        //recyclerView.setAdapter();
 
     }
 
@@ -125,6 +188,33 @@ public class FunFragment extends BaseFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        handler.removeCallbacks(runnable);
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        runnable = new MyRunnable();
+      handler.postDelayed(runnable,4000);
+    }
+
+
+
+   //轮播的runnable
+    class MyRunnable implements  Runnable{
+
+        @Override
+        public void run() {
+            int currentItem = viewPager.getCurrentItem();
+            currentItem++;
+            viewPager.setCurrentItem(currentItem);
+            handler.postDelayed(runnable,2000);
+
+        }
     }
 
 }
