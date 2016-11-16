@@ -2,6 +2,7 @@ package mdzz.com.first_of_mdzz.ui.fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -37,15 +38,29 @@ public class NewsFragment extends BaseFragment {
     private Toolbar toolbar_newsFragment;
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_news, container, false);
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         initViewPager(view);
         initTabLayout(view);
         initToolbar(view);
-        return view;
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+    }
+
     private void initToolbar(View view) {
         toolbar_newsFragment=(Toolbar)view.findViewById(R.id.toolbar_newsfragment);
 
@@ -69,9 +84,9 @@ public class NewsFragment extends BaseFragment {
         newsfragmentList.add(liveFragment);
 
         viewPager_newsFragment=(ViewPager) view.findViewById(R.id.viewpager_newsfragment);
-        mainadapter=new Mainadapter(getActivity().getSupportFragmentManager(),newsfragmentList,TABS);
+        mainadapter=new Mainadapter(getChildFragmentManager(),newsfragmentList,TABS);
         viewPager_newsFragment.setAdapter(mainadapter);
-        viewPager_newsFragment.setOffscreenPageLimit(newsfragmentList.size()-1);
+        viewPager_newsFragment.setOffscreenPageLimit(2);
     }
 
 }

@@ -1,13 +1,18 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="mdzz.com.firstdemo.fragment.SubscriberFragment">
+    >
+<android.support.v4.view.ViewPager
+    android:id="@+id/viewpager_subscribeframent"
+    android:layout_width="match_parent"
+    android:layout_height="180dp">
 
+</android.support.v4.view.ViewPager>
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleview_subscriberfragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="订阅" />
+        android:layout_height="match_parent"/>
 
 </FrameLayout>
