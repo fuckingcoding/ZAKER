@@ -1,13 +1,36 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="mdzz.com.firstdemo.fragment.NewsFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_newsfragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="news" />
+        android:layout_height="wrap_content"
+        android:background="@color/red">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout_newsFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:tabTextColor="#fff"
+            app:tabIndicatorColor="#fff"
+
+            >
+
+        </android.support.design.widget.TabLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager_newsfragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    </android.support.v4.view.ViewPager>
 
 </FrameLayout>

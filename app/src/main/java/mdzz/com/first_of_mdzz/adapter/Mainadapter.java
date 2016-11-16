@@ -20,6 +20,12 @@ public class Mainadapter extends FragmentPagerAdapter {
 
     }
 
+    public Mainadapter(FragmentManager fm, List<Fragment> fragmentList,String tabs[]) {
+        super(fm);
+        this.fragmentList=fragmentList;
+        this.tabs=tabs;
+    }
+
     @Override
     public Fragment getItem(int position) {
         return fragmentList.get(position);

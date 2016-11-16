@@ -29,9 +29,9 @@ import mdzz.com.first_of_mdzz.ui.fragment.MyFragment;
 import mdzz.com.first_of_mdzz.ui.fragment.NewsFragment;
 import mdzz.com.first_of_mdzz.utils.ToastHelper;
 
-public class MainActivity extends FragmentActivity implements  MainContract.IMainView,ViewPager.OnPageChangeListener, RadioGroup.OnCheckedChangeListener
-        , View.OnClickListener{
-  private int INTERVAL_OF_TWO_CLICK_TO_QUIT =1000;
+public class MainActivity extends FragmentActivity implements MainContract.IMainView, ViewPager.OnPageChangeListener, RadioGroup.OnCheckedChangeListener
+        , View.OnClickListener {
+    private int INTERVAL_OF_TWO_CLICK_TO_QUIT = 1000;
 
     private Context mContext = this;
     //SlidingPaneLayout布局
@@ -59,7 +59,8 @@ public class MainActivity extends FragmentActivity implements  MainContract.IMai
 
     private LinearLayout linearLayout_covered_centre, linearLayout_covered_share, linearLayout_covered_login, linearLayout_covered_back;
 
-    private  long mLastPressBackTime ;
+    private long mLastPressBackTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +72,7 @@ public class MainActivity extends FragmentActivity implements  MainContract.IMai
         initSlidinglayout();
 
     }
+
     //初始化SlidingPanelayout
     private void initSlidinglayout() {
         slidingPaneLayout_main = (SlidingPaneLayout) findViewById(R.id.slidingpanelayout_main);
@@ -230,7 +232,7 @@ public class MainActivity extends FragmentActivity implements  MainContract.IMai
 
             finish();
         } else {
-            ToastHelper.showToast(this,"再次按下返回键将退出应用!", Toast.LENGTH_SHORT);
+            ToastHelper.showToast(this, "再次按下返回键将退出应用!", Toast.LENGTH_SHORT);
 
             //Toast.makeText(this, "再次按下返回键将退出应用！", Toast.LENGTH_SHORT).show();
             mLastPressBackTime = System.currentTimeMillis();
