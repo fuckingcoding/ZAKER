@@ -7,9 +7,7 @@
 
 
     <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorAccent"
+       style="@style/styletoolbar"
         android:id="@+id/toolbar"></android.support.v7.widget.Toolbar>
     <!-- TODO: Update blank fragment layout -->
     <android.support.v4.widget.SwipeRefreshLayout
@@ -29,7 +27,7 @@
             android:background="@color/black_overlay"
             android:id="@+id/viewpager_Funfragment"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="140dp"
 
 
             ></android.support.v4.view.ViewPager>
@@ -37,38 +35,38 @@
 
                     android:id="@+id/linear_ad"
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
+                    android:layout_height="10dp"
                     android:layout_alignParentBottom="true"
 
                     android:layout_centerHorizontal="true"
                     android:orientation="horizontal"
+                    android:gravity="center"
                     ></LinearLayout>
             </RelativeLayout>
         <LinearLayout
-            android:background="@color/colorPrimary"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
 
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_margin="2dp"
             >
 
             <ImageView
+                android:background="@color/black_overlay"
                 android:src="@mipmap/ic_launcher"
                 android:id="@+id/iv1_Funfrag"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                style="@style/text_fragment_fun"/>
             <ImageView
+                android:background="@color/black_overlay"
                 android:src="@mipmap/ic_launcher"
                 android:id="@+id/iv2_Funfrag"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                style="@style/text_fragment_fun"
+                />
             <ImageView
+                android:background="@color/black_overlay"
                 android:src="@mipmap/ic_launcher"
                 android:id="@+id/iv3_Funfrag"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                style="@style/text_fragment_fun"
+                />
 
         </LinearLayout>
 

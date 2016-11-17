@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="150dp">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/hongdian"
+        android:foreground="@color/gray"/>
+
+    <LinearLayout
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/tv1_item_fun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="skjlkjsdfl"
+            style="@style/text1_recycleritem_fun"/>
+        <TextView
+            android:id="@+id/tv2_item_fun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="aaaaaaa"
+            style="@style/text2_recycleritem_fun"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

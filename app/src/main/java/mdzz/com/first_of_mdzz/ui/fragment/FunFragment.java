@@ -114,10 +114,10 @@ public class FunFragment extends BaseFragment {
         for (int i = 0; i < list_imageview.size(); i++) {
 
             ImageView iv = new ImageView(getActivity());
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(30, 30);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             params.rightMargin = 10;
             iv.setLayoutParams(params);
-            iv.setImageResource(R.drawable.dot_selector);
+            iv.setImageResource(R.drawable.ad_selector);
             if (i == 0) {
                 iv.setSelected(true);
             }

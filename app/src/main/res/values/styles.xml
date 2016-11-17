@@ -9,6 +9,12 @@
 
     </style>
 
+    <style name="styletoolbar">
+    <item name="android:layout_height">?attr/actionBarSize</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:background">@color/red</item>
+
+    </style>
 
     <style name="TextViewStyle1">
         <item name="android:textColor">@android:color/holo_red_light</item>
@@ -18,6 +24,33 @@
         <item name="android:background">#ffff00ff</item>
         <item name="android:gravity">center_horizontal</item>
     </style>
+
+    <style name="text1_recycleritem_fun">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="text2_recycleritem_fun">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="text_fragment_fun">
+
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">4dp</item>
+
+
+
+    </style>
+
+
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
