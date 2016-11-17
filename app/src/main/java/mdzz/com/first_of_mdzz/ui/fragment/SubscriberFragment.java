@@ -34,7 +34,6 @@ public class SubscriberFragment extends BaseFragment implements RecycleCallBack{
     private ArrayList<String> mList;
     private ItemTouchHelper mItemTouchHelper;
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -47,15 +46,24 @@ public class SubscriberFragment extends BaseFragment implements RecycleCallBack{
         View view=inflater.inflate(R.layout.fragment_subscriber, container, false);
 
         mList = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
-            mList.add("" + i);
-        }
+
+        mList.add("时尚频道");
+        mList.add("国内头条");
+        mList.add("国际头条");
+        mList.add("娱乐八卦");
+        mList.add("汽车频道");
+        mList.add("财经新闻");
+        mList.add("体育频道");
+        mList.add("互联网");
+        mList.add("电影资讯");
+
         mRecyclerView = (RecyclerView)view.findViewById(R.id.recycleview_subscriberfragment);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-        mAdapter = new DragAdapter(this, mList);
+        mAdapter = new DragAdapter(this, mList,mContext);
         mItemTouchHelper = new ItemTouchHelper(new DragItemCallBack(this));
         mItemTouchHelper.attachToRecyclerView(mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
+
         return view;
     }
     @Override
@@ -65,6 +73,7 @@ public class SubscriberFragment extends BaseFragment implements RecycleCallBack{
             mAdapter.setData(mList);
             mAdapter.notifyItemRemoved(position);
         } else {
+
             Toast.makeText(mContext, "当前点击的是" + position, Toast.LENGTH_SHORT).show();
             mAdapter.notifyDataSetChanged();
         }
