@@ -63,7 +63,13 @@ public class FunRecyclerAdapter extends RecyclerViewAdapterHelper<Object> {
             ImageView iv_item_fun1 = ((MyViewHolder1) holder).iv_item_fun1;
             ((MyViewHolder1) holder).tv_item_fun1.setText(title);
             ((MyViewHolder1) holder).tv_item_fun2.setText(content);
-            Glide.with(mContext).load(m_url).into(iv_item_fun1);
+            Glide.with(mContext).load(m_url)
+                    .asBitmap()
+                    .error(R.mipmap.ic_launcher)
+                    .placeholder(R.mipmap.ic_launcher)
+                    .dontAnimate()
+
+                    .into(iv_item_fun1);
         }else{
             String m_url = ((BannerBean) mList.get(position)).getUrl();
 

@@ -21,6 +21,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -139,7 +141,6 @@ public class FunFragment extends BaseFragment implements FunFragmentContract.IFu
     }
     private void initAdapter() {
         adapter = new MyVpInfiniteAdapter(list_imageview);
-        Log.e("TAG", "initAdapter: "+list.size());
         funRecyclerAdapter = new FunRecyclerAdapter(mContext,list);
 
     }
@@ -252,7 +253,9 @@ public class FunFragment extends BaseFragment implements FunFragmentContract.IFu
         Log.e("TAG", "list_promote: "+list_promote.size());
         list_col = bean.getData().getColumns();
         size_col = list_col.size();
-       for(int i =0;i<size_col;i++){
+        setImage();
+
+        for(int i =0;i<size_col;i++){
            //日期的图片
            BannerBean banner = bean.getData().getColumns().get(i).getBanner();
            list.add(banner);
@@ -266,6 +269,15 @@ public class FunFragment extends BaseFragment implements FunFragmentContract.IFu
        }
 
         funRecyclerAdapter.notifyDataSetChanged();
+
+    }
+
+    private void setImage() {
+        Glide.with(this).load(list_display.get(0).getPic().getM_url()).into(imageView1);
+        Glide.with(this).load(list_display.get(1).getPic().getM_url()).into(imageView2);
+        Glide.with(this).load(list_display.get(2).getPic().getM_url()).into(imageView3);
+
+
 
     }
 
