@@ -21,9 +21,9 @@ public class FileManger {
     public  static File getRootCacheFile(){
         if(Environment.getExternalStorageState()
                 .equals(Environment.MEDIA_MOUNTED)){
-            return MyApplication.app.getExternalCacheDir();
+            return MyApplication.getInstance().getExternalCacheDir();
         }else {
-            return MyApplication.app.getCacheDir();
+            return MyApplication.getInstance().getCacheDir();
         }
     }
 

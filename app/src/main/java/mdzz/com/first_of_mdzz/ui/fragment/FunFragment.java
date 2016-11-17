@@ -25,16 +25,22 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import mdzz.com.first_of_mdzz.R;
 import mdzz.com.first_of_mdzz.adapter.MyVpInfiniteAdapter;
 import mdzz.com.first_of_mdzz.base.BaseFragment;
+import mdzz.com.first_of_mdzz.bean.PlayBean;
+import mdzz.com.first_of_mdzz.config.UrlConfig;
+import mdzz.com.first_of_mdzz.http.HttpUtils;
+import mdzz.com.first_of_mdzz.ui.main.FunFragmentContract;
+import mdzz.com.first_of_mdzz.ui.main.FunFragmentPresenter;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FunFragment extends BaseFragment {
+public class FunFragment extends BaseFragment implements FunFragmentContract.IFunView{
 
     private SwipeRefreshLayout refreshLayout;
     private ViewPager viewPager;
@@ -46,6 +52,7 @@ public class FunFragment extends BaseFragment {
     private LinearLayout mlinear_ad;
     private  MyRunnable runnable;
     private Handler handler = new Handler();
+    private List<PlayBean> list;
 
 
     @Override
@@ -59,6 +66,7 @@ public class FunFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
+        initData();
 
 
 //        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
@@ -71,6 +79,11 @@ public class FunFragment extends BaseFragment {
 
     }
 
+    private void initData() {
+        FunFragmentPresenter presenter = new FunFragmentPresenter(this);
+        Map<String, String> map = HttpUtils.getPlayMap("北京");
+        presenter.getPlayBean(map);
+    }
 
 
     private void initView(View view) {
@@ -138,7 +151,7 @@ public class FunFragment extends BaseFragment {
             public void onPageSelected( int position) {
                 for(int i =0;i<list_imageview.size();i++){
                     if(i==(position%list_imageview.size())){
-                        Log.e("TAG", "onPageSelected() returned: " + position%6);
+                        //Log.e("TAG", "onPageSelected() returned: " + position%6);
                        mlinear_ad.getChildAt(i%list_imageview.size()).setSelected(true);
                     }else {
                         mlinear_ad.getChildAt(i%list_imageview.size()).setSelected(false);
@@ -202,9 +215,13 @@ public class FunFragment extends BaseFragment {
       handler.postDelayed(runnable,4000);
     }
 
+    @Override
+    public void getData(PlayBean bean) {
+        Log.e("TAG", "getData: "+bean.getData().getDisplay().size());
+    }
 
 
-   //轮播的runnable
+    //轮播的runnable
     class MyRunnable implements  Runnable{
 
         @Override

@@ -6,7 +6,7 @@ import java.util.List;
  * Created by acer on 2016/11/15.
  */
 
-public class playBean {
+public class PlayBean {
 
 
     /**

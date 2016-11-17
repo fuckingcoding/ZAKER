@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_select_position"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="mdzz.com.first_of_mdzz.ui.selectposition.SelectPositionActivity">
+
+
+    <TextView
+        android:id="@+id/textView_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/voip_toast_bg"
+        android:gravity="center"
+        android:textSize="50sp"
+        android:visibility="gone"
+        android:text="A"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="35dp"/>
+
+    <com.steven.android30_letterindexerview.customview.LetterIndexerView
+        android:id="@+id/letterIndexerView_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true" android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+</RelativeLayout>

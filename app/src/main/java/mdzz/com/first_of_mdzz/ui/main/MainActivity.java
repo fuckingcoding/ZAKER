@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SlidingPaneLayout;
@@ -32,7 +30,7 @@ import mdzz.com.first_of_mdzz.ui.fragment.MyFragment;
 import mdzz.com.first_of_mdzz.ui.fragment.NewsFragment;
 import mdzz.com.first_of_mdzz.utils.ToastHelper;
 
-public class MainActivity extends AppCompatActivity implements MainContract.IMainView, ViewPager.OnPageChangeListener, RadioGroup.OnCheckedChangeListener
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, RadioGroup.OnCheckedChangeListener
         , View.OnClickListener {
     private int INTERVAL_OF_TWO_CLICK_TO_QUIT = 1000;
 

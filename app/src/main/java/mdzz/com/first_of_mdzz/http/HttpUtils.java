@@ -4,8 +4,11 @@ import android.content.Context;
 import android.webkit.CookieManager;
 
 import java.net.CookiePolicy;
+import java.util.Hashtable;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import mdzz.com.first_of_mdzz.config.UrlConfig;
 import mdzz.com.first_of_mdzz.utils.FileManger;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
@@ -21,22 +24,22 @@ public class HttpUtils {
     private static HttpUtils instance;
    private Retrofit retrofit ;
     private IRetrofitInterface retrofitInterface;
-    private HttpUtils(String urlstring){
-         init(urlstring);
+    private HttpUtils( ){
+         init();
     }
 
-    private void init(String urlstring) {
+    private void init( ) {
         retrofit =  new Retrofit.Builder()
-                .baseUrl(urlstring)
+                .baseUrl(UrlConfig.BASE_URL)
                 .client(getClinet())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 
-    public static HttpUtils getInstance(String urlstring) {
+    public static HttpUtils getInstance( ) {
         if (instance == null) {
-            instance = new HttpUtils(urlstring);
+            instance = new HttpUtils();
         }
         return instance;
     }
@@ -62,7 +65,7 @@ public class HttpUtils {
 
     private   Retrofit getRetrofit(){
            retrofit = new Retrofit.Builder()
-                  .baseUrl("http://www.baidu.com/")
+                  .baseUrl(UrlConfig.BASE_URL)
                   .client(new OkHttpClient())
                   .addConverterFactory(GsonConverterFactory.create())
                   .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -75,5 +78,19 @@ public class HttpUtils {
              retrofitInterface = retrofit.create(IRetrofitInterface.class);
         }
         return retrofitInterface;
+    }
+
+
+    public static Map<String,String>getPlayMap(String city){
+        //http://wl.myzaker.com/?_appid=AndroidPhone&_v=7.0.2&_version=7.02&c=columns&city=%E5%8C%97%E4%BA%AC
+        Map<String,String> map = new Hashtable<>();
+        map.put("_appid","AndroidPhone");
+        map.put("_v","7.0.2");
+        map.put("_version","7.02");
+        map.put("c","columns");
+        map.put("city",city);
+
+        return map;
+
     }
 }
