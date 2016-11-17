@@ -5,7 +5,8 @@ import android.util.Log;
 import java.util.List;
 import java.util.Map;
 
-import mdzz.com.first_of_mdzz.bean.PlayBean;
+import mdzz.com.first_of_mdzz.bean.fun.ColumnsBean;
+import mdzz.com.first_of_mdzz.bean.fun.PlayBean;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -46,14 +47,14 @@ public class FunFragmentPresenter implements  FunFragmentContract.IFunPresenter 
 
                     @Override
                     public void onNext(PlayBean bean) {
-                        
-                        List<PlayBean.DataBean.ColumnsBean> columnsBeen = bean.getData().getColumns();
+                        bean.getData().getColumns();
+                        List<ColumnsBean> columnsBeen = bean.getData().getColumns();
                         String title = bean.getData().getDisplay().get(0).getTitle();
-                     //   String content = bean.getData().getPromote().get(0).getArticle().getContent();
+
                         String s = bean.getData().getInfo().getNext_url() + bean.getData().getInfo().getPage();
                         Log.e("TAG", "columnsBeen: "+columnsBeen.get(0).getBuild_banner());
                         Log.e("TAG", "getInfo: "+s);
-                       // Log.e("TAG", "getPromote: "+content);
+
                         Log.e("TAG", "getDisplay: "+title);
                         view.getData(bean);
                     }

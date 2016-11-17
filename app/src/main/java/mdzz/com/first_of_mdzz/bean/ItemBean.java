@@ -5,7 +5,7 @@ package mdzz.com.first_of_mdzz.bean;
  */
 
 public class ItemBean {
-
+   //定位地点的bean
 
     private String username;
     private String pinyin;

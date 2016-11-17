@@ -66,7 +66,7 @@ public class HttpUtils {
     private   Retrofit getRetrofit(){
            retrofit = new Retrofit.Builder()
                   .baseUrl(UrlConfig.BASE_URL)
-                  .client(new OkHttpClient())
+                  .client(getClinet())
                   .addConverterFactory(GsonConverterFactory.create())
                   .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                   .build();

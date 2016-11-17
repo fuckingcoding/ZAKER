@@ -5,8 +5,7 @@ import java.util.Map;
 import mdzz.com.first_of_mdzz.base.IBaseModel;
 import mdzz.com.first_of_mdzz.base.IBasePresenter;
 import mdzz.com.first_of_mdzz.base.IBaseView;
-import mdzz.com.first_of_mdzz.bean.PlayBean;
-import retrofit2.http.QueryMap;
+import mdzz.com.first_of_mdzz.bean.fun.PlayBean;
 import rx.Observable;
 
 /**

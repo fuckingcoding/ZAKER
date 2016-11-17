@@ -2,8 +2,7 @@ package mdzz.com.first_of_mdzz.ui.main;
 
 import java.util.Map;
 
-import mdzz.com.first_of_mdzz.bean.PlayBean;
-import mdzz.com.first_of_mdzz.config.UrlConfig;
+import mdzz.com.first_of_mdzz.bean.fun.PlayBean;
 import mdzz.com.first_of_mdzz.http.HttpUtils;
 import mdzz.com.first_of_mdzz.http.IRetrofitInterface;
 import rx.Observable;

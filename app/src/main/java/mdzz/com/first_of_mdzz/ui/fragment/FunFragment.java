@@ -7,11 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,8 +27,13 @@ import java.util.Map;
 import mdzz.com.first_of_mdzz.R;
 import mdzz.com.first_of_mdzz.adapter.MyVpInfiniteAdapter;
 import mdzz.com.first_of_mdzz.base.BaseFragment;
-import mdzz.com.first_of_mdzz.bean.PlayBean;
-import mdzz.com.first_of_mdzz.config.UrlConfig;
+import mdzz.com.first_of_mdzz.bean.fun.BannerBean;
+import mdzz.com.first_of_mdzz.bean.fun.ColumnsBean;
+import mdzz.com.first_of_mdzz.bean.fun.DisplayBean;
+import mdzz.com.first_of_mdzz.bean.fun.InfoBean;
+import mdzz.com.first_of_mdzz.bean.fun.ItemsBean;
+import mdzz.com.first_of_mdzz.bean.fun.PlayBean;
+import mdzz.com.first_of_mdzz.bean.fun.PromoteBean;
 import mdzz.com.first_of_mdzz.http.HttpUtils;
 import mdzz.com.first_of_mdzz.ui.main.FunFragmentContract;
 import mdzz.com.first_of_mdzz.ui.main.FunFragmentPresenter;
@@ -52,7 +54,14 @@ public class FunFragment extends BaseFragment implements FunFragmentContract.IFu
     private LinearLayout mlinear_ad;
     private  MyRunnable runnable;
     private Handler handler = new Handler();
-    private List<PlayBean> list;
+    private  List<BannerBean> list_banner; //今天
+    private List<ItemsBean> list_items; // recycler 的item
+    private List<DisplayBean> list_display; // 三个固定的imageView
+    private List<PromoteBean> list_promote; //轮播条
+    private InfoBean infoBean; //下一条信息
+    private List<ColumnsBean> list_col;//包含 list_items list_banner
+    private  List<Object> list;
+
 
 
     @Override
@@ -214,10 +223,24 @@ public class FunFragment extends BaseFragment implements FunFragmentContract.IFu
         runnable = new MyRunnable();
       handler.postDelayed(runnable,4000);
     }
-
+   private int size_col ;
+    private int size_promote;
+    //TODO 下载网络数据
     @Override
     public void getData(PlayBean bean) {
-        Log.e("TAG", "getData: "+bean.getData().getDisplay().size());
+        infoBean = bean.getData().getInfo();
+        String page = infoBean.getPage();
+        String show_category = infoBean.getShow_category();
+        Log.e("TAG", "iiiiiiiiii: "+page+show_category );
+        //三个imageview
+        list_display = bean.getData().getDisplay();
+        Log.e("TAG", "getData: "+list_display.size());
+        //轮播条
+        list_promote= bean.getData().getPromote();
+        Log.e("TAG", "list_promote: "+list_promote.size());
+        list_col = bean.getData().getColumns();
+        size_col = list_col.size();
+
     }
 
 
