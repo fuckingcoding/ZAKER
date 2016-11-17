@@ -1,6 +1,7 @@
 package mdzz.com.first_of_mdzz.ui.fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 import mdzz.com.first_of_mdzz.R;
+import mdzz.com.first_of_mdzz.adapter.FunRecyclerAdapter;
 import mdzz.com.first_of_mdzz.adapter.MyVpInfiniteAdapter;
 import mdzz.com.first_of_mdzz.base.BaseFragment;
 import mdzz.com.first_of_mdzz.bean.fun.BannerBean;
@@ -43,7 +45,7 @@ import mdzz.com.first_of_mdzz.ui.main.FunFragmentPresenter;
  * A simple {@link Fragment} subclass.
  */
 public class FunFragment extends BaseFragment implements FunFragmentContract.IFunView{
-
+  private Context mContext;
     private SwipeRefreshLayout refreshLayout;
     private ViewPager viewPager;
     private ImageView imageView1,imageView2,imageView3;
@@ -54,15 +56,21 @@ public class FunFragment extends BaseFragment implements FunFragmentContract.IFu
     private LinearLayout mlinear_ad;
     private  MyRunnable runnable;
     private Handler handler = new Handler();
-    private  List<BannerBean> list_banner; //今天
+
     private List<ItemsBean> list_items; // recycler 的item
     private List<DisplayBean> list_display; // 三个固定的imageView
     private List<PromoteBean> list_promote; //轮播条
     private InfoBean infoBean; //下一条信息
     private List<ColumnsBean> list_col;//包含 list_items list_banner
     private  List<Object> list;
+    private FunRecyclerAdapter funRecyclerAdapter;
 
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,6 +82,7 @@ public class FunFragment extends BaseFragment implements FunFragmentContract.IFu
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         initView(view);
         initData();
 
@@ -89,6 +98,7 @@ public class FunFragment extends BaseFragment implements FunFragmentContract.IFu
     }
 
     private void initData() {
+        list = new ArrayList<>();
         FunFragmentPresenter presenter = new FunFragmentPresenter(this);
         Map<String, String> map = HttpUtils.getPlayMap("北京");
         presenter.getPlayBean(map);
@@ -110,7 +120,6 @@ public class FunFragment extends BaseFragment implements FunFragmentContract.IFu
             iv.setTag(i);
 
             iv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-
             iv.setImageResource(R.mipmap.guide_loading_tag_46);
             iv.setScaleType(ImageView.ScaleType.FIT_XY);
             list_imageview .add(iv);
@@ -123,13 +132,15 @@ public class FunFragment extends BaseFragment implements FunFragmentContract.IFu
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initDot();
-         initAdapter();
+        initAdapter();
         initAdViewPager();
         initRecyclerView();
 
     }
     private void initAdapter() {
         adapter = new MyVpInfiniteAdapter(list_imageview);
+        Log.e("TAG", "initAdapter: "+list.size());
+        funRecyclerAdapter = new FunRecyclerAdapter(mContext,list);
 
     }
     private void initDot() {
@@ -197,7 +208,7 @@ public class FunFragment extends BaseFragment implements FunFragmentContract.IFu
     private void initRecyclerView() {
         manager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         recyclerView .setLayoutManager(manager);
-        //recyclerView.setAdapter();
+        recyclerView.setAdapter(funRecyclerAdapter);
 
     }
 
@@ -228,6 +239,7 @@ public class FunFragment extends BaseFragment implements FunFragmentContract.IFu
     //TODO 下载网络数据
     @Override
     public void getData(PlayBean bean) {
+
         infoBean = bean.getData().getInfo();
         String page = infoBean.getPage();
         String show_category = infoBean.getShow_category();
@@ -240,6 +252,20 @@ public class FunFragment extends BaseFragment implements FunFragmentContract.IFu
         Log.e("TAG", "list_promote: "+list_promote.size());
         list_col = bean.getData().getColumns();
         size_col = list_col.size();
+       for(int i =0;i<size_col;i++){
+           //日期的图片
+           BannerBean banner = bean.getData().getColumns().get(i).getBanner();
+           list.add(banner);
+           //子项目的bean
+           List<ItemsBean> itemsBeanList = bean.getData().getColumns().get(i).getItems();
+           for(int j=0;j<itemsBeanList.size();j++){
+              list.add(itemsBeanList.get(j));
+               Log.e("TAG", "getData: "+list.size() );
+           }
+
+       }
+
+        funRecyclerAdapter.notifyDataSetChanged();
 
     }
 
