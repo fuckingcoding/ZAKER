@@ -1,29 +1,49 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+        >
+
+ <android.support.design.widget.AppBarLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     app:layout_scrollFlags="scroll"
+        >
+
+<android.support.design.widget.CollapsingToolbarLayout
+    android:id="@+id/collapsing_fun"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+
     >
-
-
     <android.support.v7.widget.Toolbar
        style="@style/styletoolbar"
-        android:id="@+id/toolbar"></android.support.v7.widget.Toolbar>
-    <!-- TODO: Update blank fragment layout -->
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/refresh_Funfragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_gravity="top"
+        android:id="@+id/toolbar"
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+
+        ></android.support.v7.widget.Toolbar>
+
+
+            <LinearLayout
+                android:layout_marginTop="?attr/actionBarSize"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_scrollFlags="scroll"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="120dp">
         <android.support.v4.view.ViewPager
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_scrollFlags="scroll"
             android:background="@color/black_overlay"
             android:id="@+id/viewpager_Funfragment"
             android:layout_width="match_parent"
@@ -37,7 +57,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="10dp"
                     android:layout_alignParentBottom="true"
-
                     android:layout_centerHorizontal="true"
                     android:orientation="horizontal"
                     android:gravity="center"
@@ -51,36 +70,46 @@
             >
 
             <ImageView
-                android:background="@color/black_overlay"
+                android:scaleType="fitXY"
                 android:src="@mipmap/ic_launcher"
                 android:id="@+id/iv1_Funfrag"
                 style="@style/text_fragment_fun"/>
             <ImageView
-                android:background="@color/black_overlay"
+                android:scaleType="fitXY"
                 android:src="@mipmap/ic_launcher"
                 android:id="@+id/iv2_Funfrag"
                 style="@style/text_fragment_fun"
                 />
             <ImageView
-                android:background="@color/black_overlay"
+                android:scaleType="fitXY"
                 android:src="@mipmap/ic_launcher"
                 android:id="@+id/iv3_Funfrag"
                 style="@style/text_fragment_fun"
                 />
 
         </LinearLayout>
+            </LinearLayout>
+</android.support.design.widget.CollapsingToolbarLayout>
 
+ </android.support.design.widget.AppBarLayout>
+    <android.support.v4.widget.SwipeRefreshLayout
+
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
 <android.support.v7.widget.RecyclerView
-    android:background="@color/colorAccent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:background="@android:color/white"
     android:id="@+id/recyclerView_Funfrag"
     android:layout_width="match_parent"
     android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
-
-        </LinearLayout>
-
     </android.support.v4.widget.SwipeRefreshLayout>
+</android.support.design.widget.CoordinatorLayout>
 
-
-
-</LinearLayout>

@@ -4,7 +4,7 @@ package mdzz.com.first_of_mdzz.bean;
  * Created by acer on 2016/11/17.
  */
 
-public class ItemBean {
+public class SelectBean {
    //定位地点的bean
 
     private String username;
@@ -12,10 +12,10 @@ public class ItemBean {
     private String firstLetter;
     private String iconUrl;
 
-    public ItemBean() {
+    public SelectBean() {
     }
 
-    public ItemBean(String username, String iconUrl, String firstLetter, String pinyin) {
+    public SelectBean(String username, String iconUrl, String firstLetter, String pinyin) {
         this.username = username;
         this.iconUrl = iconUrl;
         this.firstLetter = firstLetter;
@@ -56,7 +56,7 @@ public class ItemBean {
 
     @Override
     public String toString() {
-        return "ItemBean{" +
+        return "SelectBean{" +
                 "username='" + username + '\'' +
                 ", pinyin='" + pinyin + '\'' +
                 ", firstLetter='" + firstLetter + '\'' +

@@ -23,10 +23,14 @@ import mdzz.com.first_of_mdzz.utils.RecyclerViewAdapterHelper;
  */
 
 public class FunRecyclerAdapter extends RecyclerViewAdapterHelper<Object> {
-
-    public FunRecyclerAdapter(Context context, List list) {
+  private  FunOnClickListener listener ;
+    public FunRecyclerAdapter(Context context, List list,FunOnClickListener listener) {
         super(context, list);
+        this.listener = listener;
 
+    }
+    public interface  FunOnClickListener{
+        void OnClick(int position);
     }
 
     @Override
@@ -53,7 +57,7 @@ public class FunRecyclerAdapter extends RecyclerViewAdapterHelper<Object> {
         }
     }
     @Override
-    public void onBindMyViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindMyViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
         if(holder instanceof  MyViewHolder1){
             String m_url = ((ItemsBean) mList.get(position)).getPic().getUrl();
@@ -68,8 +72,14 @@ public class FunRecyclerAdapter extends RecyclerViewAdapterHelper<Object> {
                     .error(R.mipmap.ic_launcher)
                     .placeholder(R.mipmap.ic_launcher)
                     .dontAnimate()
-
                     .into(iv_item_fun1);
+
+            ((MyViewHolder1) holder).itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.OnClick(position);
+                }
+            });
         }else{
             String m_url = ((BannerBean) mList.get(position)).getUrl();
 

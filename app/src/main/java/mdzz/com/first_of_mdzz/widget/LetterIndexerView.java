@@ -10,12 +10,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import mdzz.com.first_of_mdzz.R;
+
 /**
  * Created by StevenWang on 16/10/28.
  */
 
 public class LetterIndexerView extends View {
-    private String[] mArrLetters = new String[]{"#", "A", "B", "C", "D", "E", "F",
+    private String[] mArrLetters = new String[]{"热门","#", "A", "B", "C", "D", "E", "F",
             "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
             "T", "U", "V", "W", "X", "Y", "Z"};
     private int mLineHeight = 0;
@@ -93,8 +95,8 @@ public class LetterIndexerView extends View {
                         textView_dialog.setVisibility(GONE);
                     }
                     break;
-                default:
-                    setBackgroundColor(Color.parseColor("#aaaaaa"));
+                default:   //Color.parseColor("#aaaaaa")
+                    setBackgroundColor(getResources().getColor(R.color.gray));
                     if (textView_dialog != null) {
                         textView_dialog.setVisibility(VISIBLE);
                         textView_dialog.setText(mArrLetters[position]);

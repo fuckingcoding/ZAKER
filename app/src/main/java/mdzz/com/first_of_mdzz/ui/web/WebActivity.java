@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import mdzz.com.first_of_mdzz.R;
+import mdzz.com.first_of_mdzz.config.Constant;
 
 
 public class WebActivity extends AppCompatActivity {
@@ -39,12 +40,15 @@ public class WebActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web);
-
         Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
+        webstring= intent.getStringExtra(Constant.WEB_URL);
+        title =intent.getStringExtra(Constant.WEB_TITLE);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(title);
+        if(title!=null){
+            toolbar.setTitle(title);
+        }
+
         setSupportActionBar(toolbar);
 
         toolbar.setTitleTextColor(Color.WHITE);

@@ -93,4 +93,19 @@ public class HttpUtils {
         return map;
 
     }
+    public static Map<String,String>getPositionMap(String city){
+        //http://wl.myzaker.com/?_appid=AndroidPhone&_v=7.0.2&_version=7.02&c=city_list&lat=39.913249&lng=116.403625
+        //可不拼接经纬度
+        Map<String,String> map = new Hashtable<>();
+        map.put("_appid","AndroidPhone");
+        map.put("_v","7.0.2");
+        map.put("_version","7.02");
+        map.put("c","city_list");
+
+
+        return map;
+
+    }
+
+
 }

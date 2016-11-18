@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import mdzz.com.first_of_mdzz.R;
-import mdzz.com.first_of_mdzz.bean.ItemBean;
+import mdzz.com.first_of_mdzz.bean.SelectBean;
 import mdzz.com.first_of_mdzz.utils.BitmapCircleTransformation;
 import mdzz.com.first_of_mdzz.utils.RecyclerViewAdapterHelper;
 
@@ -22,10 +22,15 @@ import mdzz.com.first_of_mdzz.utils.RecyclerViewAdapterHelper;
  * Created by StevenWang on 16/10/28.
  */
 
-public class RecyclerIndexAdapter extends RecyclerViewAdapterHelper<ItemBean> implements SectionIndexer {
-
-    public RecyclerIndexAdapter(Context mContext, List<ItemBean> list) {
+public class RecyclerIndexAdapter extends RecyclerViewAdapterHelper<SelectBean> implements SectionIndexer {
+    private IndexOnClickListener listener ;
+    public RecyclerIndexAdapter(Context mContext, List<SelectBean> list,IndexOnClickListener listener) {
         super(mContext, list);
+        this.listener = listener;
+    }
+
+    public interface IndexOnClickListener{
+         void OnClick(int position);
     }
 
     @Override
@@ -35,7 +40,7 @@ public class RecyclerIndexAdapter extends RecyclerViewAdapterHelper<ItemBean> im
     }
 
     @Override
-    public void onBindMyViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindMyViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof MyViewHolder) {
             int firstPosition = getPositionForSection(getSectionForPosition(position));
             if (firstPosition == position) {
@@ -48,6 +53,13 @@ public class RecyclerIndexAdapter extends RecyclerViewAdapterHelper<ItemBean> im
 
             ((MyViewHolder) holder).textView_item_username.setText(mList.get(position)
                     .getUsername());
+
+            ((MyViewHolder) holder).itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                  listener.OnClick(position);
+                }
+            });
 
             Glide.with(mContext)
                     .load(mList.get(position).getIconUrl())

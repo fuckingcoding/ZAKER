@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -41,14 +42,21 @@ import mdzz.com.first_of_mdzz.bean.fun.PromoteBean;
 import mdzz.com.first_of_mdzz.http.HttpUtils;
 import mdzz.com.first_of_mdzz.ui.main.FunFragmentContract;
 import mdzz.com.first_of_mdzz.ui.main.FunFragmentPresenter;
+import mdzz.com.first_of_mdzz.utils.DividerItemDecoration;
+import mdzz.com.first_of_mdzz.utils.SpacesItemDecoration;
+import mdzz.com.first_of_mdzz.utils.ToastHelper;
+import mdzz.com.first_of_mdzz.utils.UIManager;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FunFragment extends BaseFragment implements FunFragmentContract.IFunView{
+public class FunFragment extends BaseFragment
+        implements View.OnClickListener,FunFragmentContract.IFunView,FunRecyclerAdapter.FunOnClickListener{
+
   private Context mContext;
     private SwipeRefreshLayout refreshLayout;
+    private CollapsingToolbarLayout collapsingToolbarLayout;
     private ViewPager viewPager;
     private ImageView imageView1,imageView2,imageView3;
     private RecyclerView recyclerView ;
@@ -66,12 +74,16 @@ public class FunFragment extends BaseFragment implements FunFragmentContract.IFu
     private List<ColumnsBean> list_col;//包含 list_items list_banner
     private  List<Object> list;
     private FunRecyclerAdapter funRecyclerAdapter;
+    private String cityname = "北京";
+    private  String urlstring ;//跳转web的参数
+    private  String title; // 跳转web的参数
 
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = context;
+        list = new ArrayList<>();
     }
 
     @Override
@@ -100,20 +112,25 @@ public class FunFragment extends BaseFragment implements FunFragmentContract.IFu
     }
 
     private void initData() {
-        list = new ArrayList<>();
+        list.clear();
         FunFragmentPresenter presenter = new FunFragmentPresenter(this);
-        Map<String, String> map = HttpUtils.getPlayMap("北京");
+        Map<String, String> map = HttpUtils.getPlayMap(cityname);
         presenter.getPlayBean(map);
     }
 
 
     private void initView(View view) {
         list_imageview = new ArrayList<>();
+        collapsingToolbarLayout = (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_fun);
+        collapsingToolbarLayout.setTitleEnabled(false);
         initToolBar(view,R.id.toolbar,"玩乐",false);
-        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_Funfragment);
+        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refreshLayout);
         imageView1 = (ImageView) view.findViewById(R.id.iv1_Funfrag);
         imageView2 = (ImageView) view.findViewById(R.id.iv2_Funfrag);
         imageView3 = (ImageView) view.findViewById(R.id.iv3_Funfrag);
+        imageView1.setOnClickListener(this);
+        imageView2.setOnClickListener(this);
+        imageView3.setOnClickListener(this);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_Funfrag);
         viewPager = (ViewPager) view.findViewById(R.id.viewpager_Funfragment);
         mlinear_ad = (LinearLayout) view.findViewById(R.id.linear_ad);
@@ -137,11 +154,25 @@ public class FunFragment extends BaseFragment implements FunFragmentContract.IFu
         initAdapter();
         initAdViewPager();
         initRecyclerView();
+        initSwipeRefresh();
+
 
     }
+
+
+
+    private void initSwipeRefresh() {
+        refreshLayout .setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initData();
+            }
+        });
+    }
+
     private void initAdapter() {
         adapter = new MyVpInfiniteAdapter(list_imageview);
-        funRecyclerAdapter = new FunRecyclerAdapter(mContext,list);
+        funRecyclerAdapter = new FunRecyclerAdapter(mContext,list,this);
 
     }
     private void initDot() {
@@ -155,6 +186,13 @@ public class FunFragment extends BaseFragment implements FunFragmentContract.IFu
             if (i == 0) {
                 iv.setSelected(true);
             }
+            //TODO 轮播条的点击
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
 
             mlinear_ad.addView(iv);
 
@@ -209,6 +247,7 @@ public class FunFragment extends BaseFragment implements FunFragmentContract.IFu
     private void initRecyclerView() {
         manager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         recyclerView .setLayoutManager(manager);
+        recyclerView.addItemDecoration(new SpacesItemDecoration(5));
         recyclerView.setAdapter(funRecyclerAdapter);
 
     }
@@ -221,6 +260,10 @@ public class FunFragment extends BaseFragment implements FunFragmentContract.IFu
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.city){
+            UIManager.startSelectCity(mContext,cityname);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -269,6 +312,7 @@ public class FunFragment extends BaseFragment implements FunFragmentContract.IFu
        }
 
         funRecyclerAdapter.notifyDataSetChanged();
+        refreshLayout.setRefreshing(false);
 
     }
 
@@ -279,6 +323,36 @@ public class FunFragment extends BaseFragment implements FunFragmentContract.IFu
 
 
 
+    }
+
+    //recycler 点击事件
+    @Override
+    public void OnClick(int position) {
+        ToastHelper.showToast(mContext,list_display.size()+"");
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        ToastHelper.showToast(mContext,"aaa");
+
+        switch (view.getId()){
+
+            case R.id.iv1_Funfrag:
+                urlstring=  list_display.get(0).getWeb().getUrl();
+                 title = list_display.get(0).getTitle();
+                break;
+            case R.id.iv2_Funfrag:
+                urlstring =list_display.get(1).getWeb().getUrl();
+                title = list_display.get(1).getTitle();
+                break;
+            case R.id.iv3_Funfrag:
+                urlstring =list_display.get(2).getWeb().getUrl();
+                title = list_display.get(2).getTitle();
+                break;
+
+        }
+        UIManager.startWebActivity(mContext,urlstring,title);
     }
 
 
