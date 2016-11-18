@@ -1,6 +1,7 @@
 package mdzz.com.first_of_mdzz.ui.fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -24,6 +25,7 @@ import mdzz.com.first_of_mdzz.ui.fragment.homechildfragment.TopicFragment;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends BaseFragment {
+    private Context mContext;
     private TabLayout tablayout;
     private List<Fragment> list_fragment;           //fragment的数据集合
     private List<String> list_title;                //TabLayout的名称集合
@@ -38,6 +40,12 @@ public class HomeFragment extends BaseFragment {
 
     public HomeFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext=context;
     }
 
 
@@ -59,9 +67,11 @@ public class HomeFragment extends BaseFragment {
         tablayout.addTab(tablayout.newTab().setText(list_title.get(0)));
         tablayout.addTab(tablayout.newTab().setText(list_title.get(1)));
         tablayout.addTab(tablayout.newTab().setText(list_title.get(2)));
-        myFragmentPaperAdapter = new MyFragmentPaperAdapter(getActivity().getSupportFragmentManager(),list_fragment,list_title);
+        myFragmentPaperAdapter = new MyFragmentPaperAdapter(getChildFragmentManager(),list_fragment,list_title);
         viewpaper.setAdapter(myFragmentPaperAdapter);
         tablayout.setupWithViewPager(viewpaper);
+        viewpaper.setOffscreenPageLimit(2);
+
     }
 
     private void initData() {
@@ -81,7 +91,7 @@ public class HomeFragment extends BaseFragment {
         tablayout = (TabLayout) rootView.findViewById(R.id.community_tablayout);
         //初始化ViewPaper
         viewpaper = (ViewPager) rootView.findViewById(R.id.community_viewpaper);
-        viewpaper.setOffscreenPageLimit(2);
+
         //初始化Fragment的数组
         list_fragment = new ArrayList<>();
         //初始化TabLayout的名称

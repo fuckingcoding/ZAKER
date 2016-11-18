@@ -34,8 +34,8 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="2dp"
                     android:id="@+id/item_friend_iv_userflag"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp" />
+                    android:layout_width="13dp"
+                    android:layout_height="13dp" />
 
             </LinearLayout>
 

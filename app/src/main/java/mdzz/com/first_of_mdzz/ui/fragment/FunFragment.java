@@ -47,7 +47,7 @@ import mdzz.com.first_of_mdzz.ui.main.FunFragmentPresenter;
  * A simple {@link Fragment} subclass.
  */
 public class FunFragment extends BaseFragment implements FunFragmentContract.IFunView{
-  private Context mContext;
+    private Context mContext;
     private SwipeRefreshLayout refreshLayout;
     private ViewPager viewPager;
     private ImageView imageView1,imageView2,imageView3;

@@ -1,6 +1,7 @@
 package mdzz.com.first_of_mdzz.ui.fragment.homechildfragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -39,6 +40,10 @@ public class TopicFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,6 +61,7 @@ public class TopicFragment extends Fragment {
         listView = (ListView) rootView.findViewById(R.id.fragment_topic_listview);
         myCommicountBaseAdapter = new MyCommicountBaseAdapter(list,getActivity());
         listView.setAdapter(myCommicountBaseAdapter);
+
 
     }
 
@@ -86,6 +92,7 @@ public class TopicFragment extends Fragment {
                         list .addAll(topicBean.getData().getList());//把对应的数据都加在数组中
                         Log.e("TAG", "onNext: "+list.size() );
                         myCommicountBaseAdapter.notifyDataSetChanged();
+
 
 
                     }
