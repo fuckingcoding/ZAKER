@@ -18,6 +18,7 @@ import mdzz.com.first_of_mdzz.adapter.MyFriendRecyclerAdapter;
 import mdzz.com.first_of_mdzz.bean.home.FriendBean;
 import mdzz.com.first_of_mdzz.config.UrlConfig;
 import mdzz.com.first_of_mdzz.http.HttpCallInterface;
+import mdzz.com.first_of_mdzz.utils.SpacesItemDecoration;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -55,6 +56,7 @@ public class FriendFragment extends Fragment {
         adapter = new MyFriendRecyclerAdapter(friendlist,getActivity());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new SpacesItemDecoration(10));
         recyclerView.setAdapter(adapter);
     }
 

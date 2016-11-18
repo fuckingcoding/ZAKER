@@ -1,6 +1,7 @@
 package mdzz.com.first_of_mdzz.ui.fragment.homechildfragment;
 
 
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import mdzz.com.first_of_mdzz.adapter.MyRecyclerAdapter;
 import mdzz.com.first_of_mdzz.bean.home.ChoiceBean;
 import mdzz.com.first_of_mdzz.config.UrlConfig;
 import mdzz.com.first_of_mdzz.http.HttpCallInterface;
+import mdzz.com.first_of_mdzz.utils.SpacesItemDecoration;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -87,6 +89,7 @@ public class ChoiceFragment extends Fragment {
         //初始化recycleView
         myrecyclerAdapter = new MyRecyclerAdapter(posts,getActivity());
         recyclerView = (RecyclerView) rootView.findViewById(R.id.fragment_choice_recyclerview);
+        recyclerView.addItemDecoration(new SpacesItemDecoration(10));
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(myrecyclerAdapter);

@@ -1,6 +1,7 @@
 package mdzz.com.first_of_mdzz.adapter;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import mdzz.com.first_of_mdzz.R;
 import mdzz.com.first_of_mdzz.bean.home.FriendBean;
+import mdzz.com.first_of_mdzz.utils.BitmapCircleTransformation;
 
 /**
  * Created by Administrator on 2016/11/17 0017.
@@ -81,7 +83,7 @@ public class MyFriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
             if(quote!=null){
                 Glide.with(mContext).load(friendlist.get(position).getQuote().getMedias().get(0).getUrl()).into(((ViewHolder1)holder).iv_url);
                 ((ViewHolder1)holder).tv_title.setText(friendlist.get(position).getQuote().getContent());
-                Glide.with(mContext).load(friendlist.get(position).getAuther().getIcon()).into(((ViewHolder1)holder).iv_head);
+                Glide.with(mContext).load(friendlist.get(position).getAuther().getIcon()).transform(new BitmapCircleTransformation(mContext)).into(((ViewHolder1)holder).iv_head);
                 Glide.with(mContext).load(friendlist.get(position).getAuther().getUserFlag().get(0).getPic()).into(((ViewHolder1)holder).iv_userflag);
                 ((ViewHolder1)holder).tv_username.setText(friendlist.get(position).getAuther().getName());
                 ((ViewHolder1)holder).tv_usertime.setText(friendlist.get(position).getDate());
@@ -91,7 +93,7 @@ public class MyFriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 
         }else if(holder instanceof ViewHolder2){
-            Glide.with(mContext).load(friendlist.get(position).getAuther().getIcon()).into(((ViewHolder2)holder).iv_head_two);
+            Glide.with(mContext).load(friendlist.get(position).getAuther().getIcon()).transform(new BitmapCircleTransformation(mContext)).into(((ViewHolder2)holder).iv_head_two);
             Glide.with(mContext).load(friendlist.get(position).getAuther().getUserFlag().get(0).getPic()).into(((ViewHolder2)holder).iv_userflag_two);
             Glide.with(mContext).load(friendlist.get(position).getOpenInfo().getPost().getMedias().get(0).getUrl()).into(((ViewHolder2)holder).iv_url_two);
             Glide.with(mContext).load(friendlist.get(position).getOpenInfo().getPost().getMedias().get(1).getUrl()).into(((ViewHolder2)holder).iv_url_second_two);
@@ -100,8 +102,7 @@ public class MyFriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
             ((ViewHolder2)holder).tv_text_two.setText(friendlist.get(position).getActionText());
             ((ViewHolder2)holder).tv_content_two.setText(friendlist.get(position).getContent());
         }else if(holder instanceof ViewHolder3){
-            Log.e("TAG", "onBindViewHolder: "+friendlist.get(position).getOpenInfo().getPost().getMedias().size() );
-            Glide.with(mContext).load(friendlist.get(position).getAuther().getIcon()).into(((ViewHolder3)holder).iv_head_three);
+            Glide.with(mContext).load(friendlist.get(position).getAuther().getIcon()).transform(new BitmapCircleTransformation(mContext)).into(((ViewHolder3)holder).iv_head_three);
             Glide.with(mContext).load(friendlist.get(position).getAuther().getUserFlag().get(0).getPic()).into(((ViewHolder3)holder).iv_userflag_three);
             Glide.with(mContext).load(friendlist.get(position).getOpenInfo().getPost().getMedias().get(0).getUrl()).into(((ViewHolder3)holder).iv_url_three);
             Glide.with(mContext).load(friendlist.get(position).getOpenInfo().getPost().getMedias().get(1).getUrl()).into(((ViewHolder3)holder).iv_url_second_three);
@@ -114,7 +115,7 @@ public class MyFriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 
         }else if(holder instanceof ViewHolder4){
-            Glide.with(mContext).load(friendlist.get(position).getAuther().getIcon()).into(((ViewHolder4)holder).iv_head_new);
+            Glide.with(mContext).load(friendlist.get(position).getAuther().getIcon()).transform(new BitmapCircleTransformation(mContext)).into(((ViewHolder4)holder).iv_head_new);
             Glide.with(mContext).load(friendlist.get(position).getAuther().getUserFlag().get(0).getPic()).into(((ViewHolder4)holder).iv_userflag_new);
             Glide.with(mContext).load(friendlist.get(position).getOpenInfo().getPost().getMedias().get(0).getUrl()).into(((ViewHolder4)holder).iv_url_new);
             ((ViewHolder4)holder).tv_username_new.setText(friendlist.get(position).getAuther().getName());
