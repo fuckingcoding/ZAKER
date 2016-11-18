@@ -75,15 +75,25 @@ public class MyFriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
         if(holder instanceof ViewHolder1){
+            FriendBean.DataBean.ListBean.QuoteBean quote = friendlist.get(position).getQuote();
+            if(quote!=null){
+                Glide.with(mContext).load(friendlist.get(position).getQuote().getMedias().get(0).getUrl()).into(((ViewHolder1)holder).iv_url);
+                ((ViewHolder1)holder).tv_title.setText(friendlist.get(position).getQuote().getContent());
+            }else{
+                position++;
+            }
             Glide.with(mContext).load(friendlist.get(position).getAuther().getIcon()).into(((ViewHolder1)holder).iv_head);
             Glide.with(mContext).load(friendlist.get(position).getAuther().getUserFlag().get(0).getPic()).into(((ViewHolder1)holder).iv_userflag);
-            Glide.with(mContext).load(friendlist.get(position).getQuote().getMedias().get(0).getUrl()).into(((ViewHolder1)holder).iv_url);
+
             ((ViewHolder1)holder).tv_username.setText(friendlist.get(position).getAuther().getName());
             ((ViewHolder1)holder).tv_usertime.setText(friendlist.get(position).getDate());
             ((ViewHolder1)holder).tv_text.setText(friendlist.get(position).getActionText());
             ((ViewHolder1)holder).tv_content.setText(friendlist.get(position).getContent());
-            ((ViewHolder1)holder).tv_title.setText(friendlist.get(position).getQuote().getContent());
+
+
+
         }else if(holder instanceof ViewHolder2){
             Glide.with(mContext).load(friendlist.get(position).getAuther().getIcon()).into(((ViewHolder2)holder).iv_head_two);
             Glide.with(mContext).load(friendlist.get(position).getAuther().getUserFlag().get(0).getPic()).into(((ViewHolder2)holder).iv_userflag_two);
