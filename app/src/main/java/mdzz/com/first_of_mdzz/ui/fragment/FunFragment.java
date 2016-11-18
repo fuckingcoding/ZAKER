@@ -51,6 +51,8 @@ import mdzz.com.first_of_mdzz.utils.UIManager;
 /**
  * A simple {@link Fragment} subclass.
  */
+public class FunFragment extends BaseFragment implements FunFragmentContract.IFunView{
+    private Context mContext;
 public class FunFragment extends BaseFragment
         implements View.OnClickListener,FunFragmentContract.IFunView,FunRecyclerAdapter.FunOnClickListener{
 
