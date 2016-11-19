@@ -8,11 +8,12 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <ImageView
+            android:layout_marginTop="5dp"
             android:id="@+id/item_friend_head"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="10dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/anonymous_icon"/>
         <LinearLayout
             android:layout_marginLeft="15dp"
             android:gravity="center_vertical"
@@ -28,9 +29,9 @@
                     android:id="@+id/item_friend_tv_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="UserName"
+                    android:text="秋名山车神"
                     android:textColor="#00ffff"
-                    android:textSize="20sp"/>
+                    android:textSize="18sp"/>
                 <ImageView
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="2dp"
@@ -48,7 +49,6 @@
                     android:id="@+id/item_friend_tv_usertime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="UserTime"
                     android:textColor="@color/colorGray"
                     android:textSize="10sp"/>
                 <TextView
@@ -56,7 +56,6 @@
                     android:id="@+id/item_friend_tv_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="usertext"
                     android:textColor="@color/colorGray"
                     android:textSize="10sp"/>
 
@@ -75,12 +74,13 @@
 
     </LinearLayout>
     <TextView
+        android:layout_marginTop="5dp"
         android:id="@+id/item_friend_tv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:layout_marginLeft="10dp"
-        android:text="UserContent"/>
+        android:text="同志们啊镖车需谨慎啊!!!"/>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -92,7 +92,7 @@
             android:id="@+id/item_friend_iv_url"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/qms"
             android:scaleType="centerCrop"/>
         <TextView
             android:id="@+id/item_friend_tv_title"
@@ -101,7 +101,7 @@
             android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="item_friend_tv_title"/>
+            android:text="《老司机》是对司机的一种称呼，具有3年以上驾龄，且交通事故较少的司机，可在 司机圈里称为老司机。"/>
 
     </LinearLayout>
     <LinearLayout

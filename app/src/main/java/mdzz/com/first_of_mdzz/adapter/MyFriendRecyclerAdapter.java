@@ -1,6 +1,7 @@
 package mdzz.com.first_of_mdzz.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,7 +17,10 @@ import java.util.List;
 
 import mdzz.com.first_of_mdzz.R;
 import mdzz.com.first_of_mdzz.bean.home.FriendBean;
+import mdzz.com.first_of_mdzz.config.Constant;
+import mdzz.com.first_of_mdzz.ui.web.WebActivity;
 import mdzz.com.first_of_mdzz.utils.BitmapCircleTransformation;
+import mdzz.com.first_of_mdzz.utils.ToastHelper;
 
 /**
  * Created by Administrator on 2016/11/17 0017.
@@ -31,6 +35,7 @@ public class MyFriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
     public static final int TYPE3 = 2;
     public static final int TYPE4 = 3;
     public static final int TYPE5 = 4;
+    private int i;
 
     @Override
     public int getItemViewType(int position) {
@@ -77,7 +82,7 @@ public class MyFriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
         if(holder instanceof ViewHolder1){
             FriendBean.DataBean.ListBean.QuoteBean quote = friendlist.get(position).getQuote();
@@ -94,8 +99,17 @@ public class MyFriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
                 ((ViewHolder1)holder).tv_usertime.setText(friendlist.get(position).getDate());
                 ((ViewHolder1)holder).tv_text.setText(friendlist.get(position).getActionText());
                 ((ViewHolder1)holder).tv_content.setText(friendlist.get(position).getContent());
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String weburl = friendlist.get(position).getQuote().getOpenInfo().getArticle().getWeburl();
+                        Intent intent = new Intent(mContext,WebActivity.class);
+                        intent.putExtra(Constant.WEB_URL,weburl);
+                        mContext.startActivity(intent);
+                    }
+                });
             }else{
-                position++;
+
             }
 
 
@@ -108,6 +122,15 @@ public class MyFriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
             ((ViewHolder2)holder).tv_usertime_two.setText(friendlist.get(position).getDate());
             ((ViewHolder2)holder).tv_text_two.setText(friendlist.get(position).getActionText());
             ((ViewHolder2)holder).tv_content_two.setText(friendlist.get(position).getContent());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String weburl = friendlist.get(position).getOpenInfo().getPost().getWeburl();
+                    Intent intent = new Intent(mContext,WebActivity.class);
+                    intent.putExtra(Constant.WEB_URL,weburl);
+                    mContext.startActivity(intent);
+                }
+            });
         }else if(holder instanceof ViewHolder3){
             Glide.with(mContext).load(friendlist.get(position).getAuther().getIcon()).transform(new BitmapCircleTransformation(mContext)).into(((ViewHolder3)holder).iv_head_three);
             Glide.with(mContext).load(friendlist.get(position).getAuther().getUserFlag().get(0).getPic()).into(((ViewHolder3)holder).iv_userflag_three);
@@ -118,6 +141,15 @@ public class MyFriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
             ((ViewHolder3)holder).tv_usertime_three.setText(friendlist.get(position).getDate());
             ((ViewHolder3)holder).tv_text_three.setText(friendlist.get(position).getActionText());
             ((ViewHolder3)holder).tv_content_three.setText(friendlist.get(position).getContent());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String weburl = friendlist.get(position).getOpenInfo().getPost().getWeburl();
+                    Intent intent = new Intent(mContext,WebActivity.class);
+                    intent.putExtra(Constant.WEB_URL,weburl);
+                    mContext.startActivity(intent);
+                }
+            });
 
 
 
@@ -129,7 +161,19 @@ public class MyFriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
             ((ViewHolder4)holder).tv_usertime_new.setText(friendlist.get(position).getDate());
             ((ViewHolder4)holder).tv_text_new.setText(friendlist.get(position).getActionText());
             ((ViewHolder4)holder).tv_content_new.setText(friendlist.get(position).getContent());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String weburl = friendlist.get(position).getOpenInfo().getPost().getWeburl();
+                    Intent intent = new Intent(mContext,WebActivity.class);
+                    intent.putExtra(Constant.WEB_URL,weburl);
+                    mContext.startActivity(intent);
+                }
+            });
         }
+
+
+
 
     }
 

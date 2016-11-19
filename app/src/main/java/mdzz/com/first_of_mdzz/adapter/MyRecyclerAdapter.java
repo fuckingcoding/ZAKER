@@ -1,6 +1,7 @@
 package mdzz.com.first_of_mdzz.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import java.util.List;
 
 import mdzz.com.first_of_mdzz.R;
 import mdzz.com.first_of_mdzz.bean.home.ChoiceBean;
+import mdzz.com.first_of_mdzz.config.Constant;
+import mdzz.com.first_of_mdzz.ui.web.WebActivity;
 import mdzz.com.first_of_mdzz.utils.BitmapCircleTransformation;
 
 /**
@@ -39,7 +42,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         Glide.with(mContext).load(posts.get(position).getAuther().getIcon()).transform(new BitmapCircleTransformation(mContext)).into(holder.img_choice);
         Glide.with(mContext).load(posts.get(position).getThumbnailMedias().get(0).getUrl()).into(holder.img_url);
         holder.tv_username.setText(posts.get(position).getAuther().getName());
@@ -49,6 +52,15 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         holder.tv_comment.setText(posts.get(position).getCommentCount());
         holder.tv_hot.setText(posts.get(position).getHotNum());
         holder.tv_like.setText(posts.get(position).getLikeNum());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String weburl = posts.get(position).getWeburl();
+                Intent intent = new Intent(mContext, WebActivity.class);
+                intent.putExtra(Constant.WEB_URL,weburl);
+                mContext.startActivity(intent);
+            }
+        });
 
     }
 
