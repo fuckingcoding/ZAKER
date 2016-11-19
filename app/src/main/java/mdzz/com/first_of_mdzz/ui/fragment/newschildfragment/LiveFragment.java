@@ -1,4 +1,4 @@
-package mdzz.com.first_of_mdzz.ui.fragment;
+package mdzz.com.first_of_mdzz.ui.fragment.newschildfragment;
 
 
 import android.graphics.Bitmap;

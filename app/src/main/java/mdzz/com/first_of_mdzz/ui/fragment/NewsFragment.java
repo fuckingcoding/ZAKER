@@ -17,6 +17,9 @@ import java.util.List;
 import mdzz.com.first_of_mdzz.R;
 import mdzz.com.first_of_mdzz.adapter.Mainadapter;
 import mdzz.com.first_of_mdzz.base.BaseFragment;
+import mdzz.com.first_of_mdzz.ui.fragment.newschildfragment.HotFragment;
+import mdzz.com.first_of_mdzz.ui.fragment.newschildfragment.LiveFragment;
+import mdzz.com.first_of_mdzz.ui.fragment.newschildfragment.SubscriberFragment;
 
 
 /**

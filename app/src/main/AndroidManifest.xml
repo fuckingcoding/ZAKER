@@ -22,6 +22,7 @@
             android:theme="@style/ActionBarTheme"
             ></activity>
         <activity android:name=".ui.web.WebActivity"></activity>
+        <activity android:name=".ui.main.subscriber.SubItemBaseActivity"/>
     </application>
 
 </manifest>

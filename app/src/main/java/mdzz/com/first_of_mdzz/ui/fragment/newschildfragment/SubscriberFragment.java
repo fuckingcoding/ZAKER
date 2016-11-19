@@ -1,7 +1,8 @@
-package mdzz.com.first_of_mdzz.ui.fragment;
+package mdzz.com.first_of_mdzz.ui.fragment.newschildfragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -20,6 +21,7 @@ import mdzz.com.first_of_mdzz.adapter.DragAdapter;
 import mdzz.com.first_of_mdzz.base.BaseFragment;
 import mdzz.com.first_of_mdzz.ui.fragment.drag.DragItemCallBack;
 import mdzz.com.first_of_mdzz.ui.fragment.drag.RecycleCallBack;
+import mdzz.com.first_of_mdzz.ui.main.subscriber.SubItemBaseActivity;
 
 
 /**
@@ -73,8 +75,14 @@ public class SubscriberFragment extends BaseFragment implements RecycleCallBack{
             mAdapter.setData(mList);
             mAdapter.notifyItemRemoved(position);
         } else {
+            String basetitle=mList.get(position).toString();
 
-            Toast.makeText(mContext, "当前点击的是" + position, Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "当前点击的是" +  basetitle, Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(getContext(), SubItemBaseActivity.class);
+            Bundle bundle=new Bundle();
+            bundle.putString("title",basetitle);
+            intent.putExtras(bundle);
+            startActivity(intent);
             mAdapter.notifyDataSetChanged();
         }
     }

@@ -25,5 +25,30 @@ public class UrlConfig {
     public static final String FRIEND_URL="http://sns.myzaker.com/daren_feeds.php?_appid=AndroidPhone&_bsize=720_1280&_city=%E5%8C%97%E4%BA%AC&_dev=160&_lat=39.913249&_lbs_city=%E5%8C%97%E4%BA%AC&_lbs_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_lng=116.403625&_mac=DC%3A0E%3AA1%3A6E%3A9B%3A85&_mcode=85AA2339&_net=wifi&_nudid=b6441c6086ab3941&_os=4.4.2_VPhone&_os_name=VPhone&_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_udid=864394102201417&_v=7.0.2&_version=7.02&s=1&uid=Doyen";
     //朋友圈Base url
     public static final String BASE_FRIEND_URL="http://sns.myzaker.com/";
+    //********************以下为news个页面的URL*******************************************
+
+    public  final static  String BaseUrl="http://iphone.myzaker.com/";
+    //时尚
+    public  final  static String FashionUrl="http://iphone.myzaker.com" +
+            "/zaker/news.php?_appid=AndroidPhone&_bsize=1080_1920&_version=7.02&app_id=12";
+    // 头条国内
+    public  final static  String NewsLoadUrl=" http://iphone.myzaker.com/zaker/news.php?_appid=AndroidPhone&_bsize=1080_1920&_version=7.02&app_id=1";
+    // 头条国际
+    public  final static  String NesForeignUrl="http://iphone.myzaker.com/zaker/news.php?_appid=AndroidPhone&_bsize=1080_1920&_version=7.02&app_id=2";
+    // 娱乐八卦中的娱乐
+    public  final static  String YuLeUrl=" http://iphone.myzaker.com/zaker/news.php?_appid=AndroidPhone&_bsize=1080_1920&_version=7.02&app_id=9";
+    // 汽车频道
+    public  final static  String CarUrl=" http://iphone.myzaker.com/zaker/news.php?_appid=AndroidPhone&_bsize=1080_1920&_version=7.02&app_id=7";
+    // 财经新闻
+    public  final static  String MoneyUrl="http://iphone.myzaker.com/zaker/news.php?_appid=AndroidPhone&_bsize=1080_1920&_version=7.02&app_id=4";
+    // 科技频道下的互联网
+    public  final static  String IntUrl="http://iphone.myzaker.com/zaker/news.php?_appid=AndroidPhone&_bsize=1080_1920&_version=7.02&app_id=5";
+    // 体育
+    public  final static  String TiYuUrl=" http://iphone.myzaker.com/zaker/news.php?_appid=AndroidPhone&_bsize=1080_1920&_version=7.02&app_id=8";
+    // 电影
+    public  final static  String MovieUrl="http://iphone.myzaker.com/zaker/news.php?_appid=AndroidPhone&_bsize=1080_1920&_version=7.02&app_id=15";
+
+
+    //***************************************************************
 
 }
