@@ -82,7 +82,11 @@ public class MyFriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
         if(holder instanceof ViewHolder1){
             FriendBean.DataBean.ListBean.QuoteBean quote = friendlist.get(position).getQuote();
             if(quote!=null){
-              // Glide.with(mContext).load(friendlist.get(position).getQuote().getMedias().get(0).getUrl()).into(((ViewHolder1)holder).iv_url);
+                if(friendlist.get(position).getQuote().getMedias().size()!=0) {
+                    Glide.with(mContext).load(friendlist.get(position).getQuote().getMedias().get(0).getUrl()).into(((ViewHolder1) holder).iv_url);
+                }else{
+                    ((ViewHolder1) holder).iv_url.setImageResource(R.mipmap.ic_launcher);
+                }
                 ((ViewHolder1)holder).tv_title.setText(friendlist.get(position).getQuote().getContent());
                 Glide.with(mContext).load(friendlist.get(position).getAuther().getIcon()).transform(new BitmapCircleTransformation(mContext)).into(((ViewHolder1)holder).iv_head);
                 Glide.with(mContext).load(friendlist.get(position).getAuther().getUserFlag().get(0).getPic()).into(((ViewHolder1)holder).iv_userflag);
@@ -90,6 +94,8 @@ public class MyFriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
                 ((ViewHolder1)holder).tv_usertime.setText(friendlist.get(position).getDate());
                 ((ViewHolder1)holder).tv_text.setText(friendlist.get(position).getActionText());
                 ((ViewHolder1)holder).tv_content.setText(friendlist.get(position).getContent());
+            }else{
+                position++;
             }
 
 

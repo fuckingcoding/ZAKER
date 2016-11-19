@@ -23,6 +23,8 @@
             ></activity>
         <activity android:name=".ui.web.WebActivity"></activity>
         <activity android:name=".ui.main.subscriber.SubItemBaseActivity"/>
+        <activity android:name=".ui.selectposition.SelectPositionActivity" />
+        <activity android:name=".ui.main.homeactivity.SportActivity"></activity>
     </application>
 
 </manifest>

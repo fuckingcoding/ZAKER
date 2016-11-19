@@ -3,6 +3,7 @@ package mdzz.com.first_of_mdzz.http;
 
 import mdzz.com.first_of_mdzz.bean.home.ChoiceBean;
 import mdzz.com.first_of_mdzz.bean.home.FriendBean;
+import mdzz.com.first_of_mdzz.bean.home.SportBean;
 import mdzz.com.first_of_mdzz.bean.home.TopicBean;
 import retrofit2.http.GET;
 import retrofit2.http.Url;
@@ -35,4 +36,6 @@ public interface HttpCallInterface {
     Observable<ChoiceBean> getnmsl(@Url String url);
     @GET
     Observable<FriendBean> getwsnd(@Url String url);
+    @GET
+    Observable<SportBean> getSport(@Url String url);
 }
