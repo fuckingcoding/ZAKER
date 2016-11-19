@@ -2,6 +2,7 @@ package mdzz.com.first_of_mdzz.ui.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -42,6 +43,7 @@ import mdzz.com.first_of_mdzz.bean.fun.PromoteBean;
 import mdzz.com.first_of_mdzz.http.HttpUtils;
 import mdzz.com.first_of_mdzz.ui.main.FunFragmentContract;
 import mdzz.com.first_of_mdzz.ui.main.FunFragmentPresenter;
+import mdzz.com.first_of_mdzz.ui.web.WebActivity;
 import mdzz.com.first_of_mdzz.utils.DividerItemDecoration;
 import mdzz.com.first_of_mdzz.utils.SpacesItemDecoration;
 import mdzz.com.first_of_mdzz.utils.ToastHelper;
@@ -51,8 +53,7 @@ import mdzz.com.first_of_mdzz.utils.UIManager;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FunFragment extends BaseFragment implements FunFragmentContract.IFunView{
-    private Context mContext;
+
 public class FunFragment extends BaseFragment
         implements View.OnClickListener,FunFragmentContract.IFunView,FunRecyclerAdapter.FunOnClickListener{
 
@@ -130,9 +131,8 @@ public class FunFragment extends BaseFragment
         imageView1 = (ImageView) view.findViewById(R.id.iv1_Funfrag);
         imageView2 = (ImageView) view.findViewById(R.id.iv2_Funfrag);
         imageView3 = (ImageView) view.findViewById(R.id.iv3_Funfrag);
-        imageView1.setOnClickListener(this);
-        imageView2.setOnClickListener(this);
-        imageView3.setOnClickListener(this);
+
+
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_Funfrag);
         viewPager = (ViewPager) view.findViewById(R.id.viewpager_Funfragment);
         mlinear_ad = (LinearLayout) view.findViewById(R.id.linear_ad);
@@ -157,7 +157,9 @@ public class FunFragment extends BaseFragment
         initAdViewPager();
         initRecyclerView();
         initSwipeRefresh();
-
+        imageView1.setOnClickListener(this);
+        imageView2.setOnClickListener(this);
+        imageView3.setOnClickListener(this);
 
     }
 
@@ -331,12 +333,17 @@ public class FunFragment extends BaseFragment
     @Override
     public void OnClick(int position) {
         ToastHelper.showToast(mContext,list_display.size()+"");
-
+        Object object = list.get(position);
+        if(object instanceof  ItemsBean){
+            urlstring = ((ItemsBean) object).getArticle().getWeburl();
+             title = ((ItemsBean) object).getArticle().getTitle();
+        }
+        UIManager.startWebActivity(mContext,urlstring,title);
     }
 
     @Override
     public void onClick(View view) {
-        ToastHelper.showToast(mContext,"aaa");
+
 
         switch (view.getId()){
 
@@ -347,14 +354,18 @@ public class FunFragment extends BaseFragment
             case R.id.iv2_Funfrag:
                 urlstring =list_display.get(1).getWeb().getUrl();
                 title = list_display.get(1).getTitle();
+
                 break;
             case R.id.iv3_Funfrag:
                 urlstring =list_display.get(2).getWeb().getUrl();
                 title = list_display.get(2).getTitle();
+
                 break;
 
         }
-        UIManager.startWebActivity(mContext,urlstring,title);
+
+
+       UIManager.startWebActivity(mContext,urlstring,title);
     }
 
 

@@ -21,6 +21,7 @@
         <activity android:name=".ui.selectposition.SelectCityActivity"
             android:theme="@style/ActionBarTheme"
             ></activity>
+        <activity android:name=".ui.web.WebActivity"></activity>
     </application>
 
 </manifest>

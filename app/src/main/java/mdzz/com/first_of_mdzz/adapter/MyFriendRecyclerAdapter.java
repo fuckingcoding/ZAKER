@@ -34,6 +34,7 @@ public class MyFriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemViewType(int position) {
+
         int size = friendlist.get(position).getMedias().size();
         if (size == 0) {
             return TYPE1;
@@ -81,7 +82,7 @@ public class MyFriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
         if(holder instanceof ViewHolder1){
             FriendBean.DataBean.ListBean.QuoteBean quote = friendlist.get(position).getQuote();
             if(quote!=null){
-                Glide.with(mContext).load(friendlist.get(position).getQuote().getMedias().get(0).getUrl()).into(((ViewHolder1)holder).iv_url);
+              // Glide.with(mContext).load(friendlist.get(position).getQuote().getMedias().get(0).getUrl()).into(((ViewHolder1)holder).iv_url);
                 ((ViewHolder1)holder).tv_title.setText(friendlist.get(position).getQuote().getContent());
                 Glide.with(mContext).load(friendlist.get(position).getAuther().getIcon()).transform(new BitmapCircleTransformation(mContext)).into(((ViewHolder1)holder).iv_head);
                 Glide.with(mContext).load(friendlist.get(position).getAuther().getUserFlag().get(0).getPic()).into(((ViewHolder1)holder).iv_userflag);
