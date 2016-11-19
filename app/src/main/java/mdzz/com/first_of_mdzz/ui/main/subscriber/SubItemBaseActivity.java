@@ -198,7 +198,7 @@ public class SubItemBaseActivity extends AppCompatActivity implements SubItemFra
         //Log.e("sss", "getData: "+url);
         Glide.with(mContext).load(url)
                // .placeholder(R.mipmap.ic_launcher)//设置站位图
-                .error (R.mipmap.ic_launcher)//加载失败的图片
+                .error (R.mipmap.ic_load_error)//加载失败的图片
                 .centerCrop()//拉伸属性
                 .into(imageView_sub_top);
         imageView_sub_top.setOnClickListener(new View.OnClickListener() {
