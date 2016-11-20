@@ -54,7 +54,7 @@ public class SelectCityActivity extends AppCompatActivity  implements SelectCont
 
         initData();
 
-        initBar();
+       // initBar();
 
         initView();
     }
