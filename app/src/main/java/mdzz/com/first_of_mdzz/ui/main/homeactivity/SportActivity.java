@@ -36,6 +36,7 @@ public class SportActivity extends AppCompatActivity {
     private int intExtra;
     private String url;
     private TextView textView;
+    private int lastVisibleItemPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +44,11 @@ public class SportActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sport);
         Intent intent = getIntent();
         intExtra = intent.getIntExtra("1", 10);
-        initView();
+        initNMSL();
         initData();
+
+        initView();
+
 
         if(intExtra==0){
             recyclerView.setAdapter(msa);
@@ -79,7 +83,7 @@ public class SportActivity extends AppCompatActivity {
         }
     }
 
-    private void initData() {
+    private void initNMSL() {
         switch (intExtra){
             case 0:
                 url=UrlConfig.SPORT_URL;
@@ -113,6 +117,10 @@ public class SportActivity extends AppCompatActivity {
                 break;
 
         }
+    }
+
+    private void initData() {
+
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(UrlConfig.BASE_SPORT_URL)
@@ -137,6 +145,7 @@ public class SportActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(SportBean sportBean) {
+                         url= sportBean.getData().getInfo().getNextUrl();
                         posts.addAll(sportBean.getData().getPosts());
                         msa.notifyDataSetChanged();
                     }
@@ -151,7 +160,22 @@ public class SportActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.sport_rv);
         msa = new MySportAdapter(this,posts);
         recyclerView.addItemDecoration(new SpacesItemDecoration(10));
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if(lastVisibleItemPosition==msa.getItemCount()-1&&newState==RecyclerView.SCROLL_STATE_IDLE){
+                    initData();
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                lastVisibleItemPosition= layoutManager.findLastVisibleItemPosition();
+            }
+        });
         recyclerView.setLayoutManager(layoutManager);
         srl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

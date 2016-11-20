@@ -37,6 +37,8 @@ public class ChoiceFragment extends Fragment {
     private RecyclerView recyclerView;
     private List<ChoiceBean.DataBean.PostsBean> posts=new ArrayList<>();
     private MyRecyclerAdapter myrecyclerAdapter;
+    private int i;
+    private  String nextUrl=UrlConfig.CHOOSE_URL;
 
 
 
@@ -65,7 +67,7 @@ public class ChoiceFragment extends Fragment {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         HttpCallInterface httpCallInterface = retrofit.create(HttpCallInterface.class);
-        Observable<ChoiceBean> getnmsl = httpCallInterface.getnmsl(UrlConfig.CHOOSE_URL);
+        Observable<ChoiceBean> getnmsl = httpCallInterface.getnmsl(nextUrl);
         getnmsl.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<ChoiceBean>() {
@@ -81,6 +83,7 @@ public class ChoiceFragment extends Fragment {
 
                     @Override
                     public void onNext(ChoiceBean choiceBean) {
+                        nextUrl= choiceBean.getData().getInfo().getNextUrl();
                         posts.addAll(choiceBean.getData().getPosts());
                         myrecyclerAdapter.notifyDataSetChanged();
                     }
@@ -93,7 +96,22 @@ public class ChoiceFragment extends Fragment {
         myrecyclerAdapter = new MyRecyclerAdapter(posts,getActivity());
         recyclerView = (RecyclerView) rootView.findViewById(R.id.fragment_choice_recyclerview);
         recyclerView.addItemDecoration(new SpacesItemDecoration(10));
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if(i==myrecyclerAdapter.getItemCount()-1&&newState==RecyclerView.SCROLL_STATE_IDLE){
+                        initData();
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                i=layoutManager.findLastVisibleItemPosition();
+            }
+        });
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(myrecyclerAdapter);
         srl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -102,6 +120,7 @@ public class ChoiceFragment extends Fragment {
                 initData();
             }
         });
+
     }
 
 }
