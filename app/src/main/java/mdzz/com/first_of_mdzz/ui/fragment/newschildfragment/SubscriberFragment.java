@@ -42,7 +42,7 @@ import mdzz.com.first_of_mdzz.ui.web.WebActivity;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SubscriberFragment extends BaseFragment implements RecycleCallBack,SubItemFragmentContract.ISubItemView{
+public class SubscriberFragment extends BaseFragment implements RecycleCallBack, SubItemFragmentContract.ISubItemView {
 
 
     private Context mContext;
@@ -61,21 +61,22 @@ public class SubscriberFragment extends BaseFragment implements RecycleCallBack,
 
 
     private List<FashionBean.DataBean.ArticlesBean> articles;
-    private List<String> adimgurl=new ArrayList<>();
+    private List<String> adimgurl = new ArrayList<>();
 
     private Handler adHandler = new Handler();
     private ADRunnable adRunnable;
     private String adurl;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mContext =context;
+        mContext = context;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_subscriber, container, false);
+        View view = inflater.inflate(R.layout.fragment_subscriber, container, false);
 
         mList = new ArrayList<>();
 
@@ -90,37 +91,40 @@ public class SubscriberFragment extends BaseFragment implements RecycleCallBack,
         mList.add("电影资讯");
 
 
-        mRecyclerView = (RecyclerView)view.findViewById(R.id.recycleview_subscriberfragment);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycleview_subscriberfragment);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-        mAdapter = new DragAdapter(this, mList,mContext);
+        mAdapter = new DragAdapter(this, mList, mContext);
         mItemTouchHelper = new ItemTouchHelper(new DragItemCallBack(this));
         mItemTouchHelper.attachToRecyclerView(mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
 
-        mSubViewpager=(ViewPager)view.findViewById(R.id.viewpager_subscribeframent);
-        adText=(TextView)view.findViewById(R.id.ad_tv);
+        mSubViewpager = (ViewPager) view.findViewById(R.id.viewpager_subscribeframent);
+        adText = (TextView) view.findViewById(R.id.ad_tv);
         return view;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter=new SubItemFragmentPresenter(this);
+
+
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        presenter = new SubItemFragmentPresenter(this);
         presenter.getBean(UrlConfig.FashionUrl);
-
-
-
-
     }
 
     private void initAd() {
         initADItemView();
+
         initViewPager();
+
         adRunnable = new ADRunnable();
 
     }
-
-
 
 
     @Override
@@ -130,8 +134,8 @@ public class SubscriberFragment extends BaseFragment implements RecycleCallBack,
         initAd();
 
 
-
     }
+
     //初始化AD的子View
     private void initADItemView() {
         adViews = new ArrayList<>();
@@ -145,9 +149,11 @@ public class SubscriberFragment extends BaseFragment implements RecycleCallBack,
             adViews.add(iv);
         }
     }
+
     private void initViewPager() {
 
-        adAdapter=new MyViewPagerAdapter(adViews);
+        adAdapter = new MyViewPagerAdapter(adViews);
+        mSubViewpager.setOffscreenPageLimit(6);
         mSubViewpager.setAdapter(adAdapter);
 
         //ViewPager滑动监听
@@ -179,9 +185,9 @@ public class SubscriberFragment extends BaseFragment implements RecycleCallBack,
                         break;
                     case MotionEvent.ACTION_UP: //提前
                         adHandler.postDelayed(adRunnable, 2000);
-                        Intent intent=new Intent(mContext, WebActivity.class);
-                        Bundle bundle=new Bundle();
-                        bundle.putString(Constant.WEB_URL,adurl);
+                        Intent intent = new Intent(mContext, WebActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString(Constant.WEB_URL, adurl);
                         intent.putExtras(bundle);
                         startActivity(intent);
                         break;
@@ -206,12 +212,12 @@ public class SubscriberFragment extends BaseFragment implements RecycleCallBack,
             mAdapter.setData(mList);
             mAdapter.notifyItemRemoved(position);
         } else {
-            String basetitle=mList.get(position).toString();
+            String basetitle = mList.get(position).toString();
 
-          //  Toast.makeText(mContext, "当前点击的是" +  basetitle, Toast.LENGTH_SHORT).show();
-            Intent intent=new Intent(getContext(), SubItemBaseActivity.class);
-            Bundle bundle=new Bundle();
-            bundle.putString("title",basetitle);
+            //  Toast.makeText(mContext, "当前点击的是" +  basetitle, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getContext(), SubItemBaseActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("title", basetitle);
             intent.putExtras(bundle);
             startActivity(intent);
             mAdapter.notifyDataSetChanged();
@@ -243,18 +249,20 @@ public class SubscriberFragment extends BaseFragment implements RecycleCallBack,
 
     @Override
     public void getData(FashionBean bean) {
-       articles = bean.getData().getArticles();
+        articles = bean.getData().getArticles();
 
-        for (int i=0; i<adViews.size(); i++) {
+        for (int i = 0; i < adViews.size(); i++) {
             //获得广告的ImageView
             ImageView adIv = (ImageView) adViews.get(i);
             //TODO 使用Picasso加载资
             Glide.with(mContext)
                     .load(articles.get(i).getThumbnail_pic())
+
                     .centerCrop()
                     .into(adIv);
+
             adText.setText(articles.get(i).getTitle());
-            adurl=articles.get(i).getWeburl();
+            adurl = articles.get(i).getWeburl();
 
         }
 
