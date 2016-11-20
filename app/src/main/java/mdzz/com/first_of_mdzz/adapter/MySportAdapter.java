@@ -1,6 +1,7 @@
 package mdzz.com.first_of_mdzz.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,9 @@ import java.util.List;
 
 import mdzz.com.first_of_mdzz.R;
 import mdzz.com.first_of_mdzz.bean.home.SportBean;
+import mdzz.com.first_of_mdzz.config.Constant;
+import mdzz.com.first_of_mdzz.ui.web.WebActivity;
+import mdzz.com.first_of_mdzz.ui.web.WebNewActivity;
 import mdzz.com.first_of_mdzz.utils.BitmapCircleTransformation;
 
 /**
@@ -28,6 +32,7 @@ public class MySportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public static final int TYPE2 = 1;
     public static final int TYPE3 = 2;
     public static final int TYPE4 = 3;
+    private int i;
 
     public MySportAdapter(Context mContext, List<SportBean.DataBean.PostsBean> posts) {
         this.mContext = mContext;
@@ -70,7 +75,7 @@ public class MySportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if(holder instanceof ViewHolder1){
             Glide.with(mContext).load(posts.get(position).getAuther().getIcon()).transform(new BitmapCircleTransformation(mContext)).into(((ViewHolder1) holder).iv);
             ((ViewHolder1) holder).txt_head.setText(posts.get(position).getAuther().getName());
@@ -99,6 +104,17 @@ public class MySportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((ViewHolder3) holder).tv_hot.setText(posts.get(position).getHotNum());
             ((ViewHolder3) holder).tv_like.setText(posts.get(position).getLikeNum());
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String weburl = posts.get(position).getWeburl();
+                Intent intent = new Intent(mContext, WebNewActivity.class);
+                intent.putExtra(Constant.WEB_URL,weburl);
+                mContext.startActivity(intent);
+            }
+        });
+
 
     }
 

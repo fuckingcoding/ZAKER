@@ -1,6 +1,7 @@
 package mdzz.com.first_of_mdzz.ui.main.homeactivity;
 
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,6 +29,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class SportActivity extends AppCompatActivity {
+    private SwipeRefreshLayout srl;
     private RecyclerView recyclerView;
     private List<SportBean.DataBean.PostsBean> posts = new ArrayList<>();
     private MySportAdapter msa;
@@ -125,7 +127,7 @@ public class SportActivity extends AppCompatActivity {
                 .subscribe(new Subscriber<SportBean>() {
                     @Override
                     public void onCompleted() {
-
+                        srl.setRefreshing(false);
                     }
 
                     @Override
@@ -144,12 +146,19 @@ public class SportActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        srl = (SwipeRefreshLayout) findViewById(R.id.topic_srl);
         textView = (TextView) findViewById(R.id.sport_toolbar_textview);
         recyclerView = (RecyclerView) findViewById(R.id.sport_rv);
         msa = new MySportAdapter(this,posts);
         recyclerView.addItemDecoration(new SpacesItemDecoration(10));
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
+        srl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initData();
+            }
+        });
 
     }
 }

@@ -4,6 +4,7 @@ package mdzz.com.first_of_mdzz.ui.fragment.homechildfragment;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -32,6 +33,7 @@ import rx.schedulers.Schedulers;
  * A simple {@link Fragment} subclass.
  */
 public class ChoiceFragment extends Fragment {
+    private SwipeRefreshLayout srl;
     private RecyclerView recyclerView;
     private List<ChoiceBean.DataBean.PostsBean> posts=new ArrayList<>();
     private MyRecyclerAdapter myrecyclerAdapter;
@@ -69,7 +71,7 @@ public class ChoiceFragment extends Fragment {
                 .subscribe(new Subscriber<ChoiceBean>() {
                     @Override
                     public void onCompleted() {
-
+                         srl.setRefreshing(false);
                     }
 
                     @Override
@@ -87,12 +89,19 @@ public class ChoiceFragment extends Fragment {
 
     private void initView(View rootView) {
         //初始化recycleView
+        srl = (SwipeRefreshLayout) rootView.findViewById(R.id.choice_srl);
         myrecyclerAdapter = new MyRecyclerAdapter(posts,getActivity());
         recyclerView = (RecyclerView) rootView.findViewById(R.id.fragment_choice_recyclerview);
         recyclerView.addItemDecoration(new SpacesItemDecoration(10));
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(myrecyclerAdapter);
+        srl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initData();
+            }
+        });
     }
 
 }
