@@ -3,8 +3,10 @@ package mdzz.com.first_of_mdzz.ui.selectposition;
 import java.util.Map;
 
 import mdzz.com.first_of_mdzz.bean.position.PositionBean;
+import mdzz.com.first_of_mdzz.bean.week.WeekBean;
 import mdzz.com.first_of_mdzz.http.HttpUtils;
 import mdzz.com.first_of_mdzz.http.IRetrofitInterface;
+import retrofit2.http.QueryMap;
 import rx.Observable;
 
 /**
@@ -16,8 +18,12 @@ public class SelectModel implements SelectContract.ISelectModel {
     public Observable<PositionBean> getPositionBean(Map<String, String> map) {
 
         IRetrofitInterface retrofitInterface = HttpUtils.getInstance().getRetrofitInterface();
-        Observable<PositionBean> bean = retrofitInterface.getPositionBean(map);
+        Observable<PositionBean> observable = retrofitInterface.getPositionBean(map);
 
-        return bean;
+        return observable;
     }
+
+
+
+
 }

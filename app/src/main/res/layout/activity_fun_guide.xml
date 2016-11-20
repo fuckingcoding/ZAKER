@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_fun_guide"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="mdzz.com.first_of_mdzz.ui.funguide.FunGuideActivity">
+   <android.support.v7.widget.Toolbar
+       android:id="@+id/toolbar_funguide"
+       style="@style/styletoolbar"
+    ></android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:weightSum="3"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <LinearLayout
+            android:id="@+id/linear_fun1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
+            <ImageView
+                android:id="@+id/iv_fun_guide1"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@mipmap/icon_jingxuan"
+                />
+            <TextView
+                android:id="@+id/tv_fun_guide1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="精选"/>
+
+
+        </LinearLayout>
+
+        <View
+            android:background="@color/gray"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"></View>
+        <LinearLayout
+            android:id="@+id/linear_fun2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
+            <ImageView
+                android:id="@+id/iv_fun_guide2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@mipmap/icon_yanyi"
+                />
+            <TextView
+                android:id="@+id/tv_fun_guide2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="演艺"/>
+
+
+        </LinearLayout>
+        <View
+            android:background="@color/gray"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"></View>
+
+        <LinearLayout
+            android:id="@+id/linear_fun3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
+            <ImageView
+                android:id="@+id/iv_fun_guide3"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@mipmap/icon_dujia"
+                />
+            <TextView
+                android:id="@+id/tv_fun_guide3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="度假"/>
+
+
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"></View>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:weightSum="3"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <LinearLayout
+            android:id="@+id/linear_fun4"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
+            <ImageView
+                android:id="@+id/iv_fun_guide4"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@mipmap/icon_dianying"
+                />
+            <TextView
+                android:id="@+id/tv_fun_guide4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="电影"/>
+
+
+        </LinearLayout>
+
+        <View
+            android:background="@color/gray"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"></View>
+        <LinearLayout
+            android:id="@+id/linear_fun5"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
+            <ImageView
+                android:id="@+id/iv_fun_guide5"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@mipmap/icon_meishi"
+                />
+            <TextView
+                android:id="@+id/tv_fun_guide5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="美食"/>
+
+
+        </LinearLayout>
+        <View
+            android:background="@color/gray"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"></View>
+
+        <LinearLayout
+            android:id="@+id/linear_fun6"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
+            <ImageView
+                android:id="@+id/iv_fun_guide6"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@mipmap/icon_huodong"
+                />
+            <TextView
+                android:id="@+id/tv_fun_guide6"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="活动"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/tv_fun_guide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:textColor="@color/selector_index"
+        android:background="@drawable/selector_positionguide"
+        android:text="定位：北京"
+        android:clickable="true"/>
+</LinearLayout>

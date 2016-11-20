@@ -2,6 +2,7 @@ package mdzz.com.first_of_mdzz.http;
 
 import java.util.Map;
 
+import mdzz.com.first_of_mdzz.bean.week.WeekBean;
 import mdzz.com.first_of_mdzz.bean.fun.PlayBean;
 import mdzz.com.first_of_mdzz.bean.position.PositionBean;
 import mdzz.com.first_of_mdzz.bean.subscibe.FashionBean;
@@ -31,5 +32,15 @@ public interface IRetrofitInterface {
 
     @GET("?")
      Observable<PositionBean> getPositionBean(@QueryMap Map<String,String> map);
+
+
+   //http://wl.myzaker.com/?c=activity_list&city=beijing&p=0&size=20&category=4
+
+     @GET("?")
+     Observable<WeekBean> getWeekBean(@QueryMap Map<String,String> map);
+
+
+   // http://wl.myzaker.com/?c=movie_list
+    //@GET(?)
 
 }

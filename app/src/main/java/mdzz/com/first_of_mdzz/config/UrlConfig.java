@@ -7,7 +7,13 @@ package mdzz.com.first_of_mdzz.config;
 public class UrlConfig {
     //http://wl.myzaker.com/?_appid=AndroidPhone&_v=7.0.2&_version=7.02&c=columns&city=%E5%8C%97%E4%BA%AC
     public  static  final  String  BASE_URL ="http://wl.myzaker.com/";
-
+    public static final String URL_REMEN ="c=columns";
+    //http://wl.myzaker.com/?c=activity_list&city=beijing&p=0&size=20&category=1
+    public static final String URL_YANYI ="http://wl.myzaker.com/?c=activity_list&city=beijing&p=0&size=20&category=1";
+    public static final String URL_DUJIA ="http://wl.myzaker.com/?c=activity_list&p=0&city=beijing&size=20&category=4";
+    public static  final String URL_DIANYING ="http://wl.myzaker.com/?_appid=AndroidPhone&_v=7.0.2&_version=7.02&c=movie_list&city=beijing";
+    public static final String URL_MEISHI ="http://wl.myzaker.com/?c=activity_list&p=0&city=beijing&size=20&category=9";
+    public static final String URL_HUODONG ="http://wl.myzaker.com/?c=activity_list&p=0&city=beijing&size=20&category=3";
     public static  final String URL_CITY ="http://wl.myzaker.com/?_appid=AndroidPhone&_v=7.0.2&_version=7.02&c=city_list&lat=39.913249&lng=116.403625";
 
     //社区话题的url

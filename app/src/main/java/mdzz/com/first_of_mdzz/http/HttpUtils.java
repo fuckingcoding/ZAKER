@@ -89,9 +89,7 @@ public class HttpUtils {
         map.put("_version","7.02");
         map.put("c","columns");
         map.put("city",city);
-
         return map;
-
     }
     public static Map<String,String>getPositionMap(String city){
         //http://wl.myzaker.com/?_appid=AndroidPhone&_v=7.0.2&_version=7.02&c=city_list&lat=39.913249&lng=116.403625
@@ -101,10 +99,39 @@ public class HttpUtils {
         map.put("_v","7.0.2");
         map.put("_version","7.02");
         map.put("c","city_list");
+        return map;
+    }
 
+    public static Map<String,String>getFunItemsMap(String city,int page,int category){
+// public static final String URL_YANYI ="http://wl.myzaker.com/?c=activity_list&city=beijing&p=0&size=20&category=1";
+// public static final String URL_DUJIA ="http://wl.myzaker.com/?c=activity_list&p=0&city=beijing&size=20&category=4";
+//public static  final String URL_DIANYING ="http://wl.myzaker.com/?_appid=AndroidPhone&_v=7.0.2&_version=7.02&c=movie_list&city=beijing";
+//public static final String URL_MEISHI ="http://wl.myzaker.com/?c=activity_list&p=0&city=beijing&size=20&category=9";
+//public static final String URL_HUODONG ="http://wl.myzaker.com/?c=activity_list&p=0&city=beijing&size=20&category=3";
+        Map<String,String> map = new Hashtable<>();
+        //map.put("_appid","AndroidPhone");
+        //map.put("_v","7.0.2");
+        //map.put("_version","7.02");
+        //c=activity_list&city=beijing&p=0&size=20&category=1
+        map.put("c","activity_list");
+        map.put("category",category+"");
+        map.put("city",city);
+        map.put("p",page+"");
+        map.put("size",20+"");
 
         return map;
+    }
 
+    public static Map<String,String>getFunMoviewMap(String city){
+
+        Map<String,String> map = new Hashtable<>();
+        //http://wl.myzaker.com/?_appid=AndroidPhone&_v=7.0.2&_version=7.02&c=movie_list&city=beijing"
+        map.put("_appid","AndroidPhone");
+        map.put("_v","7.0.2");
+        map.put("_version","7.02");
+        map.put("c","movie_list");
+        map.put("city",city);
+        return map;
     }
 
 

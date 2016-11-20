@@ -3,6 +3,7 @@ package mdzz.com.first_of_mdzz.ui.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -10,8 +11,12 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,8 +27,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.file.FileDecoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +39,7 @@ import java.util.Map;
 import mdzz.com.first_of_mdzz.R;
 import mdzz.com.first_of_mdzz.adapter.FunRecyclerAdapter;
 import mdzz.com.first_of_mdzz.adapter.MyVpInfiniteAdapter;
+import mdzz.com.first_of_mdzz.adapter.WeekAdapter;
 import mdzz.com.first_of_mdzz.base.BaseFragment;
 import mdzz.com.first_of_mdzz.bean.fun.BannerBean;
 import mdzz.com.first_of_mdzz.bean.fun.ColumnsBean;
@@ -40,7 +48,11 @@ import mdzz.com.first_of_mdzz.bean.fun.InfoBean;
 import mdzz.com.first_of_mdzz.bean.fun.ItemsBean;
 import mdzz.com.first_of_mdzz.bean.fun.PlayBean;
 import mdzz.com.first_of_mdzz.bean.fun.PromoteBean;
+import mdzz.com.first_of_mdzz.bean.week.WeekBean;
+import mdzz.com.first_of_mdzz.bean.week.WeekendsBean;
+import mdzz.com.first_of_mdzz.config.Constant;
 import mdzz.com.first_of_mdzz.http.HttpUtils;
+import mdzz.com.first_of_mdzz.ui.funguide.FunGuideActivity;
 import mdzz.com.first_of_mdzz.ui.main.FunFragmentContract;
 import mdzz.com.first_of_mdzz.ui.main.FunFragmentPresenter;
 import mdzz.com.first_of_mdzz.ui.web.WebActivity;
@@ -55,21 +67,23 @@ import mdzz.com.first_of_mdzz.utils.UIManager;
  */
 
 public class FunFragment extends BaseFragment
-        implements View.OnClickListener,FunFragmentContract.IFunView,FunRecyclerAdapter.FunOnClickListener{
+        implements View.OnClickListener,
+        FunFragmentContract.IFunView,FunRecyclerAdapter.FunOnClickListener,WeekAdapter.WeekRecyclerClickListener {
 
-  private Context mContext;
-    private SwipeRefreshLayout refreshLayout;
+   private Context mContext;
+    private SwipeRefreshLayout refreshLayout,refreshLayout_second;
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private ViewPager viewPager;
     private ImageView imageView1,imageView2,imageView3;
-    private RecyclerView recyclerView ;
-    private List<View> list_imageview;
+    private RecyclerView recyclerView ,recyclerView_second;
+    private TextView tv_city_ritht,tv_fun_left;
+    private List<ImageView> list_imageview;
     private MyVpInfiniteAdapter adapter;
     private RecyclerView.LayoutManager manager;
-    private LinearLayout mlinear_ad;
+    private LinearLayout mlinear_ad,lineartop;
     private  MyRunnable runnable;
     private Handler handler = new Handler();
-
+    private List<WeekendsBean> list_weekends ;
     private List<ItemsBean> list_items; // recycler 的item
     private List<DisplayBean> list_display; // 三个固定的imageView
     private List<PromoteBean> list_promote; //轮播条
@@ -77,9 +91,13 @@ public class FunFragment extends BaseFragment
     private List<ColumnsBean> list_col;//包含 list_items list_banner
     private  List<Object> list;
     private FunRecyclerAdapter funRecyclerAdapter;
+    private WeekAdapter weekAdapter;
     private String cityname = "北京";
     private  String urlstring ;//跳转web的参数
     private  String title; // 跳转web的参数
+    private int page =0;
+    private int category ;
+    private boolean  isHide;
 
 
     @Override
@@ -87,6 +105,7 @@ public class FunFragment extends BaseFragment
         super.onAttach(context);
         mContext = context;
         list = new ArrayList<>();
+        list_weekends = new ArrayList<>();
     }
 
     @Override
@@ -99,19 +118,31 @@ public class FunFragment extends BaseFragment
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         initView(view);
         initData();
 
 
+//
 //        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 //        setHasOptionsMenu(true);
 //        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 //        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-//        actionBar.setTitle("lalala");
-//        toolbar.setTitle("玩乐");
+//        actionBar.setTitle("玩乐");
 
 
+
+    }
+
+    private void initOtherData() {
+        FunFragmentPresenter presenter = new FunFragmentPresenter(this);
+        Map<String, String> map = HttpUtils.getFunItemsMap(cityname,page,category);
+        presenter.getWeekBean(map);
+    }
+
+    private void initMovieData(){
+        FunFragmentPresenter presenter = new FunFragmentPresenter(this);
+        Map<String, String> map = HttpUtils.getFunMoviewMap(cityname);
+        presenter.getWeekBean(map);
     }
 
     private void initData() {
@@ -126,22 +157,25 @@ public class FunFragment extends BaseFragment
         list_imageview = new ArrayList<>();
         collapsingToolbarLayout = (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_fun);
         collapsingToolbarLayout.setTitleEnabled(false);
-        initToolBar(view,R.id.toolbar,"玩乐",false);
+
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refreshLayout);
+        refreshLayout_second = (SwipeRefreshLayout) view.findViewById(R.id.refreshLayout_funsecond);
         imageView1 = (ImageView) view.findViewById(R.id.iv1_Funfrag);
         imageView2 = (ImageView) view.findViewById(R.id.iv2_Funfrag);
         imageView3 = (ImageView) view.findViewById(R.id.iv3_Funfrag);
-
-
+        tv_city_ritht = (TextView) view.findViewById(R.id.tv_city_ritht);
+        tv_fun_left = (TextView) view.findViewById(R.id.tv_fun_left);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_Funfrag);
+        recyclerView_second = (RecyclerView) view.findViewById(R.id.recyclerView_funsecond);
         viewPager = (ViewPager) view.findViewById(R.id.viewpager_Funfragment);
         mlinear_ad = (LinearLayout) view.findViewById(R.id.linear_ad);
-        for(int i =0;i<4;i++){
-            ImageView iv = new ImageView(getActivity());
+        lineartop = (LinearLayout) view.findViewById(R.id.linear_top);
+        for(int i =0;i<6;i++){
+            ImageView iv = new ImageView(mContext);
             iv.setTag(i);
 
             iv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            iv.setImageResource(R.mipmap.guide_loading_tag_46);
+          //  iv.setImageResource(R.mipmap.guide_loading_tag_46);
             iv.setScaleType(ImageView.ScaleType.FIT_XY);
             list_imageview .add(iv);
         }
@@ -160,6 +194,16 @@ public class FunFragment extends BaseFragment
         imageView1.setOnClickListener(this);
         imageView2.setOnClickListener(this);
         imageView3.setOnClickListener(this);
+        //tv_city_ritht.setOnClickListener(this);
+        tv_city_ritht.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refreshLayout_second.setRefreshing(false);
+                refreshLayout.setRefreshing(false);
+                Intent intent = new Intent(mContext, FunGuideActivity.class);
+                startActivityForResult(intent,Constant.REQUEST_FUN);
+            }
+        });
 
     }
 
@@ -172,11 +216,20 @@ public class FunFragment extends BaseFragment
                 initData();
             }
         });
+
+        refreshLayout_second.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initOtherData();
+            }
+        });
     }
 
     private void initAdapter() {
         adapter = new MyVpInfiniteAdapter(list_imageview);
+
         funRecyclerAdapter = new FunRecyclerAdapter(mContext,list,this);
+        weekAdapter = new WeekAdapter(mContext,list_weekends,this);
 
     }
     private void initDot() {
@@ -253,23 +306,28 @@ public class FunFragment extends BaseFragment
         recyclerView .setLayoutManager(manager);
         recyclerView.addItemDecoration(new SpacesItemDecoration(5));
         recyclerView.setAdapter(funRecyclerAdapter);
+        recyclerView_second.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.VERTICAL,false));
+        recyclerView_second.addItemDecoration(new SpacesItemDecoration(5));
+        recyclerView_second.setAdapter(weekAdapter);
 
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_play,menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==R.id.city){
-            UIManager.startSelectCity(mContext,cityname);
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        super.onCreateOptionsMenu(menu, inflater);
+//        inflater.inflate(R.menu.menu_play,menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if(item.getItemId()==R.id.city){
+//
+//
+//           // UIManager.startSelectCity(mContext,cityname);
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     public void onPause() {
@@ -301,6 +359,7 @@ public class FunFragment extends BaseFragment
         list_col = bean.getData().getColumns();
         size_col = list_col.size();
         setImage();
+       // setScrollImage();
 
         for(int i =0;i<size_col;i++){
            //日期的图片
@@ -320,6 +379,32 @@ public class FunFragment extends BaseFragment
 
     }
 
+    private void setScrollImage() {
+        for(int i=0;i<6;i++){
+            String image_url = list_promote.get(i).getPromotion_img();
+            ToastHelper.showToast(mContext,image_url);
+
+            //Glide.with(mContext).load(image_url).into(imageView);
+        }
+    }
+
+
+    //TODO 五个子项目的bean
+    @Override
+    public void getWeekBean(WeekBean bean) {
+
+        int size = bean.getData().getWeekends().size();
+        if(size==0){
+            ToastHelper.showToast(mContext,"找不到相关信息");
+            recyclerView_second.setBackgroundColor(Color.WHITE);
+        }
+
+        list_weekends = bean.getData().getWeekends();
+        weekAdapter.reloadRecyclerView(list_weekends,true);
+        refreshLayout_second.setRefreshing(false);
+
+    }
+
     private void setImage() {
         Glide.with(this).load(list_display.get(0).getPic().getM_url()).into(imageView1);
         Glide.with(this).load(list_display.get(1).getPic().getM_url()).into(imageView2);
@@ -332,11 +417,11 @@ public class FunFragment extends BaseFragment
     //recycler 点击事件
     @Override
     public void OnClick(int position) {
-        ToastHelper.showToast(mContext,list_display.size()+"");
+
         Object object = list.get(position);
         if(object instanceof  ItemsBean){
             urlstring = ((ItemsBean) object).getArticle().getWeburl();
-             title = ((ItemsBean) object).getArticle().getTitle();
+             title = ((ItemsBean) object).getTitle();
         }
         UIManager.startWebActivity(mContext,urlstring,title);
     }
@@ -362,12 +447,85 @@ public class FunFragment extends BaseFragment
 
                 break;
 
+
         }
 
 
        UIManager.startWebActivity(mContext,urlstring,title);
     }
 
+    //子项页面的传值
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode== Constant.REQUEST_FUN &resultCode==Constant.RESULT_FUNGUIDE){
+            cityname = data.getStringExtra(Constant.KEY_FUN_CITY);
+            category = data.getIntExtra(Constant.KEY_FUN_URLINT, -1);
+            if(TextUtils.isEmpty(cityname)){
+                tv_city_ritht.setText("北京");
+            }else{
+                tv_city_ritht.setText(cityname);
+            }
+
+
+            setcategory();
+            dataChange();
+
+
+        }
+    }
+
+    private void setcategory() {
+        switch (category){
+            case 10:
+                tv_fun_left.setText("电影");
+            break;
+            case 0:
+                tv_fun_left.setText("玩乐");
+                break;
+            case 1 :
+                tv_fun_left.setText("演艺");
+
+                break;
+            case 3:
+                tv_fun_left.setText("活动");
+                break;
+            case 4:
+                tv_fun_left.setText("度假");
+                break;
+            case 9:
+                tv_fun_left.setText("美食");
+                break;
+        }
+    }
+
+    private void dataChange() {
+        switch (category){
+            case 10:
+                isHide =true;
+                hideView(isHide);
+                initMovieData();
+                break;
+            case 0:
+                isHide =false;
+                hideView(isHide);
+                break;
+            default :
+                isHide =true;
+                hideView(isHide);
+                initOtherData();
+                break;
+        }
+
+    }
+   //TODO weekadapter
+    @Override
+    public void onWeekItemClick(int position) {
+        String url = list_weekends.get(position).getWeekend().getContent_url();
+        String string =list_weekends.get(position).getTitle();
+
+        UIManager.startWebActivity(mContext,url,string);
+    }
 
     //轮播的runnable
     class MyRunnable implements  Runnable{
@@ -380,6 +538,22 @@ public class FunFragment extends BaseFragment
             handler.postDelayed(runnable,2000);
 
         }
+    }
+
+    void hideView(boolean isHide){
+        if(isHide){
+
+            lineartop.setVisibility(View.GONE);
+            refreshLayout.setVisibility(View.GONE);
+            refreshLayout_second.setVisibility(View.VISIBLE);
+        }else{
+            lineartop.setVisibility(View.VISIBLE);
+            refreshLayout.setVisibility(View.VISIBLE);
+            refreshLayout_second.setVisibility(View.GONE);
+
+
+        }
+
     }
 
 }
