@@ -10,13 +10,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-
 import mdzz.com.first_of_mdzz.R;
 import mdzz.com.first_of_mdzz.adapter.RecyclerIndexAdapter;
 import mdzz.com.first_of_mdzz.bean.SelectBean;
