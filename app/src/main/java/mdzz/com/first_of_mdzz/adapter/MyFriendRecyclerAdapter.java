@@ -90,7 +90,7 @@ public class MyFriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
                 if(friendlist.get(position).getQuote().getMedias().size()!=0) {
                     Glide.with(mContext).load(friendlist.get(position).getQuote().getMedias().get(0).getUrl()).into(((ViewHolder1) holder).iv_url);
                 }else{
-                    ((ViewHolder1) holder).iv_url.setImageResource(R.mipmap.ic_launcher);
+                    ((ViewHolder1) holder).iv_url.setImageResource(R.mipmap.anonymous_icon);
                 }
                 ((ViewHolder1)holder).tv_title.setText(friendlist.get(position).getQuote().getContent());
                 Glide.with(mContext).load(friendlist.get(position).getAuther().getIcon()).transform(new BitmapCircleTransformation(mContext)).into(((ViewHolder1)holder).iv_head);
