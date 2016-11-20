@@ -3,6 +3,7 @@ package mdzz.com.first_of_mdzz.ui.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,9 +29,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.file.FileDecoder;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,6 +102,7 @@ public class FunFragment extends BaseFragment
     private int page =0;
     private int category ;
     private boolean  isHide;
+    private List<SimpleTarget<Bitmap>> list_target;
 
 
     @Override
@@ -106,6 +111,7 @@ public class FunFragment extends BaseFragment
         mContext = context;
         list = new ArrayList<>();
         list_weekends = new ArrayList<>();
+        list_target= new ArrayList<>();
     }
 
     @Override
@@ -171,12 +177,21 @@ public class FunFragment extends BaseFragment
         mlinear_ad = (LinearLayout) view.findViewById(R.id.linear_ad);
         lineartop = (LinearLayout) view.findViewById(R.id.linear_top);
         for(int i =0;i<6;i++){
-            ImageView iv = new ImageView(mContext);
+            final ImageView iv = new ImageView(mContext);
             iv.setTag(i);
 
             iv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
           //  iv.setImageResource(R.mipmap.guide_loading_tag_46);
             iv.setScaleType(ImageView.ScaleType.FIT_XY);
+            SimpleTarget<Bitmap> target = new SimpleTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                    iv.setImageBitmap(resource);
+
+                }
+            };
+            list_target.add(target);
+
             list_imageview .add(iv);
         }
         Log.e("TAG", "initView: "+list_imageview.size());
@@ -233,7 +248,7 @@ public class FunFragment extends BaseFragment
 
     }
     private void initDot() {
-        for (int i = 0; i < list_imageview.size(); i++) {
+        for (int i = 0; i < list_imageview.size()/2; i++) {
 
             ImageView iv = new ImageView(getActivity());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -265,12 +280,12 @@ public class FunFragment extends BaseFragment
             }
             @Override
             public void onPageSelected( int position) {
-                for(int i =0;i<list_imageview.size();i++){
+                for(int i =0;i<list_imageview.size()/2;i++){
                     if(i==(position%list_imageview.size())){
                         //Log.e("TAG", "onPageSelected() returned: " + position%6);
-                       mlinear_ad.getChildAt(i%list_imageview.size()).setSelected(true);
+                       mlinear_ad.getChildAt(i%(list_imageview.size()/2)).setSelected(true);
                     }else {
-                        mlinear_ad.getChildAt(i%list_imageview.size()).setSelected(false);
+                        mlinear_ad.getChildAt(i%(list_imageview.size()/2)).setSelected(false);
                     }
                 }
 //                if(adinfo!=null){
@@ -355,11 +370,12 @@ public class FunFragment extends BaseFragment
         Log.e("TAG", "getData: "+list_display.size());
         //轮播条
         list_promote= bean.getData().getPromote();
+        size_promote =list_promote.size();
         Log.e("TAG", "list_promote: "+list_promote.size());
         list_col = bean.getData().getColumns();
         size_col = list_col.size();
         setImage();
-       // setScrollImage();
+
 
         for(int i =0;i<size_col;i++){
            //日期的图片
@@ -376,17 +392,18 @@ public class FunFragment extends BaseFragment
 
         funRecyclerAdapter.notifyDataSetChanged();
         refreshLayout.setRefreshing(false);
-
-    }
-
-    private void setScrollImage() {
         for(int i=0;i<6;i++){
             String image_url = list_promote.get(i).getPromotion_img();
-            ToastHelper.showToast(mContext,image_url);
-
-            //Glide.with(mContext).load(image_url).into(imageView);
+            Toast.makeText(mContext,image_url,Toast.LENGTH_LONG);
+            Log.i("TAG", "getData: "+i );
+            Log.i("TAG", "getData: "+image_url);
+            Glide.with(mContext).load(image_url).asBitmap().into(list_target.get(i));
+            Glide.with(mContext).load(image_url).asBitmap().into(list_target.get(i+3));
         }
+
     }
+
+
 
 
     //TODO 五个子项目的bean
