@@ -18,6 +18,7 @@ import android.webkit.WebViewClient;
 
 import mdzz.com.first_of_mdzz.R;
 import mdzz.com.first_of_mdzz.config.Constant;
+import mdzz.com.first_of_mdzz.utils.ToastHelper;
 
 
 public class WebActivity extends AppCompatActivity {
@@ -36,14 +37,18 @@ public class WebActivity extends AppCompatActivity {
         title =intent.getStringExtra(Constant.WEB_TITLE);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
         if(title!=null){
-            toolbar.setTitle(title);
+            ToastHelper.showToast(this,title);
+            actionBar.setTitle(title);
+            toolbar.setTitleTextColor(Color.BLACK);
         }
 
-        setSupportActionBar(toolbar);
 
-        toolbar.setTitleTextColor(Color.WHITE);
-        ActionBar actionBar = getSupportActionBar();
+
+
+
         actionBar.setDisplayHomeAsUpEnabled(true);
         toolbar.setOnClickListener(new View.OnClickListener() {
             @Override

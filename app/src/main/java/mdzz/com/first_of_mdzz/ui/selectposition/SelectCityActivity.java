@@ -1,6 +1,7 @@
 package mdzz.com.first_of_mdzz.ui.selectposition;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,8 @@ import mdzz.com.first_of_mdzz.bean.position.CitiesBean;
 import mdzz.com.first_of_mdzz.bean.position.HotCitiesBean;
 import mdzz.com.first_of_mdzz.bean.position.LbsCityBean;
 import mdzz.com.first_of_mdzz.bean.position.PositionBean;
+import mdzz.com.first_of_mdzz.bean.week.WeekBean;
+import mdzz.com.first_of_mdzz.config.Constant;
 import mdzz.com.first_of_mdzz.http.HttpUtils;
 import mdzz.com.first_of_mdzz.utils.ChineseToPinyinHelper;
 import mdzz.com.first_of_mdzz.utils.DividerItemDecoration;
@@ -151,6 +154,7 @@ public class SelectCityActivity extends AppCompatActivity  implements SelectCont
         mAdapter.notifyDataSetChanged();
     }
 
+
     private void transforBean() {
         for(int i =0;i<list_hotcities.size();i++){
             SelectBean selectBean = new SelectBean();
@@ -189,6 +193,12 @@ public class SelectCityActivity extends AppCompatActivity  implements SelectCont
     //item 点击事件
     @Override
     public void OnClick(int position) {
-        ToastHelper.showToast(mContext,position+"");
+        SelectBean bean = mTotalList.get(position);
+        String cityname = bean.getUsername();
+        Intent intent = new Intent();
+        intent.putExtra(Constant.KEY_CITY,cityname);
+        setResult(Constant.RESULT_POSITION,intent);
+        finish();
+
     }
 }

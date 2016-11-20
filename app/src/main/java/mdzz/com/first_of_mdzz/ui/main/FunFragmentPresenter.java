@@ -7,6 +7,8 @@ import java.util.Map;
 
 import mdzz.com.first_of_mdzz.bean.fun.ColumnsBean;
 import mdzz.com.first_of_mdzz.bean.fun.PlayBean;
+import mdzz.com.first_of_mdzz.bean.week.WeekBean;
+import mdzz.com.first_of_mdzz.utils.ToastHelper;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -49,6 +51,8 @@ public class FunFragmentPresenter implements  FunFragmentContract.IFunPresenter 
                     public void onNext(PlayBean bean) {
                         bean.getData().getColumns();
                         List<ColumnsBean> columnsBeen = bean.getData().getColumns();
+                        //TODO 上面的异常方法报异常
+                        Log.e("TAG", "onNext-------------: "+bean.getData().getDisplay().size());
                         String title = bean.getData().getDisplay().get(0).getTitle();
 
                         String s = bean.getData().getInfo().getNext_url() + bean.getData().getInfo().getPage();
@@ -59,8 +63,30 @@ public class FunFragmentPresenter implements  FunFragmentContract.IFunPresenter 
                         view.getData(bean);
                     }
                 });
+    }
 
+    @Override
+    public void getWeekBean(Map<String, String> map) {
 
+        Observable<WeekBean> observable = model.getWeekBean(map);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<WeekBean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(WeekBean bean) {
+                        view.getWeekBean(bean);
+                    }
+                });
 
     }
 }

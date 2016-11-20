@@ -25,13 +25,46 @@
        style="@style/styletoolbar"
         android:layout_gravity="top"
         android:id="@+id/toolbar"
+        >
+        <RelativeLayout
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
 
+            android:layout_height="match_parent">
 
+            <TextView
+            android:id="@+id/tv_city_ritht"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableRight="@mipmap/icon_positionright"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+                android:text="定位"
+                android:textColor="@color/colorWhite"
+                android:gravity="center"
+            />
 
-        ></android.support.v7.widget.Toolbar>
+            <TextView
+                android:id="@+id/tv_fun_left"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="玩乐"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_marginLeft="11dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+
+                 />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
 
 
             <LinearLayout
+                android:id="@+id/linear_top"
                 android:layout_marginTop="?attr/actionBarSize"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 app:layout_scrollFlags="scroll"
@@ -100,9 +133,12 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
+        android:layout_height="match_parent"
         >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 <android.support.v7.widget.RecyclerView
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:background="@android:color/white"
@@ -110,6 +146,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
+    <!--<ImageView-->
+        <!--android:id="@+id/iv_totop1"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@mipmap/icon_totop"-->
+        <!--android:background="@color/colorAccent"-->
+      <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_margin="10dp"-->
+
+        <!--/>-->
+</RelativeLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
+    <android.support.v4.widget.SwipeRefreshLayout
+
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:id="@+id/refreshLayout_funsecond"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        >
+        <android.support.v7.widget.RecyclerView
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:background="@color/colorGray"
+            android:id="@+id/recyclerView_funsecond"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+         <!--<ImageView-->
+             <!--android:id="@+id/iv_totop2"-->
+             <!--android:layout_width="wrap_content"-->
+             <!--android:layout_height="wrap_content"-->
+             <!--android:src="@mipmap/icon_totop"-->
+             <!--android:background="@color/colorAccent"-->
+             <!--android:layout_alignParentBottom="true"-->
+             <!--android:layout_margin="10dp"-->
+
+             <!--/>-->
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+
 </android.support.design.widget.CoordinatorLayout>
 

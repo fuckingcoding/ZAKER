@@ -3,6 +3,7 @@ package mdzz.com.first_of_mdzz.ui.main;
 import java.util.Map;
 
 import mdzz.com.first_of_mdzz.bean.fun.PlayBean;
+import mdzz.com.first_of_mdzz.bean.week.WeekBean;
 import mdzz.com.first_of_mdzz.http.HttpUtils;
 import mdzz.com.first_of_mdzz.http.IRetrofitInterface;
 import rx.Observable;
@@ -19,6 +20,13 @@ public class FunFragmentModel implements  FunFragmentContract.IFunModel {
 
         IRetrofitInterface retrofitInterface = HttpUtils.getInstance().getRetrofitInterface();
         Observable<PlayBean> observable = retrofitInterface.getPlayBean(map);
+        return observable;
+    }
+    @Override
+    public Observable<WeekBean> getWeekBean(Map<String, String> map) {
+
+        IRetrofitInterface retrofitInterface = HttpUtils.getInstance().getRetrofitInterface();
+        Observable<WeekBean> observable = retrofitInterface.getWeekBean(map);
         return observable;
     }
 }

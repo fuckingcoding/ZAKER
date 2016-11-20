@@ -3,6 +3,7 @@ package mdzz.com.first_of_mdzz.ui.selectposition;
 import java.util.Map;
 
 import mdzz.com.first_of_mdzz.bean.position.PositionBean;
+import mdzz.com.first_of_mdzz.bean.week.WeekBean;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -45,4 +46,6 @@ public class SelectPresenter implements SelectContract.ISelectPresenter {
                     }
                 });
     }
+
+
 }
