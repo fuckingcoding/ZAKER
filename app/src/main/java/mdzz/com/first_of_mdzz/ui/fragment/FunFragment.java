@@ -434,10 +434,12 @@ public class FunFragment extends BaseFragment
 
             case R.id.iv1_Funfrag:
                 urlstring=  list_display.get(0).getWeb().getUrl();
+                Log.i("TAG", "onClick: "+urlstring);
                  title = list_display.get(0).getTitle();
                 break;
             case R.id.iv2_Funfrag:
                 urlstring =list_display.get(1).getWeb().getUrl();
+                Log.i("TAG", "onClick2222: "+urlstring);
                 title = list_display.get(1).getTitle();
 
                 break;
