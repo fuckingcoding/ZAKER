@@ -82,10 +82,10 @@ public class DragAdapter extends RecyclerView.Adapter<DragAdapter.DragHolder> {
                 break;
             default:
         }
-        if (null == show.get(position))
-            holder.del.setVisibility(View.INVISIBLE);
-        else
-            holder.del.setVisibility(View.VISIBLE);
+       // if (null == show.get(position))
+           // holder.del.setVisibility(View.INVISIBLE);
+       // else
+           // holder.del.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -110,7 +110,7 @@ public class DragAdapter extends RecyclerView.Adapter<DragAdapter.DragHolder> {
             del = (ImageView) itemView.findViewById(R.id.del);
             icon=(ImageView)itemView.findViewById(R.id.icon);
             item.setOnClickListener(this);
-            del.setOnClickListener(this);
+            //del.setOnClickListener(this);
 
         }
 
@@ -119,7 +119,7 @@ public class DragAdapter extends RecyclerView.Adapter<DragAdapter.DragHolder> {
             show.clear();
             show.put(getAdapterPosition(), getAdapterPosition());
             itemView.setBackgroundColor(Color.LTGRAY);
-            del.setVisibility(View.VISIBLE);
+           //del.setVisibility(View.VISIBLE);
         }
 
         @Override

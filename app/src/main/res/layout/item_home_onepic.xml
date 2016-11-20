@@ -10,7 +10,7 @@
         android:layout_height="50dp">
         <ImageView
             android:layout_marginTop="5dp"
-            android:id="@+id/item_choice_imageview"
+            android:id="@+id/home_onepic_iv_head"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
@@ -23,14 +23,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
-                android:id="@+id/item_choice_tv_username"
+                android:id="@+id/home_onepic_tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="UserName"
                 android:textColor="#00ffff"
                 android:textSize="18sp"/>
             <TextView
-                android:id="@+id/item_choice_tv_usertime"
+                android:id="@+id/home_onepic_tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="UserTime"
@@ -38,19 +38,11 @@
 
 
         </LinearLayout>
-        <TextView
-            android:layout_gravity="center_vertical"
-            android:id="@+id/item_choice_tv_kinds"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="UserKinds"
-            android:layout_marginRight="10dp"
-            android:textColor="@color/colorGray"/>
 
     </LinearLayout>
     <TextView
         android:layout_marginTop="5dp"
-        android:id="@+id/item_choice_tv_content"
+        android:id="@+id/home_onepic_tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -58,7 +50,7 @@
         android:text="UserContent"/>
     <ImageView
         android:layout_marginTop="5dp"
-        android:id="@+id/item_choice_iv_url"
+        android:id="@+id/home_onepic_iv_url"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:src="@mipmap/ic_launcher"
@@ -79,7 +71,7 @@
                 android:src="@mipmap/ic_post_list_hot"/>
             <TextView
                 android:layout_marginLeft="8dp"
-                android:id="@+id/item_choice_tv_comment"
+                android:id="@+id/home_onepic_tv_commint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="comment"/>
@@ -97,7 +89,7 @@
                 android:src="@mipmap/ic_post_list_reply"/>
             <TextView
                 android:layout_marginLeft="8dp"
-                android:id="@+id/item_choice_tv_hot"
+                android:id="@+id/home_onepic_tv_hot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="hot"/>
@@ -115,7 +107,7 @@
                 android:src="@mipmap/ic_post_list_like_normal"/>
             <TextView
                 android:layout_marginLeft="8dp"
-                android:id="@+id/item_choice_tv_like"
+                android:id="@+id/home_onepic_tv_like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="like"/>

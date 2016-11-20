@@ -3,6 +3,7 @@ package mdzz.com.first_of_mdzz.ui.fragment.homechildfragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -32,9 +33,12 @@ import rx.schedulers.Schedulers;
  * A simple {@link Fragment} subclass.
  */
 public class FriendFragment extends Fragment {
+    private SwipeRefreshLayout srl;
     private RecyclerView recyclerView;
     private List<FriendBean.DataBean.ListBean> friendlist = new ArrayList<>();
     private MyFriendRecyclerAdapter adapter;
+    private String nextUrl=UrlConfig.FRIEND_URL;
+    private int lastVisibleItemPosition;
 
 
     public FriendFragment() {
@@ -52,12 +56,34 @@ public class FriendFragment extends Fragment {
         return rootView;
     }
     private void initView(View rootView) {
+        srl = (SwipeRefreshLayout) rootView.findViewById(R.id.friend_srl);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.fragment_friend_recyclerview);
         adapter = new MyFriendRecyclerAdapter(friendlist,getActivity());
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if(lastVisibleItemPosition==adapter.getItemCount()-1&&newState==RecyclerView.SCROLL_STATE_IDLE){
+                    initData();
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
+            }
+        });
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new SpacesItemDecoration(10));
         recyclerView.setAdapter(adapter);
+        srl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initData();
+            }
+        });
     }
 
     private void initData() {
@@ -68,13 +94,13 @@ public class FriendFragment extends Fragment {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         HttpCallInterface httpCallInterface = retrofit.create(HttpCallInterface.class);
-        Observable<FriendBean> getwsnd = httpCallInterface.getwsnd(UrlConfig.FRIEND_URL);
+        Observable<FriendBean> getwsnd = httpCallInterface.getwsnd(nextUrl);
         getwsnd.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<FriendBean>() {
                     @Override
                     public void onCompleted() {
-
+                        srl.setRefreshing(false);
                     }
 
                     @Override
@@ -84,6 +110,7 @@ public class FriendFragment extends Fragment {
 
                     @Override
                     public void onNext(FriendBean friendBean) {
+                        nextUrl = friendBean.getData().getInfo().getNextUrl();
                         friendlist.addAll(friendBean.getData().getList());
                         adapter.notifyDataSetChanged();
 

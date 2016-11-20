@@ -1,6 +1,7 @@
 package mdzz.com.first_of_mdzz.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import java.util.List;
 
 import mdzz.com.first_of_mdzz.R;
 import mdzz.com.first_of_mdzz.bean.home.TopicBean;
+import mdzz.com.first_of_mdzz.ui.main.homeactivity.SportActivity;
 
 
 /**
@@ -47,7 +49,7 @@ public class MyCommicountBaseAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         ViewHolder holder = null;
         if(view == null){
             holder = new ViewHolder();
@@ -63,6 +65,19 @@ public class MyCommicountBaseAdapter extends BaseAdapter {
         Glide.with(mContext).load(mlist.get(i).getPic()).into(holder.img);
         holder.textView_title.setText(mlist.get(i).getTitle());
         holder.textView_stitle.setText(mlist.get(i).getStitle());
+        view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, SportActivity.class);
+                    intent.putExtra("1",i);
+                    mContext.startActivity(intent);
+
+
+                }
+        });
+
+
+
         return view;
     }
     class ViewHolder{

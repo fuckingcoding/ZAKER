@@ -29,6 +29,7 @@ public class UrlConfig {
 
     //朋友圈url
     public static final String FRIEND_URL="http://sns.myzaker.com/daren_feeds.php?_appid=AndroidPhone&_bsize=720_1280&_city=%E5%8C%97%E4%BA%AC&_dev=160&_lat=39.913249&_lbs_city=%E5%8C%97%E4%BA%AC&_lbs_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_lng=116.403625&_mac=DC%3A0E%3AA1%3A6E%3A9B%3A85&_mcode=85AA2339&_net=wifi&_nudid=b6441c6086ab3941&_os=4.4.2_VPhone&_os_name=VPhone&_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_udid=864394102201417&_v=7.0.2&_version=7.02&s=1&uid=Doyen";
+
     //朋友圈Base url
     public static final String BASE_FRIEND_URL="http://sns.myzaker.com/";
     //********************以下为news个页面的URL*******************************************
@@ -55,6 +56,41 @@ public class UrlConfig {
     public  final static  String MovieUrl="http://iphone.myzaker.com/zaker/news.php?_appid=AndroidPhone&_bsize=1080_1920&_version=7.02&app_id=15";
 
 
+    //hot
+    public final static String HotUrl="http://hotphone.myzaker.com/daily_hot_new.php?_appid=AndroidPhone&_bsize=1080_1920&_city=beijing&_dev=18&_lat=38.895039&_lbs_city=%E5%A4%A7%E8%BF%9E&_lbs_province=%E8%BE%BD%E5%AE%81%E7%9C%81&_lng=121.544741&_mac=c0%3Aee%3Afb%3A47%3Ae1%3Aa7&_mcode=DF8F0C00&_net=wifi&_nudid=8912d2847acc785d&_os=5.1.1_ONEA2001&_os_name=ONEA2001&_province=22&_udid=867271028756970&_v=7.0.2&_version=7.02&act=pre&last_time=1479563489";
+
+    public final static String Hot1Url="http://hotphone.myzaker.com/daily_hot_new.php?_appid=AndroidPhone&_bsize=1080_1920&_city=guangzhou&_dev=18&_lat=38.893751&_lbs_city=大连&_lbs_province=辽宁省&_lng=121.545834&_mac=bc%3A3a%3Aea%3Aa9%3Ae0%3A83&_mcode=AC3F6AED&_net=wifi&_nudid=a876a3d5e489bb81&_os=4.4.4_OPPOR7&_os_name=OPPOR7&_province=30&_udid=868240023306601&_uid=11938751&_utoken=ca56dd&_v=7.0.2&_version=7.02&act=pre&last_time=1479630830";
     //***************************************************************
+
+    //综合体育url
+    public static final String SPORT_URL="http://dis.myzaker.com/api/get_post.php?_appid=AndroidPhone&_bsize=720_1280&_city=%E5%8C%97%E4%BA%AC&_dev=160&_lat=39.91325&_lbs_city=%E5%8C%97%E4%BA%AC&_lbs_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_lng=116.403625&_mac=DC%3A0E%3AA1%3A6E%3A9B%3A85&_mcode=85AA2339&_net=wifi&_nudid=b6441c6086ab3941&_os=4.4.2_VPhone&_os_name=VPhone&_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_udid=864394102201417&_v=7.0.2&_version=7.02&discussion_id=246&sort_type=last_comment";
+    //综合体育Base url
+    public static final String BASE_SPORT_URL="http://dis.myzaker.com/";
+
+    //数码脑残粉
+    public static final String PHONE_URL="http://dis.myzaker.com/api/get_post.php?_appid=AndroidPhone&_bsize=720_1280&_city=%E5%8C%97%E4%BA%AC&_dev=160&_lat=39.91325&_lbs_city=%E5%8C%97%E4%BA%AC&_lbs_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_lng=116.403625&_mac=DC%3A0E%3AA1%3A6E%3A9B%3A85&_mcode=85AA2339&_net=wifi&_nudid=b6441c6086ab3941&_os=4.4.2_VPhone&_os_name=VPhone&_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_udid=864394102201417&_v=7.0.2&_version=7.02&discussion_id=156&sort_type=last_comment";
+    //电影圈：
+    public static final String FILM_URL="http://dis.myzaker.com/api/get_post.php?_appid=AndroidPhone&_bsize=720_1280&_city=%E5%8C%97%E4%BA%AC&_dev=160&_lat=39.91325&_lbs_city=%E5%8C%97%E4%BA%AC&_lbs_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_lng=116.403625&_mac=DC%3A0E%3AA1%3A6E%3A9B%3A85&_mcode=85AA2339&_net=wifi&_nudid=b6441c6086ab3941&_os=4.4.2_VPhone&_os_name=VPhone&_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_udid=864394102201417&_v=7.0.2&_version=7.02&discussion_id=168&sort_type=last_comment";
+
+    //健身房
+    public static final String HEALTH_URL="http://dis.myzaker.com/api/get_post.php?_appid=AndroidPhone&_bsize=720_1280&_city=%E5%8C%97%E4%BA%AC&_dev=160&_lat=39.91325&_lbs_city=%E5%8C%97%E4%BA%AC&_lbs_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_lng=116.403625&_mac=DC%3A0E%3AA1%3A6E%3A9B%3A85&_mcode=85AA2339&_net=wifi&_nudid=b6441c6086ab3941&_os=4.4.2_VPhone&_os_name=VPhone&_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_udid=864394102201417&_v=7.0.2&_version=7.02&discussion_id=215&sort_type=last_comment";
+
+    //颤抖吧吃货
+    public static final String EAT_URL="http://dis.myzaker.com/api/get_post.php?_appid=AndroidPhone&_bsize=720_1280&_city=%E5%8C%97%E4%BA%AC&_dev=160&_lat=39.91325&_lbs_city=%E5%8C%97%E4%BA%AC&_lbs_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_lng=116.403625&_mac=DC%3A0E%3AA1%3A6E%3A9B%3A85&_mcode=85AA2339&_net=wifi&_nudid=b6441c6086ab3941&_os=4.4.2_VPhone&_os_name=VPhone&_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_udid=864394102201417&_v=7.0.2&_version=7.02&discussion_id=2&sort_type=last_comment";
+
+    //女神转型记
+    public static final String GIRLGOLD_URL="http://dis.myzaker.com/api/get_post.php?_appid=AndroidPhone&_bsize=720_1280&_city=%E5%8C%97%E4%BA%AC&_dev=160&_lat=39.91325&_lbs_city=%E5%8C%97%E4%BA%AC&_lbs_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_lng=116.403625&_mac=DC%3A0E%3AA1%3A6E%3A9B%3A85&_mcode=85AA2339&_net=wifi&_nudid=b6441c6086ab3941&_os=4.4.2_VPhone&_os_name=VPhone&_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_udid=864394102201417&_v=7.0.2&_version=7.02&discussion_id=86&sort_type=last_comment";
+
+    //董小姐
+    public static final String MISSESD_URL="http://dis.myzaker.com/api/get_post.php?_appid=AndroidPhone&_bsize=720_1280&_city=%E5%8C%97%E4%BA%AC&_dev=160&_lat=39.91325&_lbs_city=%E5%8C%97%E4%BA%AC&_lbs_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_lng=116.403625&_mac=DC%3A0E%3AA1%3A6E%3A9B%3A85&_mcode=85AA2339&_net=wifi&_nudid=b6441c6086ab3941&_os=4.4.2_VPhone&_os_name=VPhone&_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_udid=864394102201417&_v=7.0.2&_version=7.02&discussion_id=83&sort_type=last_comment";
+
+    //汽车总动员
+    public static final String CAR_URL="http://dis.myzaker.com/api/get_post.php?_appid=AndroidPhone&_bsize=720_1280&_city=%E5%8C%97%E4%BA%AC&_dev=160&_lat=39.91325&_lbs_city=%E5%8C%97%E4%BA%AC&_lbs_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_lng=116.403625&_mac=DC%3A0E%3AA1%3A6E%3A9B%3A85&_mcode=85AA2339&_net=wifi&_nudid=b6441c6086ab3941&_os=4.4.2_VPhone&_os_name=VPhone&_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_udid=864394102201417&_v=7.0.2&_version=7.02&discussion_id=185&sort_type=last_comment";
+
+    //扎堆
+    public static final String ZHADUI_URL="http://dis.myzaker.com/api/get_post.php?_appid=AndroidPhone&_bsize=720_1280&_city=%E5%8C%97%E4%BA%AC&_dev=160&_lat=39.91325&_lbs_city=%E5%8C%97%E4%BA%AC&_lbs_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_lng=116.403625&_mac=DC%3A0E%3AA1%3A6E%3A9B%3A85&_mcode=85AA2339&_net=wifi&_nudid=b6441c6086ab3941&_os=4.4.2_VPhone&_os_name=VPhone&_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_udid=864394102201417&_v=7.0.2&_version=7.02&discussion_id=161&sort_type=last_comment";
+
+    //我们就爱倒腾APP
+    public static final String APP_URL="http://dis.myzaker.com/api/get_post.php?_appid=AndroidPhone&_bsize=720_1280&_city=%E5%8C%97%E4%BA%AC&_dev=160&_lat=39.91325&_lbs_city=%E5%8C%97%E4%BA%AC&_lbs_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_lng=116.403625&_mac=DC%3A0E%3AA1%3A6E%3A9B%3A85&_mcode=85AA2339&_net=wifi&_nudid=b6441c6086ab3941&_os=4.4.2_VPhone&_os_name=VPhone&_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_udid=864394102201417&_v=7.0.2&_version=7.02&discussion_id=178&sort_type=last_comment";
 
 }
