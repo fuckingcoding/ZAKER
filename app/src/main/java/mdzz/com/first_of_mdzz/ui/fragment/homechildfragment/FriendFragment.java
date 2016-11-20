@@ -3,6 +3,7 @@ package mdzz.com.first_of_mdzz.ui.fragment.homechildfragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -32,6 +33,7 @@ import rx.schedulers.Schedulers;
  * A simple {@link Fragment} subclass.
  */
 public class FriendFragment extends Fragment {
+    private SwipeRefreshLayout srl;
     private RecyclerView recyclerView;
     private List<FriendBean.DataBean.ListBean> friendlist = new ArrayList<>();
     private MyFriendRecyclerAdapter adapter;
@@ -52,12 +54,19 @@ public class FriendFragment extends Fragment {
         return rootView;
     }
     private void initView(View rootView) {
+        srl = (SwipeRefreshLayout) rootView.findViewById(R.id.friend_srl);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.fragment_friend_recyclerview);
         adapter = new MyFriendRecyclerAdapter(friendlist,getActivity());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new SpacesItemDecoration(10));
         recyclerView.setAdapter(adapter);
+        srl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initData();
+            }
+        });
     }
 
     private void initData() {
@@ -74,7 +83,7 @@ public class FriendFragment extends Fragment {
                 .subscribe(new Subscriber<FriendBean>() {
                     @Override
                     public void onCompleted() {
-
+                        srl.setRefreshing(false);
                     }
 
                     @Override

@@ -19,6 +19,7 @@ import mdzz.com.first_of_mdzz.R;
 import mdzz.com.first_of_mdzz.bean.home.FriendBean;
 import mdzz.com.first_of_mdzz.config.Constant;
 import mdzz.com.first_of_mdzz.ui.web.WebActivity;
+import mdzz.com.first_of_mdzz.ui.web.WebNewActivity;
 import mdzz.com.first_of_mdzz.utils.BitmapCircleTransformation;
 import mdzz.com.first_of_mdzz.utils.ToastHelper;
 
@@ -126,7 +127,7 @@ public class MyFriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
                 @Override
                 public void onClick(View view) {
                     String weburl = friendlist.get(position).getOpenInfo().getPost().getWeburl();
-                    Intent intent = new Intent(mContext,WebActivity.class);
+                    Intent intent = new Intent(mContext,WebNewActivity.class);
                     intent.putExtra(Constant.WEB_URL,weburl);
                     mContext.startActivity(intent);
                 }
@@ -145,7 +146,7 @@ public class MyFriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
                 @Override
                 public void onClick(View view) {
                     String weburl = friendlist.get(position).getOpenInfo().getPost().getWeburl();
-                    Intent intent = new Intent(mContext,WebActivity.class);
+                    Intent intent = new Intent(mContext,WebNewActivity.class);
                     intent.putExtra(Constant.WEB_URL,weburl);
                     mContext.startActivity(intent);
                 }
@@ -165,7 +166,7 @@ public class MyFriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
                 @Override
                 public void onClick(View view) {
                     String weburl = friendlist.get(position).getOpenInfo().getPost().getWeburl();
-                    Intent intent = new Intent(mContext,WebActivity.class);
+                    Intent intent = new Intent(mContext,WebNewActivity.class);
                     intent.putExtra(Constant.WEB_URL,weburl);
                     mContext.startActivity(intent);
                 }

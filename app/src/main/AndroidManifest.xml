@@ -18,13 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.selectposition.SelectCityActivity"
-            android:theme="@style/ActionBarTheme"
-            ></activity>
-        <activity android:name=".ui.web.WebActivity"></activity>
-        <activity android:name=".ui.main.subscriber.SubItemBaseActivity"/>
+        <activity
+            android:name=".ui.selectposition.SelectCityActivity"
+            android:theme="@style/ActionBarTheme" />
+        <activity android:name=".ui.web.WebActivity" />
+        <activity android:name=".ui.main.subscriber.SubItemBaseActivity" />
         <activity android:name=".ui.selectposition.SelectPositionActivity" />
-        <activity android:name=".ui.main.homeactivity.SportActivity"></activity>
+        <activity android:name=".ui.main.homeactivity.SportActivity" />
+        <activity android:name=".ui.web.WebNewActivity"></activity>
     </application>
 
 </manifest>

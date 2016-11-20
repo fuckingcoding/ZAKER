@@ -17,6 +17,7 @@ import mdzz.com.first_of_mdzz.R;
 import mdzz.com.first_of_mdzz.bean.home.ChoiceBean;
 import mdzz.com.first_of_mdzz.config.Constant;
 import mdzz.com.first_of_mdzz.ui.web.WebActivity;
+import mdzz.com.first_of_mdzz.ui.web.WebNewActivity;
 import mdzz.com.first_of_mdzz.utils.BitmapCircleTransformation;
 
 /**
@@ -56,7 +57,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
             @Override
             public void onClick(View view) {
                 String weburl = posts.get(position).getWeburl();
-                Intent intent = new Intent(mContext, WebActivity.class);
+                Intent intent = new Intent(mContext, WebNewActivity.class);
                 intent.putExtra(Constant.WEB_URL,weburl);
                 mContext.startActivity(intent);
             }
