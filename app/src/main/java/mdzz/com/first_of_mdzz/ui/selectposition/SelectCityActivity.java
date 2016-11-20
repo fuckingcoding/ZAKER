@@ -8,17 +8,13 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MenuItem;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-
 import mdzz.com.first_of_mdzz.R;
 import mdzz.com.first_of_mdzz.adapter.RecyclerIndexAdapter;
 import mdzz.com.first_of_mdzz.bean.SelectBean;
@@ -26,7 +22,6 @@ import mdzz.com.first_of_mdzz.bean.position.CitiesBean;
 import mdzz.com.first_of_mdzz.bean.position.HotCitiesBean;
 import mdzz.com.first_of_mdzz.bean.position.LbsCityBean;
 import mdzz.com.first_of_mdzz.bean.position.PositionBean;
-import mdzz.com.first_of_mdzz.bean.week.WeekBean;
 import mdzz.com.first_of_mdzz.config.Constant;
 import mdzz.com.first_of_mdzz.http.HttpUtils;
 import mdzz.com.first_of_mdzz.utils.ChineseToPinyinHelper;
