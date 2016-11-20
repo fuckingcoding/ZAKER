@@ -11,7 +11,10 @@ import android.widget.TextView;
 
 import mdzz.com.first_of_mdzz.R;
 import mdzz.com.first_of_mdzz.base.BaseFragment;
+import mdzz.com.first_of_mdzz.ui.main.MineReuseActivity;
+import mdzz.com.first_of_mdzz.ui.web.WebActivity;
 import mdzz.com.first_of_mdzz.utils.ToastHelper;
+import mdzz.com.first_of_mdzz.utils.UIManager;
 
 
 /**
@@ -56,29 +59,38 @@ public class MyFragment extends BaseFragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
+        Intent intent = new Intent(getActivity(), MineReuseActivity.class);
         switch (view.getId()){
             case R.id.news:
-                ToastHelper.showToast(getActivity(),"此功能暂未开放，敬请期待");
+                intent.putExtra("1","消息中心");
+                startActivity(intent);
                 break;
             case R.id.push:
-                ToastHelper.showToast(getActivity(),"此功能暂未开放，敬请期待");
+                intent.putExtra("1","推送资讯");
+                startActivity(intent);
                 break;
             case R.id.zaker_club:
-                ToastHelper.showToast(getActivity(),"此功能暂未开放，敬请期待");
+                String url ="http://iphone.myzaker.com/zaker/hd_center.php";
+                UIManager.startWebActivity(getActivity(),url,"ZAKER俱乐部");
                 break;
             case R.id.mark:
-                ToastHelper.showToast(getActivity(),"此功能暂未开放，敬请期待");
+                String url_two = "http://m.zkshop.myzaker.com/";
+                UIManager.startWebActivity(getActivity(),url_two,"积分商城");
                 break;
             case R.id.collect:
-                ToastHelper.showToast(getActivity(),"此功能暂未开放，敬请期待");
+                intent.putExtra("1","我的收藏");
+                startActivity(intent);
                 break;
             case R.id.download:
-                ToastHelper.showToast(getActivity(),"此功能暂未开放，敬请期待");
+                intent.putExtra("1","离线下载");
+                startActivity(intent);
                 break;
             case R.id.set:
-                ToastHelper.showToast(getActivity(),"此功能暂未开放，敬请期待");
+                intent.putExtra("1","更多设置");
+                startActivity(intent);
                 break;
 
         }
+
     }
 }
