@@ -2,15 +2,13 @@ package mdzz.com.first_of_mdzz.ui.selectposition;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -26,7 +24,6 @@ import mdzz.com.first_of_mdzz.bean.position.CitiesBean;
 import mdzz.com.first_of_mdzz.bean.position.HotCitiesBean;
 import mdzz.com.first_of_mdzz.bean.position.LbsCityBean;
 import mdzz.com.first_of_mdzz.bean.position.PositionBean;
-import mdzz.com.first_of_mdzz.bean.week.WeekBean;
 import mdzz.com.first_of_mdzz.config.Constant;
 import mdzz.com.first_of_mdzz.http.HttpUtils;
 import mdzz.com.first_of_mdzz.utils.ChineseToPinyinHelper;
@@ -61,9 +58,8 @@ public class SelectCityActivity extends AppCompatActivity  implements SelectCont
 
     private void initBar() {
             ActionBar actionBar = getSupportActionBar();
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("选择你所在的城市");
-
+//            actionBar.setDisplayHomeAsUpEnabled(true);
+//            actionBar.setTitle("选择你所在的城市");
     }
 
     private void initData() {

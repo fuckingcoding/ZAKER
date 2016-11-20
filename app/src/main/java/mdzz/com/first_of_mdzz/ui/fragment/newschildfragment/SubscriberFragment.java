@@ -185,11 +185,7 @@ public class SubscriberFragment extends BaseFragment implements RecycleCallBack,
                         break;
                     case MotionEvent.ACTION_UP: //提前
                         adHandler.postDelayed(adRunnable, 2000);
-                        Intent intent = new Intent(mContext, WebActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString(Constant.WEB_URL, adurl);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
+
                         break;
                 }
                 return false;
@@ -256,14 +252,23 @@ public class SubscriberFragment extends BaseFragment implements RecycleCallBack,
             ImageView adIv = (ImageView) adViews.get(i);
             //TODO 使用Picasso加载资
             Glide.with(mContext)
-                    .load(articles.get(i).getThumbnail_pic())
+                    .load(articles.get(i+2).getThumbnail_pic())
 
                     .centerCrop()
                     .into(adIv);
 
-            adText.setText(articles.get(i).getTitle());
-            adurl = articles.get(i).getWeburl();
-
+            adText.setText(articles.get(i+2).getTitle());
+            adurl = articles.get(i+2).getWeburl();
+            adIv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString(Constant.WEB_URL, adurl);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
         }
 
 
