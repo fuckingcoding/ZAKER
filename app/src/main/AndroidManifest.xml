@@ -24,6 +24,10 @@
         <activity android:name=".ui.web.WebActivity" />
         <activity android:name=".ui.main.subscriber.SubItemBaseActivity" />
         <activity android:name=".ui.funguide.FunGuideActivity"></activity>
+        <activity android:name=".ui.flush.FlushActivity">
+
+
+        </activity>
 
 
 

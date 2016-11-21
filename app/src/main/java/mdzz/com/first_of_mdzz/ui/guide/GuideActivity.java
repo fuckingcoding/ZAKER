@@ -23,7 +23,7 @@ public class GuideActivity extends AppCompatActivity {
     private LinearLayout mlinear;
     private MyViewPagerAdapter madapter;
     private List<View> list;
-    private int [] viewdatas= new int[] {R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher};
+    private int [] viewdatas= new int[] {R.drawable.guideone,R.drawable.guidetwo,R.drawable.guidethree};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,7 @@ public class GuideActivity extends AppCompatActivity {
             iv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
             iv.setImageResource(viewdatas[i]);
-            iv.setScaleType(ImageView.ScaleType.FIT_XY);
+            iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
             list.add(iv);
             if(i==2){
                 iv.setOnClickListener(new View.OnClickListener() {
