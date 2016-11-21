@@ -1,0 +1,54 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="4dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/textView_item_date"
+            style="@style/weather_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="星期二"/>
+
+        <TextView
+            android:id="@+id/textView_item_weatherTemp"
+            style="@style/weather_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="22℃-28℃"/>
+
+        <TextView
+            android:id="@+id/textView_item_wind"
+            style="@style/weather_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="微风"/>
+
+        <TextView
+            android:id="@+id/textView_item_weather"
+            style="@style/weather_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="阵雨转阴"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView_item_weatherIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/biz_plugin_weather_qing"/>
+
+</LinearLayout>

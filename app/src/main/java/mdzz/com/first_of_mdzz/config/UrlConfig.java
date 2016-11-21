@@ -93,4 +93,10 @@ public class UrlConfig {
     //我们就爱倒腾APP
     public static final String APP_URL="http://dis.myzaker.com/api/get_post.php?_appid=AndroidPhone&_bsize=720_1280&_city=%E5%8C%97%E4%BA%AC&_dev=160&_lat=39.91325&_lbs_city=%E5%8C%97%E4%BA%AC&_lbs_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_lng=116.403625&_mac=DC%3A0E%3AA1%3A6E%3A9B%3A85&_mcode=85AA2339&_net=wifi&_nudid=b6441c6086ab3941&_os=4.4.2_VPhone&_os_name=VPhone&_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_udid=864394102201417&_v=7.0.2&_version=7.02&discussion_id=178&sort_type=last_comment";
 
+
+
+    // 天气预报url
+    public static final String URL_WEATHER_BASE = "http://wthrcdn.etouch.cn/";
+    public static final String URL_WEATHER_PATH = "weather_mini?";
+    //例如：http://wthrcdn.etouch.cn/weather_mini?city=%E5%8C%97%E4%BA%AC
 }
