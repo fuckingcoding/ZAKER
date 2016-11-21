@@ -12,17 +12,11 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +26,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.file.FileDecoder;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 
@@ -55,12 +48,11 @@ import mdzz.com.first_of_mdzz.bean.fun.PromoteBean;
 import mdzz.com.first_of_mdzz.bean.week.WeekBean;
 import mdzz.com.first_of_mdzz.bean.week.WeekendsBean;
 import mdzz.com.first_of_mdzz.config.Constant;
+import mdzz.com.first_of_mdzz.database.PreUtils;
 import mdzz.com.first_of_mdzz.http.HttpUtils;
 import mdzz.com.first_of_mdzz.ui.funguide.FunGuideActivity;
 import mdzz.com.first_of_mdzz.ui.main.FunFragmentContract;
 import mdzz.com.first_of_mdzz.ui.main.FunFragmentPresenter;
-import mdzz.com.first_of_mdzz.ui.web.WebActivity;
-import mdzz.com.first_of_mdzz.utils.DividerItemDecoration;
 import mdzz.com.first_of_mdzz.utils.SpacesItemDecoration;
 import mdzz.com.first_of_mdzz.utils.ToastHelper;
 import mdzz.com.first_of_mdzz.utils.UIManager;
@@ -179,6 +171,7 @@ public class FunFragment extends BaseFragment
         for(int i =0;i<6;i++){
             final ImageView iv = new ImageView(mContext);
             iv.setTag(i);
+            iv.setImageResource(R.mipmap.ic_mdzz);
 
             iv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
           //  iv.setImageResource(R.mipmap.guide_loading_tag_46);
@@ -478,7 +471,8 @@ public class FunFragment extends BaseFragment
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode== Constant.REQUEST_FUN &resultCode==Constant.RESULT_FUNGUIDE){
-            cityname = data.getStringExtra(Constant.KEY_FUN_CITY);
+            //cityname = data.getStringExtra(Constant.KEY_FUN_CITY);
+            cityname= PreUtils.readStrting(mContext,Constant.PRE_KEY);
             category = data.getIntExtra(Constant.KEY_FUN_URLINT, -1);
             if(TextUtils.isEmpty(cityname)){
                 tv_city_ritht.setText("北京");

@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,8 @@ import mdzz.com.first_of_mdzz.config.Constant;
 import mdzz.com.first_of_mdzz.config.UrlConfig;
 import mdzz.com.first_of_mdzz.ui.web.WebActivity;
 import mdzz.com.first_of_mdzz.utils.DividerItemDecoration;
+
+import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 
 /**
@@ -55,8 +58,8 @@ public class HotFragment extends BaseFragment implements HotFragmentContract.IHo
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        presenter = new HotFragmentPresenter(this);
-         presenter.getBean(UrlConfig.Hot1Url);
+         presenter = new HotFragmentPresenter(this);
+         presenter.getBean(UrlConfig.HotUrl);
 
 
 
@@ -98,8 +101,8 @@ public class HotFragment extends BaseFragment implements HotFragmentContract.IHo
                 //判断是否该加载更多数据（1.屏幕处于停止状态；2.屏幕已经滑动到了item的最底端）
                 if (mLastVisibleItem == hotRecycleAdapter.getItemCount() - 1 && newState == RecyclerView
                         .SCROLL_STATE_IDLE) {
-                    mCurPage++;
-                    presenter.getBean(UrlConfig.Hot1Url);
+
+                    presenter.getBean(UrlConfig.HotNextUrl);
 
                     }
             }
@@ -133,7 +136,8 @@ public class HotFragment extends BaseFragment implements HotFragmentContract.IHo
 
     @Override
     public void getData(HotBean bean) {
-         articles = bean.getData().getArticles();
+        //articles.clear();
+         articles .addAll(bean.getData().getArticles());
          info = bean.getData().getInfo();
 
         hotRecycleAdapter.reloadRecyclerView(articles,false);
@@ -142,7 +146,11 @@ public class HotFragment extends BaseFragment implements HotFragmentContract.IHo
 
     @Override
     public void onclick(int position) {
+        Log.e(TAG, "onclick: " +position);
+        Log.e(TAG, "onclick: "+articles.size());
         weburl = articles.get(position).getWeburl();
+
+        Log.e("www", "onclick: "+weburl );
         Jump();
     }
     private void Jump() {

@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.io.FileDescriptor;
 import java.util.List;
 
 import mdzz.com.first_of_mdzz.R;
@@ -69,8 +68,8 @@ public class FunRecyclerAdapter extends RecyclerViewAdapterHelper<Object> {
             ((MyViewHolder1) holder).tv_item_fun2.setText(content);
             Glide.with(mContext).load(m_url)
                     .asBitmap()
-                    .error(R.mipmap.ic_launcher)
-                    .placeholder(R.mipmap.ic_launcher)
+                    .error(R.mipmap.ic_load_error)
+                    .placeholder(R.mipmap.ic_mdzz)
                     .dontAnimate()
                     .into(iv_item_fun1);
 
