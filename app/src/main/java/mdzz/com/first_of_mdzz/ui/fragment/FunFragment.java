@@ -95,12 +95,13 @@ public class FunFragment extends BaseFragment
     private int category ;
     private boolean  isHide;
     private List<SimpleTarget<Bitmap>> list_target;
-
+    private boolean login;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = context;
+        login = PreUtils.readBoolean(mContext,"login");
         list = new ArrayList<>();
         list_weekends = new ArrayList<>();
         list_target= new ArrayList<>();
@@ -110,6 +111,7 @@ public class FunFragment extends BaseFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootview =inflater.inflate(R.layout.fragment_fun, container, false);
+
         return rootview;
     }
 
@@ -203,17 +205,25 @@ public class FunFragment extends BaseFragment
         imageView2.setOnClickListener(this);
         imageView3.setOnClickListener(this);
         //tv_city_ritht.setOnClickListener(this);
-        tv_city_ritht.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                refreshLayout_second.setRefreshing(false);
-                refreshLayout.setRefreshing(false);
-                Intent intent = new Intent(mContext, FunGuideActivity.class);
-                startActivityForResult(intent,Constant.REQUEST_FUN);
-            }
-        });
 
-    }
+            tv_city_ritht.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    if(login==true) {
+                        refreshLayout_second.setRefreshing(false);
+                        refreshLayout.setRefreshing(false);
+                        Intent intent = new Intent(mContext, FunGuideActivity.class);
+                        startActivityForResult(intent, Constant.REQUEST_FUN);
+                    }else{
+                        ToastHelper.showToast(mContext,"请先登录");
+                    }
+                }
+            });
+        }
+
+
+
 
 
 
