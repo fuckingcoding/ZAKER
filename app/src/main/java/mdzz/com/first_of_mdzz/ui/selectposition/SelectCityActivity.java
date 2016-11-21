@@ -2,9 +2,9 @@ package mdzz.com.first_of_mdzz.ui.selectposition;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -56,9 +56,8 @@ public class SelectCityActivity extends AppCompatActivity  implements SelectCont
 
     private void initBar() {
             ActionBar actionBar = getSupportActionBar();
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("选择你所在的城市");
-
+//            actionBar.setDisplayHomeAsUpEnabled(true);
+//            actionBar.setTitle("选择你所在的城市");
     }
 
     private void initData() {

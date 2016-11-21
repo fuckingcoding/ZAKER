@@ -31,7 +31,6 @@
 
 
 
-
         <activity android:name=".ui.main.homeactivity.SportActivity" />
         <activity android:name=".ui.web.WebNewActivity" />
         <activity android:name=".ui.main.MineReuseActivity"></activity>

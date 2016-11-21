@@ -1,7 +1,6 @@
 package mdzz.com.first_of_mdzz.ui.main;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -13,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -20,21 +21,22 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import mdzz.com.first_of_mdzz.ui.fragment.FunFragment;
-import mdzz.com.first_of_mdzz.widget.NoScrollViewPager;
 import mdzz.com.first_of_mdzz.R;
 import mdzz.com.first_of_mdzz.adapter.Mainadapter;
+import mdzz.com.first_of_mdzz.adapter.MyWeatherAdapter;
+import mdzz.com.first_of_mdzz.bean.Weather.WeatherBean;
+import mdzz.com.first_of_mdzz.ui.fragment.FunFragment;
 import mdzz.com.first_of_mdzz.ui.fragment.HomeFragment;
 import mdzz.com.first_of_mdzz.ui.fragment.MyFragment;
 import mdzz.com.first_of_mdzz.ui.fragment.NewsFragment;
 import mdzz.com.first_of_mdzz.utils.ToastHelper;
+import mdzz.com.first_of_mdzz.widget.NoScrollViewPager;
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, RadioGroup.OnCheckedChangeListener
-        , View.OnClickListener {
+        , View.OnClickListener,MainActivityWeatherContract.IWeatherView {
     private int INTERVAL_OF_TWO_CLICK_TO_QUIT = 1000;
 
-    private Context mContext = this;
+
     //SlidingPaneLayout布局
     private SlidingPaneLayout slidingPaneLayout_main;
     //覆盖及被覆盖层
@@ -62,6 +64,15 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     private long mLastPressBackTime;
 
+    //天气
+    private Context mContext=this;
+    private ListView listView_main;
+    private ProgressBar progressBar_main;
+    private List<WeatherBean.DataBean.ForecastBean> mTotalList=new ArrayList<>();
+    private MyWeatherAdapter adapter=null;
+
+    private MainActivityWeatherPresenter mweatherPresenterimpl;
+    private MainActivityWeatherModel mweatherModelimpl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +82,24 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         initView();
         selectPage(0);
         initSlidinglayout();
+         initWeather();
+    }
 
+    private void initWeather() {
+        initWeatherView();
+        initData();
+    }
+
+    private void initData() {
+        mweatherPresenterimpl=new MainActivityWeatherPresenter(this);
+        mweatherPresenterimpl.loadNetwirkData("大连");
+    }
+
+    private void initWeatherView() {
+        listView_main=(ListView)findViewById(R.id.listView_main);
+        progressBar_main=(ProgressBar)findViewById(R.id.progressBar_main);
+        adapter=new MyWeatherAdapter(mContext,mTotalList);
+        listView_main.setAdapter(adapter);
     }
 
     //初始化SlidingPanelayout
@@ -80,17 +108,17 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         //被覆盖层初始化
         layout_covered = (LinearLayout) findViewById(R.id.layout_covered);
 
-        //滑动层初始化
-        layout_slider = (LinearLayout) findViewById(R.id.layout_slider);
-        linearLayout_covered_centre = (LinearLayout) findViewById(R.id.linearLayout_covered_centre);
-        linearLayout_covered_share = (LinearLayout) findViewById(R.id.linearLayout_covered_share);
-        linearLayout_covered_login = (LinearLayout) findViewById(R.id.linearLayout_covered_login);
-        linearLayout_covered_back = (LinearLayout) findViewById(R.id.linearLayout_covered_back);
-        //滑动层按钮的点击事件
-        linearLayout_covered_centre.setOnClickListener(this);
-        linearLayout_covered_share.setOnClickListener(this);
-        linearLayout_covered_login.setOnClickListener(this);
-        linearLayout_covered_back.setOnClickListener(this);
+//        //滑动层初始化
+       layout_slider = (LinearLayout) findViewById(R.id.layout_slider);
+//        linearLayout_covered_centre = (LinearLayout) findViewById(R.id.linearLayout_covered_centre);
+//        linearLayout_covered_share = (LinearLayout) findViewById(R.id.linearLayout_covered_share);
+//        linearLayout_covered_login = (LinearLayout) findViewById(R.id.linearLayout_covered_login);
+//        linearLayout_covered_back = (LinearLayout) findViewById(R.id.linearLayout_covered_back);
+//        //滑动层按钮的点击事件
+//        linearLayout_covered_centre.setOnClickListener(this);
+//        linearLayout_covered_share.setOnClickListener(this);
+//        linearLayout_covered_login.setOnClickListener(this);
+//        linearLayout_covered_back.setOnClickListener(this);
 
         //设置covered层的显示宽度，该宽度决定了Slider层的剩余的宽度
         ViewGroup.LayoutParams params = layout_covered.getLayoutParams();
@@ -207,22 +235,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     //滑动层（被覆盖层）的点击事件
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent();
-        switch (view.getId()) {
-            case R.id.linearLayout_covered_centre:
-                Toast.makeText(mContext, "点击了个人中心", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.linearLayout_covered_share:
-                Toast.makeText(mContext, "点击了分享", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.linearLayout_covered_login:
-                Toast.makeText(mContext, "点击了登录", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.linearLayout_covered_back:
-                Toast.makeText(mContext, "点击了个人退出", Toast.LENGTH_SHORT).show();
-                break;
-            default:
-        }
+
 
     }
 
@@ -241,6 +254,24 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     }
 
 
+    @Override
+    public void showProgress() {
+        progressBar_main.setVisibility(View.VISIBLE);
+    }
 
+    @Override
+    public void hideProgress() {
+        progressBar_main.setVisibility(View.GONE);
+    }
 
+    @Override
+    public void showErrorInfo(String msg) {
+        Toast.makeText(mContext, "网络异常，加载失败", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public WeatherBean loadNetworkData(WeatherBean weatherBean) {
+        adapter.reloadListView(weatherBean.getData().getForecast(),true);
+        return null;
+    }
 }
