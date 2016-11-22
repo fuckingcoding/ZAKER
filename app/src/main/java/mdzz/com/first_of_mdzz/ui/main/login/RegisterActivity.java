@@ -256,8 +256,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void ShowEnterAnimation() {
         Transition transition = TransitionInflater.from(this).inflateTransition(R.transition.fabtransition);
-        getWindow().setSharedElementEnterTransition(transition);
-
+        if(Build.VERSION.SDK_INT>=21) {
+            getWindow().setSharedElementEnterTransition(transition);
+        }
         transition.addListener(new Transition.TransitionListener() {
             @Override
             public void onTransitionStart(Transition transition) {
@@ -290,46 +291,52 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void animateRevealShow() {
-        Animator mAnimator = ViewAnimationUtils.createCircularReveal(cvAdd, cvAdd.getWidth()/2,0, fab.getWidth() / 2, cvAdd.getHeight());
-        mAnimator.setDuration(500);
-        mAnimator.setInterpolator(new AccelerateInterpolator());
-        mAnimator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-            }
+        if(Build.VERSION.SDK_INT>=21) {
+            Animator mAnimator = ViewAnimationUtils.createCircularReveal(cvAdd, cvAdd.getWidth() / 2, 0, fab.getWidth() / 2, cvAdd.getHeight());
+            mAnimator.setDuration(500);
+            mAnimator.setInterpolator(new AccelerateInterpolator());
+            mAnimator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                }
 
-            @Override
-            public void onAnimationStart(Animator animation) {
-                cvAdd.setVisibility(View.VISIBLE);
-                super.onAnimationStart(animation);
-            }
-        });
-        mAnimator.start();
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    cvAdd.setVisibility(View.VISIBLE);
+                    super.onAnimationStart(animation);
+                }
+            });
+            mAnimator.start();
+        }
     }
 
     public void animateRevealClose() {
-        Animator mAnimator = ViewAnimationUtils.createCircularReveal(cvAdd,cvAdd.getWidth()/2,0, cvAdd.getHeight(), fab.getWidth() / 2);
-        mAnimator.setDuration(500);
-        mAnimator.setInterpolator(new AccelerateInterpolator());
-        mAnimator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                cvAdd.setVisibility(View.INVISIBLE);
-                super.onAnimationEnd(animation);
-                fab.setImageResource(R.drawable.plus);
-                RegisterActivity.super.onBackPressed();
-            }
+        if(Build.VERSION.SDK_INT>=21) {
+            Animator mAnimator = ViewAnimationUtils.createCircularReveal(cvAdd, cvAdd.getWidth() / 2, 0, cvAdd.getHeight(), fab.getWidth() / 2);
+            mAnimator.setDuration(500);
+            mAnimator.setInterpolator(new AccelerateInterpolator());
+            mAnimator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    cvAdd.setVisibility(View.INVISIBLE);
+                    super.onAnimationEnd(animation);
+                    fab.setImageResource(R.drawable.plus);
+                    RegisterActivity.super.onBackPressed();
+                }
 
-            @Override
-            public void onAnimationStart(Animator animation) {
-                super.onAnimationStart(animation);
-            }
-        });
-        mAnimator.start();
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    super.onAnimationStart(animation);
+                }
+            });
+            mAnimator.start();
+        }
     }
     @Override
     public void onBackPressed() {
         animateRevealClose();
     }
+
+  
 }

@@ -250,30 +250,32 @@ private EditText phoneEdt, pswEdt;
 
     @OnClick({R.id.bt_go, R.id.fab})
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.fab:
-                getWindow().setExitTransition(null);
-                getWindow().setEnterTransition(null);
+        if(Build.VERSION.SDK_INT>=21) {
+            switch (view.getId()) {
+                case R.id.fab:
+                    getWindow().setExitTransition(null);
+                    getWindow().setEnterTransition(null);
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    ActivityOptions options =
-                            ActivityOptions.makeSceneTransitionAnimation(this, fab, fab.getTransitionName());
-                    startActivity(new Intent(this, RegisterActivity.class), options.toBundle());
-                } else {
-                    startActivity(new Intent(this, RegisterActivity.class));
-                }
-                break;
-            case R.id.bt_go:
-                Explode explode = new Explode();
-                explode.setDuration(500);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        ActivityOptions options =
+                                ActivityOptions.makeSceneTransitionAnimation(this, fab, fab.getTransitionName());
+                        startActivity(new Intent(this, RegisterActivity.class), options.toBundle());
+                    } else {
+                        startActivity(new Intent(this, RegisterActivity.class));
+                    }
+                    break;
+                case R.id.bt_go:
+                    Explode explode = new Explode();
+                    explode.setDuration(500);
 
-                getWindow().setExitTransition(explode);
-                getWindow().setEnterTransition(explode);
-                // ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
-                // Intent i2 = new Intent(this,LoginSuccessActivity.class);
-                //startActivity(i2, oc2.toBundle());
-                login();
-                break;
+                    getWindow().setExitTransition(explode);
+                    getWindow().setEnterTransition(explode);
+                    // ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
+                    // Intent i2 = new Intent(this,LoginSuccessActivity.class);
+                    //startActivity(i2, oc2.toBundle());
+                    login();
+                    break;
+            }
         }
     }
 
