@@ -43,15 +43,30 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        Glide.with(mContext).load(posts.get(position).getAuther().getIcon()).transform(new BitmapCircleTransformation(mContext)).into(holder.img_choice);
-       // Glide.with(mContext).load(posts.get(position).getThumbnailMedias().get(0).getUrl()).into(holder.img_url);
-        holder.tv_username.setText(posts.get(position).getAuther().getName());
-        holder.tv_userTime.setText(posts.get(position).getDate());
-        holder.tv_kinds.setText(posts.get(position).getSpecialInfo().getDiscussionTitle());
-        holder.tv_content.setText(posts.get(position).getContent());
-        holder.tv_comment.setText(posts.get(position).getCommentCount());
-        holder.tv_hot.setText(posts.get(position).getHotNum());
-        holder.tv_like.setText(posts.get(position).getLikeNum());
+        int size = posts.get(position).getThumbnailMedias().size();
+        if(size!=0){
+            Glide.with(mContext).load(posts.get(position).getAuther().getIcon()).transform(new BitmapCircleTransformation(mContext)).into(holder.img_choice);
+            Glide.with(mContext).load(posts.get(position).getThumbnailMedias().get(0).getUrl()).into(holder.img_url);
+            holder.tv_username.setText(posts.get(position).getAuther().getName());
+            holder.tv_userTime.setText(posts.get(position).getDate());
+            holder.tv_kinds.setText(posts.get(position).getSpecialInfo().getDiscussionTitle());
+            holder.tv_content.setText(posts.get(position).getContent());
+            holder.tv_comment.setText(posts.get(position).getCommentCount());
+            holder.tv_hot.setText(posts.get(position).getHotNum());
+            holder.tv_like.setText(posts.get(position).getLikeNum());
+
+        }else{
+            Glide.with(mContext).load(posts.get(position).getAuther().getIcon()).transform(new BitmapCircleTransformation(mContext)).into(holder.img_choice);
+            holder.img_url.setImageResource(R.drawable.qms);
+            holder.tv_username.setText(posts.get(position).getAuther().getName());
+            holder.tv_userTime.setText(posts.get(position).getDate());
+            holder.tv_kinds.setText(posts.get(position).getSpecialInfo().getDiscussionTitle());
+            holder.tv_content.setText(posts.get(position).getContent());
+            holder.tv_comment.setText(posts.get(position).getCommentCount());
+            holder.tv_hot.setText(posts.get(position).getHotNum());
+            holder.tv_like.setText(posts.get(position).getLikeNum());
+        }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
