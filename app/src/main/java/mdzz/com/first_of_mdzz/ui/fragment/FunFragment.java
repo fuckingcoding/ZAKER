@@ -395,7 +395,7 @@ public class FunFragment extends BaseFragment
 
         funRecyclerAdapter.notifyDataSetChanged();
         refreshLayout.setRefreshing(false);
-        for(int i=0;i<6;i++){
+        for(int i=0;i<list_promote.size();i++){
             String image_url = list_promote.get(i).getPromotion_img();
             Toast.makeText(mContext,image_url,Toast.LENGTH_LONG);
             Log.i("TAG", "getData: "+i );

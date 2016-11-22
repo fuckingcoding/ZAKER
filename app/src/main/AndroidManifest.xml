@@ -30,6 +30,9 @@
         <activity android:name=".ui.main.homeactivity.SportActivity" />
         <activity android:name=".ui.web.WebNewActivity" />
         <activity android:name=".ui.main.MineReuseActivity"></activity>
+        <activity android:name=".ui.main.login.RegisterActivity"
+            android:theme="@style/Translucent"/>
+        <activity android:name=".ui.main.login.LoginActivity"/>
     </application>
 
 </manifest>

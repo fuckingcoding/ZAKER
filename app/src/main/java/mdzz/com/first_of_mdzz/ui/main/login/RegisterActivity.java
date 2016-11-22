@@ -338,5 +338,5 @@ public class RegisterActivity extends AppCompatActivity {
         animateRevealClose();
     }
 
-  
+
 }
