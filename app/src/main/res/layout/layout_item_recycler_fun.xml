@@ -6,7 +6,7 @@
         android:id="@+id/iv_recycler_item1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/hongdian"
+
          android:scaleType="fitXY"
         android:foreground="@color/black_overlay"/>
 

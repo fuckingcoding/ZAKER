@@ -16,7 +16,6 @@ import java.util.List;
 import mdzz.com.first_of_mdzz.R;
 import mdzz.com.first_of_mdzz.bean.home.ChoiceBean;
 import mdzz.com.first_of_mdzz.config.Constant;
-import mdzz.com.first_of_mdzz.ui.web.WebActivity;
 import mdzz.com.first_of_mdzz.ui.web.WebNewActivity;
 import mdzz.com.first_of_mdzz.utils.BitmapCircleTransformation;
 
@@ -45,7 +44,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         Glide.with(mContext).load(posts.get(position).getAuther().getIcon()).transform(new BitmapCircleTransformation(mContext)).into(holder.img_choice);
-        Glide.with(mContext).load(posts.get(position).getThumbnailMedias().get(0).getUrl()).into(holder.img_url);
+       // Glide.with(mContext).load(posts.get(position).getThumbnailMedias().get(0).getUrl()).into(holder.img_url);
         holder.tv_username.setText(posts.get(position).getAuther().getName());
         holder.tv_userTime.setText(posts.get(position).getDate());
         holder.tv_kinds.setText(posts.get(position).getSpecialInfo().getDiscussionTitle());

@@ -59,7 +59,12 @@ public class UrlConfig {
     //hot
     public final static String HotUrl="http://hotphone.myzaker.com/daily_hot_new.php?_appid=AndroidPhone&_bsize=1080_1920&_city=beijing&_dev=18&_lat=38.895039&_lbs_city=%E5%A4%A7%E8%BF%9E&_lbs_province=%E8%BE%BD%E5%AE%81%E7%9C%81&_lng=121.544741&_mac=c0%3Aee%3Afb%3A47%3Ae1%3Aa7&_mcode=DF8F0C00&_net=wifi&_nudid=8912d2847acc785d&_os=5.1.1_ONEA2001&_os_name=ONEA2001&_province=22&_udid=867271028756970&_v=7.0.2&_version=7.02&act=pre&last_time=1479563489";
 
-    public final static String Hot1Url="http://hotphone.myzaker.com/daily_hot_new.php?_appid=AndroidPhone&_bsize=720_1280&_city=ganzhou&_dev=160&_lat=39.913249&_lbs_city=%E5%8C%97%E4%BA%AC&_lbs_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_lng=116.403625&_mac=DC%3A0E%3AA1%3A6E%3A9B%3A85&_mcode=85AA2339&_net=wifi&_nudid=b6441c6086ab3941&_os=4.4.2_VPhone&_os_name=VPhone&_province=03&_udid=864394102201417&_v=7.0.2&_version=7.02";
+    //public final static String Hot1Url="http://hotphone.myzaker.com/daily_hot_new.php?_appid=AndroidPhone&_bsize=720_1280&_city=ganzhou&_dev=160&_lat=39.913249&_lbs_city=%E5%8C%97%E4%BA%AC&_lbs_province=%E5%8C%97%E4%BA%AC%E5%B8%82&_lng=116.403625&_mac=DC%3A0E%3AA1%3A6E%3A9B%3A85&_mcode=85AA2339&_net=wifi&_nudid=b6441c6086ab3941&_os=4.4.2_VPhone&_os_name=VPhone&_province=03&_udid=864394102201417&_v=7.0.2&_version=7.02";
+
+    public final static String Hot1Url="http://hotphone.myzaker.com/daily_hot_new.php?_appid=AndroidPhone&_bsize=1080_1920&_dev=18&_lat=38.895606&_lng=121.54572&_mac=bc%3A3a%3Aea%3Aa9%3Ae0%3A83&_mcode=AC3F6AED&_nudid=a876a3d5e489bb81&_province=30&_udid=868240023306601&_v=7.0.2&_version=7.02";
+
+    //public final static String Hot1Url="http://hotphone.myzaker.com/refresh_ad.php?_appid=AndroidPhone&_bsize=1080_1920&_city=%E5%A4%A7%E8%BF%9E&_dev=18&_lat=38.895093&_lbs_city=%E5%A4%A7%E8%BF%9E&_lbs_province=%E8%BE%BD%E5%AE%81%E7%9C%81&_lng=121.544731&_mac=bc%3A3a%3Aea%3Aa9%3Ae0%3A83&_mcode=AC3F6AED&_net=wifi&_nudid=a876a3d5e489bb81&_os=4.4.4_OPPOR7&_os_name=OPPOR7&_province=%E8%BE%BD%E5%AE%81%E7%9C%81&_udid=868240023306601&_v=7.0.2&_version=7.02";
+    public final static String HotNextUrl="http://hotphone.myzaker.com/daily_hot_new.php?_appid=AndroidPhone&_bsize=1080_1920&_dev=18&_lat=38.895606&_lng=121.54572&_mac=bc%3A3a%3Aea%3Aa9%3Ae0%3A83&_mcode=AC3F6AED&_nudid=a876a3d5e489bb81&_province=30&_udid=868240023306601&_v=7.0.2&_version=7.02&act=next";
     //***************************************************************
 
     //综合体育url

@@ -9,6 +9,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -16,6 +17,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -25,6 +27,8 @@ import mdzz.com.first_of_mdzz.R;
 import mdzz.com.first_of_mdzz.adapter.Mainadapter;
 import mdzz.com.first_of_mdzz.adapter.MyWeatherAdapter;
 import mdzz.com.first_of_mdzz.bean.Weather.WeatherBean;
+import mdzz.com.first_of_mdzz.config.Constant;
+import mdzz.com.first_of_mdzz.database.PreUtils;
 import mdzz.com.first_of_mdzz.ui.fragment.FunFragment;
 import mdzz.com.first_of_mdzz.ui.fragment.HomeFragment;
 import mdzz.com.first_of_mdzz.ui.fragment.MyFragment;
@@ -73,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     private MainActivityWeatherPresenter mweatherPresenterimpl;
     private MainActivityWeatherModel mweatherModelimpl;
+    private TextView  textViewcityname;
+    private  String s;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         selectPage(0);
         initSlidinglayout();
          initWeather();
+
     }
 
     private void initWeather() {
@@ -92,7 +99,12 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     private void initData() {
         mweatherPresenterimpl=new MainActivityWeatherPresenter(this);
-        mweatherPresenterimpl.loadNetwirkData("大连");
+        s = PreUtils.readStrting(mContext, Constant.PRE_KEY);
+        if(TextUtils.isEmpty(s)){
+           s ="北京";
+        }
+        mweatherPresenterimpl.loadNetwirkData(s);
+        textViewcityname.setText(s);
     }
 
     private void initWeatherView() {
@@ -104,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     //初始化SlidingPanelayout
     private void initSlidinglayout() {
+        textViewcityname=(TextView)findViewById(R.id.textView_city);
         slidingPaneLayout_main = (SlidingPaneLayout) findViewById(R.id.slidingpanelayout_main);
         //被覆盖层初始化
         layout_covered = (LinearLayout) findViewById(R.id.layout_covered);
@@ -125,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         params.width = getResources().getDisplayMetrics().widthPixels * 2 / 3;
         layout_covered.setLayoutParams(params);
         //设置滑动层的渐隐颜色
-        slidingPaneLayout_main.setSliderFadeColor(Color.parseColor("#22000000"));
+        slidingPaneLayout_main.setSliderFadeColor(Color.parseColor("#778a8a8a"));
         //实现slider与Covered两个层的缩放效果
         slidingPaneLayout_main.setPanelSlideListener(new SlidingPaneLayout.PanelSlideListener() {
             @Override
@@ -133,8 +146,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                 //slider层上头像随着滑动隐藏不见
                 //  imageView_slider_face.setAlpha(1 - slideOffset);
                 //实现slider层的缩小效果（xy轴心点、xy方向的缩放比例）
-                ViewCompat.setScaleX(layout_slider, 1 - slideOffset * 0.1f);
-                ViewCompat.setScaleY(layout_slider, 1 - slideOffset * 0.1f);
+//                ViewCompat.setScaleX(layout_slider, 1 - slideOffset * 0.1f);
+//                ViewCompat.setScaleY(layout_slider, 1 - slideOffset * 0.1f);
                 //实现covered层的放大效果（xy轴心点、xy方向的缩放比例）
                 ViewCompat.setPivotX(layout_covered, 0);
                 ViewCompat.setScaleX(layout_covered, slideOffset);
@@ -143,6 +156,10 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
             @Override
             public void onPanelOpened(View panel) {
+                initData();
+                textViewcityname.setText(s);
+                adapter.notifyDataSetChanged();
+
             }
 
             @Override

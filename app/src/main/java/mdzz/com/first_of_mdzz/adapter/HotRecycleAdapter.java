@@ -21,35 +21,39 @@ import mdzz.com.first_of_mdzz.utils.RecyclerViewAdapterHelper;
  */
 
 public class HotRecycleAdapter extends RecyclerViewAdapterHelper<HotBean.DataBean.ArticlesBean> {
-    private static final int STATE1 = 0, STATE2 = 1,STATE3=3;
-
-    public interface IOnItemClickListener{
+    private static final int STATE1 = 0, STATE2 = 1, STATE3 = 3;
+   private List<HotBean.DataBean.ArticlesBean.ThumbnailMediasBean> count;
+    public interface IOnItemClickListener {
         void onclick(int position);
     }
+
     private IOnItemClickListener iOnItemClickListener;
-    public HotRecycleAdapter(Context context, List<HotBean.DataBean.ArticlesBean> list,IOnItemClickListener iOnItemClickListener) {
+
+    public HotRecycleAdapter(Context context, List<HotBean.DataBean.ArticlesBean> list, IOnItemClickListener iOnItemClickListener) {
         super(context, list);
-        this.iOnItemClickListener=iOnItemClickListener;
+        this.iOnItemClickListener = iOnItemClickListener;
     }
 
     @Override
     public int getItemViewType(int position) {
-        List<HotBean.DataBean.ArticlesBean.ThumbnailMediasBean> count = mList.get(position).getThumbnail_medias();
 
+         count = mList.get(position).getThumbnail_medias();
+//        final int T = 0;
+//
+//        if (count == null) {
+//            return STATE1;
+//        }
+//        if (count.size() > 0 && count.size() < 3) {
+//            return STATE2;
+//        }
+//        if (count.size() > 2) {
+//            return STATE3;
+//        }
+//        return STATE2;
+//    }
 
-        if(count==null){
-            return STATE1;
-        }
-        if(count.size()>0&&count.size()<3){
-            return STATE2;
-        }
-        if(count.size()>2){
-            return STATE3;
-        }
-            return STATE1;
-        }
-
-
+    return count==null?STATE1:(count.size()>0&&count.size()<3?STATE2:(count.size()>2?STATE3:null));
+}
     @Override
     public RecyclerView.ViewHolder onCreateMyViewHolder(ViewGroup parent, int viewType) {
         View view = null;
