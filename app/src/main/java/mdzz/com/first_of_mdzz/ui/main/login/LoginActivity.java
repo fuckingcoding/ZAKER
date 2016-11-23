@@ -31,7 +31,6 @@ import java.util.regex.Pattern;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
@@ -40,6 +39,8 @@ import mdzz.com.first_of_mdzz.bean.Users;
 import mdzz.com.first_of_mdzz.database.PreUtils;
 import mdzz.com.first_of_mdzz.ui.main.MainActivity;
 import mdzz.com.first_of_mdzz.utils.EncryptUtils;
+
+import static android.R.attr.name;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -53,8 +54,8 @@ public class LoginActivity extends AppCompatActivity {
     CardView cv;
     @InjectView(R.id.fab)
     FloatingActionButton fab;
-    private String pssw;
-    private String name;
+    private String pssw21;
+    private String name21;
 //21
 private EditText phoneEdt, pswEdt;
     private ImageView clearBtn, showBtn;
@@ -62,7 +63,7 @@ private EditText phoneEdt, pswEdt;
 
     private boolean isShow;
 
-    private String pssw21;
+    private String pssw;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +82,7 @@ private EditText phoneEdt, pswEdt;
         //提供以下两种方式进行初始化操作：
 
         //第一：默认初始化
-        Bmob.initialize(this, "643a383f5bb4d365e8d37692ae1fd8d5");
+      //  Bmob.initialize(this, "643a383f5bb4d365e8d37692ae1fd8d5");
 
         //第二：自v3.4.7版本开始,设置BmobConfig,允许设置请求超时时间、文件分片上传时每片的大小、文件的过期时间(单位为秒)，
         //BmobConfig config =new BmobConfig.Builder(this)
@@ -207,23 +208,23 @@ private EditText phoneEdt, pswEdt;
 
     private void loginlow() {
 
-        pssw21 = pswEdt.getEditableText().toString();
-        String name = phoneEdt.getEditableText().toString();
+        pssw = pswEdt.getEditableText().toString();
+        String name1 = phoneEdt.getEditableText().toString();
 
         String pswRegEx = "^\\d{8}$";
         Pattern pattern = Pattern.compile(pswRegEx);
-        Matcher matcher = pattern.matcher(pssw21);
+        Matcher matcher = pattern.matcher(pssw);
         boolean b = matcher.matches();
 
         //输入内容非空判断
         if (b) {
             BmobQuery<Users> bmobQuery = new BmobQuery<>();
-            bmobQuery.addWhereEqualTo("name", name);
+            bmobQuery.addWhereEqualTo("name", name1);
             bmobQuery.findObjects(new FindListener<Users>() {
                 @Override
                 public void done(List<Users> list, BmobException e) {
                     if (e == null) {
-                        if (list.get(0).getPassword().equals(EncryptUtils.md5(pssw21))) {
+                        if (list.get(0).getPassword().equals(EncryptUtils.md5(pssw))) {
                             Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                             PreUtils.writeBoolean(LoginActivity.this, "login", true);
                             String username=list.get(0).getName();
@@ -282,23 +283,25 @@ private EditText phoneEdt, pswEdt;
 
     private void login() {
 
-        pssw = etPassword.getEditableText().toString();
-        name = etUsername.getEditableText().toString();
+        pssw21 = etPassword.getEditableText().toString();
+        Log.e("q", "login: "+pssw21 );
+        name21 = etUsername.getEditableText().toString();
+        Log.e("q", "login: "+name );
 
         String pswRegEx = "^\\d{8}$";
         Pattern pattern = Pattern.compile(pswRegEx);
-        Matcher matcher = pattern.matcher(pssw);
+        Matcher matcher = pattern.matcher(pssw21);
         boolean b = matcher.matches();
 
         //输入内容非空判断
         if (b) {
             BmobQuery<Users> bmobQuery = new BmobQuery<>();
-            bmobQuery.addWhereEqualTo("name", name);
+            bmobQuery.addWhereEqualTo("name", name21);
             bmobQuery.findObjects(new FindListener<Users>() {
                 @Override
                 public void done(List<Users> list, BmobException e) {
                     if (e == null) {
-                        if (list.get(0).getPassword().equals(EncryptUtils.md5(pssw))) {
+                        if (list.get(0).getPassword().equals(EncryptUtils.md5(pssw21))) {
                             Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                             PreUtils.writeBoolean(LoginActivity.this, "login", true);
                             String username=list.get(0).getName();

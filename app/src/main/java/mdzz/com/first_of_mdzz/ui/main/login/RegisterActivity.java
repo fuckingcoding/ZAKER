@@ -221,22 +221,24 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void login() {
-        String username=mUserNameEditText.getEditableText().toString();
-        String userpsw=mPassWordEditText.getEditableText().toString();
+        String username21=mUserNameEditText.getEditableText().toString();
+        Log.e("q", "login: "+username21 );
+        String userpsw21=mPassWordEditText.getEditableText().toString();
+        Log.e("q", "login: "+userpsw21 );
         String repeatpsw=mRepeatPassWordEditText.getEditableText().toString();
 
         String pswRegEx="^\\d{8}$";
         Pattern pattern = Pattern.compile(pswRegEx);
-        Matcher matcher = pattern.matcher(userpsw);
+        Matcher matcher = pattern.matcher(userpsw21);
         boolean b = matcher.matches();
         Users user=new Users();
-        user.setName(username);
-        user.setPassword(EncryptUtils.md5(userpsw));
+        user.setName(username21);
+        user.setPassword(EncryptUtils.md5(userpsw21));
 
                 if(b) {
                     Users users = new Users();
-                    users.setName(username);
-                    users.setPassword(EncryptUtils.md5(userpsw));
+                    users.setName(username21);
+                    users.setPassword(EncryptUtils.md5(userpsw21));
                     users.save(new SaveListener<String>() {
                         @Override
                         public void done(String objectId, BmobException e) {
@@ -248,7 +250,7 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     });
                 }else{
-                    Toast.makeText(RegisterActivity.this,"密码不符合要求", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this,"密码不符合要求.8位以上数字", Toast.LENGTH_SHORT).show();
                 }
 
             }

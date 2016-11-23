@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     @Override
     public void showErrorInfo(String msg) {
-        Toast.makeText(mContext, "网络异常，加载失败", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mContext, "网络异常，加载失败", Toast.LENGTH_SHORT).show();
     }
 
     @Override

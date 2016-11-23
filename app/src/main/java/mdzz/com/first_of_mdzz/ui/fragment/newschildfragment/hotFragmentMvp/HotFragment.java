@@ -32,25 +32,27 @@ import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HotFragment extends BaseFragment implements HotFragmentContract.IHotView,HotRecycleAdapter.IOnItemClickListener{
+public class HotFragment extends BaseFragment implements HotFragmentContract.IHotView, HotRecycleAdapter.IOnItemClickListener {
     private Context mContext;
     private HotFragmentPresenter presenter;
     private RecyclerView recyclerView_hotfragment;
     private HotRecycleAdapter hotRecycleAdapter;
     private LinearLayoutManager mlayoutManager;
     private List<HotBean> mTotalList = new ArrayList<>();
-    private  List<HotBean.DataBean.ArticlesBean> articles=new ArrayList<>();
+    private List<HotBean.DataBean.ArticlesBean> articles = new ArrayList<>();
     private HotBean.DataBean.InfoBean info;
 
 
     private String weburl;
 
     private int mLastVisibleItem = 0;
-    private int mCurPage=1;
+    private int mCurPage = 1;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mContext=context;
+        mContext = context;
+
 
     }
 
@@ -58,10 +60,8 @@ public class HotFragment extends BaseFragment implements HotFragmentContract.IHo
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-         presenter = new HotFragmentPresenter(this);
-         presenter.getBean(UrlConfig.HotUrl);
-
-
+        presenter = new HotFragmentPresenter(this);
+        presenter.getBean(UrlConfig.Hot1Url);
 
 
     }
@@ -77,14 +77,14 @@ public class HotFragment extends BaseFragment implements HotFragmentContract.IHo
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initRecycle(view);
 
+        initRecycle(view);
 
 
     }
 
     private void initRecycle(View view) {
-        recyclerView_hotfragment=(RecyclerView)view.findViewById(R.id.recyclerview_hotfragment);
+        recyclerView_hotfragment = (RecyclerView) view.findViewById(R.id.recyclerview_hotfragment);
         recyclerView_hotfragment.setHasFixedSize(true);
         recyclerView_hotfragment.setItemAnimator(new DefaultItemAnimator());
         recyclerView_hotfragment.addItemDecoration(new DividerItemDecoration(mContext,
@@ -92,7 +92,7 @@ public class HotFragment extends BaseFragment implements HotFragmentContract.IHo
 
         mlayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         recyclerView_hotfragment.setLayoutManager(mlayoutManager);
-        hotRecycleAdapter = new HotRecycleAdapter(mContext, articles,this);
+        hotRecycleAdapter = new HotRecycleAdapter(mContext, articles, this);
         recyclerView_hotfragment.setAdapter(hotRecycleAdapter);
         recyclerView_hotfragment.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -102,9 +102,9 @@ public class HotFragment extends BaseFragment implements HotFragmentContract.IHo
                 if (mLastVisibleItem == hotRecycleAdapter.getItemCount() - 1 && newState == RecyclerView
                         .SCROLL_STATE_IDLE) {
 
-                    presenter.getBean(UrlConfig.HotNextUrl);
+                     presenter.getBean(UrlConfig.HotNextUrl);
 
-                    }
+                }
             }
 
             @Override
@@ -137,26 +137,27 @@ public class HotFragment extends BaseFragment implements HotFragmentContract.IHo
     @Override
     public void getData(HotBean bean) {
         //articles.clear();
-         articles .addAll(bean.getData().getArticles());
-         info = bean.getData().getInfo();
+        articles.addAll(bean.getData().getArticles());
+        info = bean.getData().getInfo();
 
-        hotRecycleAdapter.reloadRecyclerView(articles,false);
-
+        // hotRecycleAdapter.reloadRecyclerView(articles,false);
+        hotRecycleAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onclick(int position) {
-        Log.e(TAG, "onclick: " +position);
-        Log.e(TAG, "onclick: "+articles.size());
+        Log.e(TAG, "onclick: " + position);
+        Log.e(TAG, "onclick: " + articles.size());
         weburl = articles.get(position).getWeburl();
 
-        Log.e("www", "onclick: "+weburl );
+        Log.e("www", "onclick: " + weburl);
         Jump();
     }
+
     private void Jump() {
         Intent intent = new Intent(mContext, WebActivity.class);
-        Bundle bundle= new Bundle();
-        bundle.putString(Constant.WEB_URL,weburl);
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.WEB_URL, weburl);
         intent.putExtras(bundle);
         startActivity(intent);
     }

@@ -6,9 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import mdzz.com.first_of_mdzz.R;
-import mdzz.com.first_of_mdzz.ui.guide.GuideActivity;
-import mdzz.com.first_of_mdzz.ui.main.MainActivity;
 import mdzz.com.first_of_mdzz.database.PreUtils;
+import mdzz.com.first_of_mdzz.ui.main.MainActivity;
 
 
 public class FlushActivity extends AppCompatActivity {
@@ -59,12 +58,12 @@ public class FlushActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
             Intent intent = new Intent();
             IsGoToMain = PreUtils.readBoolean(FlushActivity.this,KEY_ISGOTOMAIN);
-            if (IsGoToMain){
-                intent.setClass(FlushActivity.this,MainActivity.class);
-            }else{
-                intent.setClass(FlushActivity.this,GuideActivity.class);
-                  PreUtils.writeBoolean(FlushActivity.this,KEY_ISGOTOMAIN,true);
-            }
+//            if (IsGoToMain){
+               intent.setClass(FlushActivity.this,MainActivity.class);
+//            }else{
+//                intent.setClass(FlushActivity.this,GuideActivity.class);
+//                  PreUtils.writeBoolean(FlushActivity.this,KEY_ISGOTOMAIN,true);
+//            }
 
 
             startActivity(intent);
